@@ -1,9 +1,9 @@
 .headerEl {
   background-color: antiquewhite;
   color: black;
-  margin-bottom: 10%;
+  /* margin-bottom: 10%;
   padding-top: 10%;
-  padding-bottom: 10%;
+  padding-bottom: 10%; */
   display: flex;
   flex-direction: row;
 }
