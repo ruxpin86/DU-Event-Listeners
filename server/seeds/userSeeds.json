@@ -48,7 +48,7 @@
      {
         "username": "ted",
         "email": "ted@dufriends.com",
-        "password":"tedg0tobed!",
+        "password":"tedg0tobed!!",
         "events":[            {"eventName": "poolParty",
             "creator":"krisd",
             "description":"pool party splash"},
