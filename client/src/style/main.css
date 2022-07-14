@@ -1,0 +1,47 @@
+:root {
+  --pink: #ffd6e0;
+  --yellow: #ffe66d;
+  --purple: #b8b8ff;
+  --green: #66e0ce;
+  --textColor: ##707070;
+}
+
+.home-frame {
+  display: flex;
+  flex-wrap: wrap;
+}
+.menu-block {
+  width: 50vw;
+  height: 50vh;
+  border: 1px solid black;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-block h1 {
+  text-decoration: none;
+  /* color: var(--textColor); */
+}
+
+.menu-block h1:active {
+  color: black;
+  color: var(--textColor);
+}
+
+.menu-block.yellow {
+  background-color: var(--yellow);
+}
+
+.menu-block.pink {
+  background-color: var(--pink);
+}
+
+.menu-block.green {
+  background-color: var(--green);
+}
+
+.menu-block.purple {
+  background-color: var(--purple);
+}
