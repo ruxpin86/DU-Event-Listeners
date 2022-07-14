@@ -35,7 +35,9 @@ const typeDefs = gql`
 
     removeUser: User
 
-    addEvent(userId: ID!, input: EventInput)
+    addEvent(userId: ID!, input: EventInput): Event
+
+    removeEvent(input: EventInput): Event
   }
 
   input EventInput {
