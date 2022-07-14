@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-import Auth from "../../utils/auth";
+import "../style/header.css";
+// import Auth from "../../utils/auth";
 
 const Header = () => {
   const logout = (event) => {
     event.preventDefault();
-    Auth.logout();
+    // Auth.logout();
   };
   return (
     <header className="headerEl">
@@ -17,19 +17,19 @@ const Header = () => {
           </h1>
         </Link>
         <div>
-          {Auth.loggedIn() ? (
-            <>
-              <button className="btn btn-lg btn-light m-2" onClick={logout}>
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link className="btn btn-lg btn-primary m-2" to="/login">
-                Logout
-              </Link>
-            </>
-          )}
+          {/* {Auth.loggedIn() ? ( */}
+          <>
+            <button className="btn btn-lg btn-light m-2" onClick={logout}>
+              Logout
+            </button>
+          </>
+          {/* ) : ( */}
+          {/* <>
+            <Link className="btn btn-lg btn-primary m-2" to="/login">
+              Logout
+            </Link>
+          </> */}
+          {/* )} */}
         </div>
       </div>
     </header>

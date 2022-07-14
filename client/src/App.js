@@ -13,14 +13,13 @@ const client = new ApolloClient({
   uri: "/graphql",
   cache: new InMemoryCache(),
 });
-import "./style/index.css";
 
 function App() {
   return (
     // <ApolloProvider client={client}>
     <Router>
       <div className="flex-column justify-flex-start">
-        {/* <Header /> */}
+        <Header />
         <div className="container">
           <Routes>
             <Route exact path="/" element={<Home />} />
