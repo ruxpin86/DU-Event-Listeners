@@ -13,6 +13,7 @@ const client = new ApolloClient({
   uri: "/graphql",
   cache: new InMemoryCache(),
 });
+import "./style/index.css";
 
 function App() {
   return (
