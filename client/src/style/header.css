@@ -1,0 +1,22 @@
+.headerEl {
+  background-color: antiquewhite;
+  color: black;
+  margin-bottom: 10%;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  display: flex;
+  flex-direction: row;
+}
+
+.headerDiv {
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.headerText {
+  margin: 0%;
+}
