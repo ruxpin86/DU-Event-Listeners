@@ -7,13 +7,15 @@
 }
 
 .home-frame {
+  width: 100vw;
+  height: 88vh;
   display: flex;
   flex-wrap: wrap;
 }
 .menu-block {
   width: 50vw;
-  height: 50vh;
-  border: 1px solid black;
+  height: 44vh;
+  border: 5px solid black;
   box-sizing: border-box;
   display: flex;
   justify-content: center;

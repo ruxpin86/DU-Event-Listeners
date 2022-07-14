@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import "../style/header.css";
+
 // import Auth from "../../utils/auth";
 
 const Header = () => {
@@ -24,11 +26,12 @@ const Header = () => {
             </button>
           </>
           {/* ) : ( */}
-          <>
+
+          {/* <>
             <Link className="btn btn-lg btn-primary m-2" to="/login">
               Logout
             </Link>
-          </>
+          </> */}
           {/* )} */}
         </div>
       </div>
