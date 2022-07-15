@@ -36,14 +36,49 @@
   background-color: var(--yellow);
 }
 
+.menu-block.yellow.open {
+  width: 100vw;
+  height: 88vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: 1s;
+}
+
 .menu-block.pink {
   background-color: var(--pink);
+}
+
+.menu-block.pink.open {
+  width: 100vw;
+  height: 88vh;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: 1s;
 }
 
 .menu-block.green {
   background-color: var(--green);
 }
 
+.menu-block.green.open {
+  width: 100vw;
+  height: 88vh;
+  position: absolute;
+  top: 0;
+  transition: 1s;
+}
+
 .menu-block.purple {
   background-color: var(--purple);
+}
+
+.menu-block.purple.open {
+  width: 100vw;
+  height: 88vh;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transition: 1s;
 }
