@@ -1,4 +1,4 @@
-.signup{
+.signup-form{
     display: flex;
     flex-direction: column;
 }
@@ -6,4 +6,8 @@
 .signupEl{
     display: flex;
     flex-direction: column;
+}
+
+.signup-btn{
+    border: 3px solid black;
 }

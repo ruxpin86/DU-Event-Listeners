@@ -1,0 +1,45 @@
+.headerEl {
+    border-bottom: 5px solid black;
+}
+
+.container{
+  background-color: #66e0ce;
+}
+
+.welcome{
+  display: flex;
+  justify-content: center;
+  background-color: #ffe66d;
+  border-bottom: 5px solid black;
+}
+
+.main-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+
+}
+
+.signup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    background-color: antiquewhite;
+    border: 5px solid black;
+    margin-right: 2rem ;
+    height: 100%;
+}
+
+.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    background-color: antiquewhite;
+    border: 5px solid black;
+    height: 100%;
+}

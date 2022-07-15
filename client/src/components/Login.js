@@ -5,12 +5,18 @@ export default function Login() {
   return (
     <>
       <h3>Login</h3>
-      <form>
-        <label for="username">Username</label>
-        <input type="text" id="username"></input>
-        <label for="password">Password</label>
-        <input type="password"></input>
-        <button type="button">Login</button>
+      <br></br>
+      <form className="login-form">
+        <div className="loginEl">
+          <label for="username">Username</label>
+          <input type="text" id="username"></input>
+          <label for="password">Password</label>
+          <input type="password"></input>
+        </div>
+        <br></br>
+        <button className="login-btn" type="button">
+          Login
+        </button>
       </form>
     </>
   );
