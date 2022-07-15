@@ -35,8 +35,8 @@ export const QUERY_SINGLE_USER = gql`
 `;
 
 export const QUERY_ME = gql`
-  query me {
-    me {
+  query getMe {
+    user {
       _id
       username
       events {
@@ -47,6 +47,28 @@ export const QUERY_ME = gql`
         description
         link
       }
+    }
+  }
+`;
+
+export const QUERY_ALL_RESOURCES = gql`
+  query getAllResources {
+    resource {
+      _id
+      link
+      description
+      title
+    }
+  }
+`;
+
+export const QUERY_RESOURCE = gql`
+  query getResource {
+    resource {
+      _id
+      link
+      description
+      title
     }
   }
 `;

@@ -46,9 +46,11 @@ const typeDefs = gql`
   }
 
   type Query {
-    users: [User]!
-    user(userId: ID!): User
-    me: User
+    allUsers: [User]!
+    singleUser(userId: ID!): User
+    getMe: User
+    getAllResources: [Resource]!
+    getResource(resourceId: ID!): Resource
   }
 
   type Mutation {
@@ -62,7 +64,7 @@ const typeDefs = gql`
 
     removeEvent(input: EventInput): Event
 
-    addResource(input: ResourceInput): Resource
+    addResource(input: ResourceInput!): Resource
   }
 `;
 

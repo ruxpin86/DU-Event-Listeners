@@ -23,3 +23,16 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+export const ADD_RESOURCE = gql`
+  mutation addResource($input: ResourceInput!) {
+    addResource(input: $input) {
+      resource {
+        _id
+        link
+        title
+        description
+      }
+    }
+  }
+`;
