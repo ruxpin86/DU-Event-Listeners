@@ -17,6 +17,7 @@
 }
 
 .signup-btn:hover{
+    cursor: default;
     border-radius: 2px;
     color:rgb(164, 117, 208);
     border: 5px solid rgb(164, 117, 208);
