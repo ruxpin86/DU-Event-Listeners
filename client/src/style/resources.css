@@ -6,4 +6,73 @@
   flex-direction: column;
   align-items: center;
   padding-top: 2rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.blog-block {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+.blog-block .left {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.blog-block .left .filter {
+  width: 100%;
+  height: 3rem;
+  margin-bottom: 20px;
+}
+.filter select {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+
+.left .card {
+  width: 100%;
+  height: 20vh;
+  /* background-color: white; */
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.blog-block .right {
+  width: 30%;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: white; */
+  border-radius: 15px;
+  padding: 20px 0;
+  /* border: 5px dotted gray; */
+}
+.blog-block form p {
+  color: red;
+}
+
+.blog-block form {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.blog-block form input {
+  height: 3rem;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid gray;
+}
+.blog-block form input:focus-visible {
+  outline: none;
+}
+.blog-block form .submit-btn {
+  border: none;
+  background-color: #66e0ce;
+  margin-top: 2rem;
 }
