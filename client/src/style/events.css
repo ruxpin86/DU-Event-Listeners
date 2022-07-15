@@ -7,3 +7,68 @@
   align-items: center;
   padding-top: 2rem;
 }
+
+.eventEl {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.createEventBtn {
+  padding: 3px;
+  width: fit-content;
+  border: 3px solid black;
+  transition: 0.3s;
+}
+
+.createEventBtn:hover {
+  cursor: default;
+  border-radius: 2px;
+  color: rgb(164, 117, 208);
+  border: 5px solid rgb(164, 117, 208);
+}
+
+.card {
+  width: 500px;
+  border-radius: 10px;
+  margin: 30px;
+  background: #66e0ce;
+  overflow: hidden;
+}
+.card-header {
+  height: 70px;
+  border: 4px solid black;
+  border-bottom: 4px dotted black;
+  border-radius: 10px 10px 0 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.card-header:before,
+.card-header:after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: #66e0ce;
+  border-radius: 100%;
+  bottom: -12px;
+  border: 4px solid black;
+  box-sizing: border-box;
+}
+.card-header:before {
+  left: -13px;
+}
+.card-header:after {
+  right: -13px;
+}
+.card-body {
+  height: 200px;
+  border: 4px solid black;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
