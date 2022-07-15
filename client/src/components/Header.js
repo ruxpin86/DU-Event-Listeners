@@ -13,7 +13,7 @@ const Header = () => {
   return (
     <header className="headerEl">
       <div className="headerDiv">
-        <Link to="/">
+        <Link to="/main">
           <h1 className="headerTxt" style={{ fontSize: "3rem" }}>
             DU Event Listeners
           </h1>
