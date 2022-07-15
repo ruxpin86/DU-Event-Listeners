@@ -10,6 +10,8 @@ import { setContext } from "@apollo/client/link/context";
 
 import Header from "./components/Header";
 import Home from "./pages/Home";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 import Main from "./pages/Main";
 import Events from "./pages/Events";
 import Resources from "./pages/Resources";

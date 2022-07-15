@@ -9,7 +9,14 @@ export default function Home() {
   return (
     <div>
       <h1>Welcome Students!</h1>
-      <Link to="/signup"></Link>
+      <form>
+        <div className="signup">
+          <Signup />
+        </div>
+        <div className="login">
+          <Login />
+        </div>
+      </form>
     </div>
   );
 }
