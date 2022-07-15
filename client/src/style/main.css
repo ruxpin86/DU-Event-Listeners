@@ -1,9 +1,10 @@
 :root {
-  --pink: #ffd6e0;
+  --pink: #ee9694;
   --yellow: #ffe66d;
-  --purple: #b8b8ff;
+  --purple: #99c1de;
   --green: #66e0ce;
-  --textColor: ##707070;
+  --orange: #ffac81;
+  --textColor: #707070;
 }
 
 .home-frame {
@@ -42,7 +43,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  transition: 1s;
+  transition: 0.7s;
 }
 
 .menu-block.pink {
@@ -55,7 +56,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  transition: 1s;
+  transition: 0.7s;
 }
 
 .menu-block.green {
@@ -67,7 +68,7 @@
   height: 88vh;
   position: absolute;
   top: 0;
-  transition: 1s;
+  transition: 0.7s;
 }
 
 .menu-block.purple {
@@ -80,5 +81,9 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  transition: 1s;
+  transition: 0.7s;
+}
+
+.menu-block.orange {
+  background-color: var(--orange);
 }
