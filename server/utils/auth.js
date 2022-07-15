@@ -1,6 +1,8 @@
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 //SET TOKEN/EXPIRATION
+//everything that goes in .env has to go onto ted's heroku as well.
 const secret = "thisissupersecret";
 const expiration = "2h";
 
