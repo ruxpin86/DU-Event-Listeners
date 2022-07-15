@@ -5,7 +5,14 @@ export const QUERY_USERS = gql`
     users {
       _id
       username
-      events
+      events {
+        creator
+        eventId
+        creator
+        eventName
+        description
+        link
+      }
     }
   }
 `;
@@ -15,7 +22,14 @@ export const QUERY_SINGLE_USER = gql`
     user(userId: $userId) {
       _id
       username
-      events
+      events {
+        creator
+        eventId
+        creator
+        eventName
+        description
+        link
+      }
     }
   }
 `;
@@ -25,7 +39,14 @@ export const QUERY_ME = gql`
     me {
       _id
       username
-      events
+      events {
+        creator
+        eventId
+        creator
+        eventName
+        description
+        link
+      }
     }
   }
 `;
