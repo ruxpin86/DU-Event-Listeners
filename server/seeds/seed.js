@@ -22,9 +22,8 @@ db.once("open", async () => {
           new: true,
         }
       ).populate("events");
-      //.populate puts in everything associated with the mongo id it is referencing
+      //.populate puts in everything associated with the mongo id it is referencing!
       console.log(updatedUser);
-   
     }
     console.log("all done!");
     process.exit(0);
