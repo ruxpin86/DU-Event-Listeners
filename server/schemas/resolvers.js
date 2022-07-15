@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User } = require("../models");
+const { User, Resource } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -74,6 +74,12 @@ const resolvers = {
         );
       }
       throw new AuthenticationError("You need to be logged in!");
+    },
+
+    addResource: async (parent, { input }) => {
+      const resource = await Resource.create({ input });
+
+      return resource;
     },
   },
 };
