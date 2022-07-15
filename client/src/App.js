@@ -3,6 +3,8 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 import Main from "./pages/Main";
 import Events from "./pages/Events";
 import Resources from "./pages/Resources";
@@ -23,6 +25,8 @@ function App() {
         <div className="container">
           <Routes>
             <Route exact path="/" element={<Home />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/main" element={<Main />} />
             <Route exact path="/events" element={<Events />} />
             <Route exact path="/resources" element={<Resources />} />
