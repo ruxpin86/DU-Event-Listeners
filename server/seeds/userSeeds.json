@@ -2,62 +2,28 @@
     {
         "username": "krisd",
         "email": "kris@dufriends.com",
-        "password":"Password123!",
-        "events":[
-            {"eventName": "poolParty",
-            "creator":"krisd",
-            "description":"pool party splash"}
-    ]
+        "password":"Password123!"
     },
         {
         "username": "andyp",
         "email": "andy@dufriends.com",
-        "password":"Create1!",
-        "events":[            
-            {"eventName": "poolParty",
-            "creator":"krisd",
-            "description":"pool party splash"},
-            {
-               "eventName": "coffeeMeetup",
-            "creator":"andyp",
-            "description":"come drink coffee" , 
-            "link": "https://www.eventbrite.com/d/online/coding/"
-            } ]
+        "password":"Create1!"
+        
     },
         {
         "username": "olly",
         "email": "olly@dufriends.com",
-        "password":"A123!thisissparta",
-        "events":[            
-            {"eventName": "poolParty",
-            "creator":"krisd",
-            "description":"pool party splash"}]
+        "password":"A123!thisissparta"
     },
         {
         "username": "pete",
         "email": "pete@dufriends.com",
-        "password":"peteGoes*peep2",
-        "events":[            
-            {
-               "eventName": "coffeeMeetup",
-            "creator":"andyp",
-            "description":"come drink coffee" , 
-            "link": "https://www.eventbrite.com/d/online/coding/"
-            } ]
+        "password":"peteGoes*peep2"
     },
      {
         "username": "ted",
         "email": "ted@dufriends.com",
-        "password":"tedg0tobed!",
-        "events":[            {"eventName": "poolParty",
-            "creator":"krisd",
-            "description":"pool party splash"},
-            {
-               "eventName": "coffeeMeetup",
-            "creator":"andyp",
-            "description":"come drink coffee" , 
-            "link": "https://www.eventbrite.com/d/online/coding/"
-            } ]
+        "password":"tedg0tobed!!"
     }
   
 ]

@@ -17,15 +17,40 @@ const typeDefs = gql`
     link: String
   }
 
+  type Resource {
+    _id: ID
+    link: String
+    #category: String
+    title: String
+    description: String
+  }
+
   type Auth {
     token: ID!
     user: User
   }
 
+  input EventInput {
+    eventId: ID
+    creator: String!
+    eventName: String!
+    description: String!
+    link: String
+  }
+
+  input ResourceInput {
+    resourceId: ID
+    link: String
+    title: String
+    description: String
+  }
+
   type Query {
-    users: [User]!
-    user(userId: ID!): User
-    me: User
+    allUsers: [User]!
+    singleUser(userId: ID!): User
+    getMe: User
+    getAllResources: [Resource]!
+    getResource(resourceId: ID!): Resource
   }
 
   type Mutation {
@@ -38,14 +63,8 @@ const typeDefs = gql`
     addEvent(userId: ID!, input: EventInput): Event
 
     removeEvent(input: EventInput): Event
-  }
 
-  input EventInput {
-    eventId: ID
-    creator: String!
-    eventName: String!
-    description: String!
-    link: String
+    addResource(input: ResourceInput!): Resource
   }
 `;
 
