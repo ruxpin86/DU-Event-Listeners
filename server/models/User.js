@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const eventSchema = require("./Events");
+const Events = require("./Events");
 //  const instant-messagingSchema = require("./Instant-Messaging"); Maybe we will need this for instant messaging
 
 const userSchema = new Schema(
@@ -28,7 +28,12 @@ const userSchema = new Schema(
         "Password needs: Minimum eight characters, at least one letter, one number and one special character",
       ],
     },
-    events: [eventSchema],
+    events: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Events",
+      },
+    ],
   },
   {
     toJSON: {
