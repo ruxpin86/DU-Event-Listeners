@@ -15,6 +15,7 @@ export default function Signup() {
           <label for="password">Password</label>
           <input type="password"></input>
         </div>
+        <br></br>
         <button className="signup-btn" type="button">
           Sign Up!
         </button>
