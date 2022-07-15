@@ -52,7 +52,7 @@ export default function Main() {
       )} */}
 
       <div className={[openEvents ? "open" : "", "menu-block green"].join(" ")}>
-        <DelayedLink delay={1000} to="/events">
+        <DelayedLink delay={700} to="/events">
           <button
             className="m-0"
             style={{ fontSize: "3rem" }}
@@ -80,7 +80,7 @@ export default function Main() {
       <div
         className={[openResource ? "open" : "", "menu-block yellow"].join(" ")}
       >
-        <DelayedLink delay={1000} to="/resources">
+        <DelayedLink delay={700} to="/resources">
           <button
             className="m-0"
             style={{ fontSize: "3rem" }}
@@ -102,7 +102,7 @@ export default function Main() {
       </div> */}
       {/* </Link> */}
       <div className={[openForum ? "open" : "", "menu-block pink"].join(" ")}>
-        <DelayedLink delay={1000} to="/forum">
+        <DelayedLink delay={700} to="/forum">
           <button
             className="m-0"
             style={{ fontSize: "3rem" }}
@@ -124,7 +124,7 @@ export default function Main() {
       </div> */}
       {/* </Link> */}
       <div className={[openChat ? "open" : "", "menu-block purple"].join(" ")}>
-        <DelayedLink delay={1000} to="/live-chat">
+        <DelayedLink delay={700} to="/live-chat">
           <button
             className="m-0"
             style={{ fontSize: "3rem" }}
@@ -134,6 +134,7 @@ export default function Main() {
           </button>
         </DelayedLink>
       </div>
+      <div className="menu-block orange"></div>
     </div>
   );
 }
