@@ -2,12 +2,17 @@ const { Schema, model } = require("mongoose");
 
 const resourceSchema = new Schema(
   {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
     link: {
       type: String,
       required: true,
     },
     category: {
       type: String,
+      required: True,
     },
     title: {
       type: String,
