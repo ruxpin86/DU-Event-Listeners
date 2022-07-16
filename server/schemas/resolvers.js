@@ -19,13 +19,13 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    getAllResources: async () => {
-      return Resource.find();
-    },
+    // getAllResources: async () => {
+    //   return Resource.find();
+    // },
 
-    getResource: async (parent, { resourceId }) => {
-      return Resource.findOne({ _id: resourceId });
-    },
+    // getResource: async (parent, { resourceId }) => {
+    //   return Resource.findOne({ _id: resourceId });
+    // },
   },
 
   Mutation: {
@@ -84,10 +84,18 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addResource: async (parent, { input }) => {
-      const resource = await Resource.create({ input });
-
-      return resource;
+    addResource: async (parent, { userId, input }, context) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { resources: input } },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError("You need to be logged in!");
     },
   },
 };

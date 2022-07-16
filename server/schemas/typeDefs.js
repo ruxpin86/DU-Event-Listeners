@@ -19,8 +19,9 @@ const typeDefs = gql`
 
   type Resource {
     _id: ID
+    user: String
     link: String
-    #category: String
+    category: String
     title: String
     description: String
   }
@@ -40,8 +41,10 @@ const typeDefs = gql`
 
   input ResourceInput {
     resourceId: ID
+    user: String
     link: String
     title: String
+    category: String
     description: String
   }
 
