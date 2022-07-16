@@ -9,7 +9,7 @@ export default function Login() {
   const [open, setOpen] = useState(false);
 
   const [loginFormData, setloginFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -37,7 +37,7 @@ export default function Login() {
     }
 
     setloginFormData({
-      username: "",
+      email: "",
       password: "",
     });
   };
@@ -52,11 +52,11 @@ export default function Login() {
         <br></br>
         <form className="login-form">
           <div className="loginEl">
-            <label for="username">Username</label>
+            <label for="email">Email</label>
             <input
               onChange={handleInputChange}
               type="text"
-              name="username"
+              name="email"
               value={loginFormData.username}
             ></input>
             <label for="password">Password</label>
