@@ -19,8 +19,9 @@ const typeDefs = gql`
 
   type Resource {
     _id: ID
+    user: String
     link: String
-    #category: String
+    category: String
     title: String
     description: String
   }
