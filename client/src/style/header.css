@@ -7,17 +7,44 @@
   height: 15vh;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 5rem;
+  margin: 0 1rem;
 }
 
 .headerDiv {
   max-width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   text-align: center;
 }
 
 .headerText {
   margin: 0%;
+  color: black;
+}
+
+.logoutBtnDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 5%;
+}
+
+.logoutBtn {
+  padding: 3px;
+  width: fit-content;
+  border: 3px solid black;
+  transition: 0.3s;
+}
+
+.logoutBtn:hover {
+  cursor: default;
+  border-radius: 2px;
+  color: rgb(164, 117, 208);
+  border: 5px solid rgb(164, 117, 208);
 }
