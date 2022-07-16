@@ -45,7 +45,9 @@ export default function Login() {
   console.log(loginFormData);
   return (
     <>
-      <h2 onClick={() => setOpen(!open)}>Welcome Back! (Login)</h2>
+      <h2 className="main-page-form" onClick={() => setOpen(!open)}>
+        Welcome Back! (Login)
+      </h2>
       <Collapse isOpened={open}>
         <br></br>
         <form className="login-form">
