@@ -87,3 +87,15 @@
 .menu-block.orange {
   background-color: var(--orange);
 }
+
+@media only screen and (max-width: 1200px) {
+  .home-frame {
+    flex-direction: column;
+  }
+  .menu-block {
+    width: 100%;
+    height: 22vh;
+    right: 0;
+    left: 0;
+  }
+}
