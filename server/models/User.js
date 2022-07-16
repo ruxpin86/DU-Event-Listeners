@@ -2,6 +2,7 @@ const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const Events = require("./Events");
+const Resource = require("./Resource");
 //  const instant-messagingSchema = require("./Instant-Messaging"); Maybe we will need this for instant messaging
 
 const userSchema = new Schema(
@@ -32,6 +33,12 @@ const userSchema = new Schema(
       {
         type: Schema.Types.ObjectId,
         ref: "Events",
+      },
+    ],
+    resources: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Resource",
       },
     ],
   },

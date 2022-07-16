@@ -3,8 +3,8 @@ const { Schema, model } = require("mongoose");
 const resourceSchema = new Schema(
   {
     user: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
+      type: String,
+      required: true,
     },
     link: {
       type: String,
@@ -12,7 +12,7 @@ const resourceSchema = new Schema(
     },
     category: {
       type: String,
-      required: True,
+      required: true,
     },
     title: {
       type: String,
