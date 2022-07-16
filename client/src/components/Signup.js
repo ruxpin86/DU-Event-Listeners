@@ -47,7 +47,9 @@ export default function Signup() {
   console.log(userFormData);
   return (
     <>
-      <h2 onClick={() => setOpen(!open)}>Create an Account!</h2>
+      <h2 className="main-page-form" onClick={() => setOpen(!open)}>
+        Create an Account!
+      </h2>
       <Collapse isOpened={open}>
         <br></br>
         <form className="signup-form">
