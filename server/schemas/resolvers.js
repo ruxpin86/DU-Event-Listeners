@@ -43,8 +43,8 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    login: async (parent, { username, password }) => {
-      const user = await User.findOne({ username });
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
 
       if (!user) {
         throw new AuthenticationError("No profile with this email found!");
