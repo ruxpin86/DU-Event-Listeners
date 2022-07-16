@@ -28,8 +28,8 @@ db.once("open", async () => {
       // console.log(updatedUser);
     }
     const newResources = await Resource.create(resourceSeeds);
-    const newUserResource = await User.findByIdAndUpdate(
-      _id,
+    const newUserResource = await User.updateMany(
+      newUsers._id,
       {
         $addToSet: { resources: newResources },
       },
