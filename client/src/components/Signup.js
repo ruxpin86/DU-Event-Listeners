@@ -3,6 +3,7 @@ import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 import "../style/signup.css";
 import Auth from "../utils/auth";
+import { Collapse } from "react-collapse";
 
 export default function Signup() {
   const [userFormData, setUserFormData] = useState({
@@ -10,6 +11,8 @@ export default function Signup() {
     email: "",
     password: "",
   });
+
+  const [open, setOpen] = useState(false);
 
   const [addUser, { error, data }] = useMutation(ADD_USER);
   if (error) {
@@ -44,30 +47,40 @@ export default function Signup() {
   console.log(userFormData);
   return (
     <>
-      <h3>Sign-up</h3>
-      <br></br>
-      <form className="signup-form">
-        <div className="signupEl">
-          <label for="email">Email</label>
-          <input onChange={handleInputChange} type="text" name="email"></input>
-          <label for="username">Username</label>
-          <input
-            onChange={handleInputChange}
-            type="text"
-            name="username"
-          ></input>
-          <label for="password">Password</label>
-          <input
-            onChange={handleInputChange}
-            type="password"
-            name="password"
-          ></input>
-        </div>
+      <h2 onClick={() => setOpen(!open)}>Create an Account!</h2>
+      <Collapse isOpened={open}>
         <br></br>
-        <button onClick={handleFormSubmit} className="signup-btn" type="button">
-          Sign Up!
-        </button>
-      </form>
+        <form className="signup-form">
+          <div className="signupEl">
+            <label for="email">Email</label>
+            <input
+              onChange={handleInputChange}
+              type="text"
+              name="email"
+            ></input>
+            <label for="username">Username</label>
+            <input
+              onChange={handleInputChange}
+              type="text"
+              name="username"
+            ></input>
+            <label for="password">Password</label>
+            <input
+              onChange={handleInputChange}
+              type="password"
+              name="password"
+            ></input>
+          </div>
+          <br></br>
+          <button
+            onClick={handleFormSubmit}
+            className="signup-btn"
+            type="button"
+          >
+            Sign Up!
+          </button>
+        </form>
+      </Collapse>
     </>
   );
 }

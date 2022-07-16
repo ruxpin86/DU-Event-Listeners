@@ -2,6 +2,10 @@
     border: 1px solid rgb(100,100,100,.15);
 } */
 
+.ReactCollapse--collapse {
+    transition: height 500ms;
+}
+
 .login-form{
     display: flex;
     flex-direction: column;

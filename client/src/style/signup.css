@@ -1,3 +1,12 @@
+.ReactCollapse--collapse {
+    transition: height 500ms;
+}
+
+h2:hover{
+    cursor: s-resize;
+    color:cadetblue;
+}
+
 .signup-form{
     display: flex;
     flex-direction: column;
