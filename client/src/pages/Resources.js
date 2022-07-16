@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "../style/resources.css";
 import { MdClose } from "react-icons/md";
 import { useForm } from "react-hook-form";
-
+import ResourceCard from "../components/ResourceCard";
 export default function Resources() {
   const {
     register,
@@ -12,17 +12,45 @@ export default function Resources() {
 
   const data = [
     {
-      title: "create-react-app-buildpack",
+      title: "Css and Html",
       link: "https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack",
       description: "Creat react-app on your Heroko",
       create: "Olly",
+      category: "frontend",
       create_date: "2022/07/07",
     },
     {
       title: "create-react-app-buildpack",
       link: "https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack",
-      description: "Creat react-app on your Heroko",
-      create: "Olly",
+      description:
+        "The large-scale contamination of the public sphere by rumours, hate speech, dangerous conspiracy theories and orchestrated deception campaigns is causing widespread concern around the world. These ills are collectively referred to as “information disorder” .The disorder results from a range of factors. They include a rapidly changing media ecology and an increasingly fractious, populist and polarised political environment. The surge in misleading and false information about the Covid-19 pandemic has increased these concerns.",
+      create: "Peter",
+      category: "frontend",
+      create_date: "2022/07/07",
+    },
+    {
+      title: "react advanced",
+      link: "https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack",
+      description:
+        "The large-scale contamination of the public sphere by rumours, hate speech, dangerous conspiracy theories and orchestrated deception campaigns is causing widespread concern around the world. These ills are collectively referred to as “information disorder”.",
+      create: "Ted",
+      category: "frontend",
+      create_date: "2022/07/07",
+    },
+    {
+      title: "GraphQL Note",
+      link: "https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack",
+      description:
+        "The large-scale contamination of the public sphere by rumours, hate speech, dangerous conspiracy theories and orchestrated deception campaigns is causing widespread concern around the world. These ills are collectively referred to as “information disorder”.",
+      create: "Kris",
+      create_date: "2022/07/07",
+    },
+    {
+      title: "MongoDb Note",
+      link: "https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack",
+      description:
+        "The large-scale contamination of the public sphere by rumours, hate speech, dangerous conspiracy theories and orchestrated deception campaigns is causing widespread concern around the world. These ills are collectively referred to as “information disorder”.",
+      create: "Andrew",
       create_date: "2022/07/07",
     },
   ];
@@ -39,79 +67,17 @@ export default function Resources() {
       <div className="blog-block">
         <div className="left">
           <div className="filter">
-            <select class="form-select" aria-label="Default select example">
-              <option selected>Select Resources Type</option>
+            <select defaultValue={"DEFAULT"}>
+              <option value="DEFAULT" disabled>
+                Select Resources Type
+              </option>
               <option value="1">Front end</option>
               <option value="2">Back end</option>
               <option value="3">Other</option>
             </select>
           </div>
           {data.map((data, i) => (
-            <div className="card w-75" key={i}>
-              <div class="card-body">
-                <h5 class="card-title">{data.title}</h5>
-                <p>
-                  <a
-                    class="btn btn-primary"
-                    data-bs-toggle="collapse"
-                    href="#multiCollapseExample1"
-                    role="button"
-                    aria-expanded="false"
-                    aria-controls="multiCollapseExample1"
-                  >
-                    Toggle first element
-                  </a>
-                  <button
-                    class="btn btn-primary"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#multiCollapseExample2"
-                    aria-expanded="false"
-                    aria-controls="multiCollapseExample2"
-                  >
-                    Toggle second element
-                  </button>
-                  <button
-                    class="btn btn-primary"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target=".multi-collapse"
-                    aria-expanded="false"
-                    aria-controls="multiCollapseExample1 multiCollapseExample2"
-                  >
-                    Toggle both elements
-                  </button>
-                </p>
-                <div class="row">
-                  <div class="col">
-                    <div
-                      class="collapse multi-collapse"
-                      id="multiCollapseExample1"
-                    >
-                      <div class="card card-body">
-                        Some placeholder content for the first collapse
-                        component of this multi-collapse example. This panel is
-                        hidden by default but revealed when the user activates
-                        the relevant trigger.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div
-                      class="collapse multi-collapse"
-                      id="multiCollapseExample2"
-                    >
-                      <div class="card card-body">
-                        Some placeholder content for the second collapse
-                        component of this multi-collapse example. This panel is
-                        hidden by default but revealed when the user activates
-                        the relevant trigger.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ResourceCard data={data} i={i} key={i} />
           ))}
         </div>
         <div className="right">
@@ -126,7 +92,33 @@ export default function Resources() {
             <label>Description</label>
             <input {...register("description", { required: true })} />
             {errors.description && <p>Description is required</p>}
-
+            <div className="radio-frame">
+              <div className="radio-flex">
+                <input
+                  {...register("category", { required: true })}
+                  type="radio"
+                  value="frontend"
+                />
+                <label>Frontend</label>
+              </div>
+              <div className="radio-flex">
+                <input
+                  {...register("category", { required: true })}
+                  type="radio"
+                  value="backend"
+                />
+                <label>Backend</label>
+              </div>
+              <div className="radio-flex">
+                <input
+                  {...register("category", { required: true })}
+                  type="radio"
+                  value="other"
+                />
+                <label>Other</label>
+              </div>
+            </div>
+            {errors.category && <p>Type is required</p>}
             <input className="submit-btn" type="submit" />
           </form>
         </div>
