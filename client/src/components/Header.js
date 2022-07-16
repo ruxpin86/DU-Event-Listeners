@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import logo from "../images/logo.svg";
+import logo_blue from "../images/logo_blue.svg";
+import logo_green from "../images/logo_green.svg";
+import logo_red from "../images/logo_red.svg";
+import logo_yellow from "../images/logo_yellow.svg";
 
 import "../style/header.css";
 
@@ -10,9 +15,23 @@ const Header = () => {
     event.preventDefault();
     // Auth.logout();
   };
+
+  const [img, setImg] = useState(logo_green);
+  const shffle = () => {
+    setImg(logo_red);
+  };
+
   return (
     <header className="headerEl">
       <div className="headerDiv">
+        <img
+          className="logo"
+          src={img}
+          onMouseEnter={shffle}
+          onMouseLeave={(e) => {
+            setImg(logo_green);
+          }}
+        />
         <Link to="/main">
           <h1 className="headerTxt" style={{ fontSize: "3rem" }}>
             DU Event Listeners
@@ -20,11 +39,7 @@ const Header = () => {
         </Link>
         <div>
           {/* {Auth.loggedIn() ? ( */}
-          <>
-            <button className="btn btn-lg btn-light m-2" onClick={logout}>
-              Logout
-            </button>
-          </>
+          <></>
           {/* ) : ( */}
 
           {/* <>
@@ -34,6 +49,11 @@ const Header = () => {
           </> */}
           {/* )} */}
         </div>
+      </div>
+      <div className="logoutBtnDiv">
+        <Link to="/">
+          <button className="logoutBtn">Logout</button>
+        </Link>
       </div>
     </header>
   );
