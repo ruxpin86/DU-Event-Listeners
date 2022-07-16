@@ -41,8 +41,10 @@ const typeDefs = gql`
 
   input ResourceInput {
     resourceId: ID
+    user: String
     link: String
     title: String
+    category: String
     description: String
   }
 

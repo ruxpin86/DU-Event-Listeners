@@ -15,6 +15,7 @@ body {
   width: 100vw;
   height: 88vh;
   position: relative;
+  overflow: hidden;
 }
 a {
   text-decoration: none;
@@ -52,4 +53,12 @@ button:hover {
 }
 .title a:hover {
   transform: rotate(180deg);
+}
+
+*::-webkit-scrollbar,
+*::-webkit-scrollbar-thumb {
+  width: 0px;
+  border-radius: 0px;
+  background-clip: padding-box;
+  border: 0px solid transparent;
 }
