@@ -1,3 +1,5 @@
+import { useQuery, useMutation } from "@apollo/client";
+import { ADD_RESOURCE } from '../utils'
 import React, { useState } from "react";
 import "../style/resources.css";
 import { MdClose } from "react-icons/md";
@@ -12,48 +14,47 @@ export default function Resources() {
 
   const data = [
     {
-      title: "Css and Html",
-      link: "https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack",
-      description: "Creat react-app on your Heroko",
-      create: "Olly",
-      category: "frontend",
-      create_date: "2022/07/07",
+      user: "krisd",
+      link: "https://medium.com/@MarkPieszak/how-to-delete-all-node-modules-folders-on-your-machine-and-free-up-hd-space-f3954843aeda",
+      category: "other",
+      title: "How to Delete Node Modules",
+      description:
+        "This resource highlights how to remove the node_modules when they are taking up too much space on your machine",
     },
     {
-      title: "create-react-app-buildpack",
-      link: "https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack",
+      user: "krisd",
+      link: "https://dev.to/underscorecode/css-selectors-the-full-reference-guide-3cbf",
+      category: "Frontend",
+      title: "CSS Selectors",
       description:
-        "The large-scale contamination of the public sphere by rumours, hate speech, dangerous conspiracy theories and orchestrated deception campaigns is causing widespread concern around the world. These ills are collectively referred to as “information disorder” .The disorder results from a range of factors. They include a rapidly changing media ecology and an increasingly fractious, populist and polarised political environment. The surge in misleading and false information about the Covid-19 pandemic has increased these concerns.",
-      create: "Peter",
-      category: "frontend",
-      create_date: "2022/07/07",
+        "This resource highlights some important details on CSS Selectors",
     },
     {
-      title: "react advanced",
-      link: "https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack",
+      user: "olly",
+      link: "https://flexbox.malven.co/",
+      category: "Frontend",
+      title: "Flexbox Cheat-Sheet",
       description:
-        "The large-scale contamination of the public sphere by rumours, hate speech, dangerous conspiracy theories and orchestrated deception campaigns is causing widespread concern around the world. These ills are collectively referred to as “information disorder”.",
-      create: "Ted",
-      category: "frontend",
-      create_date: "2022/07/07",
+        "This resource is quick guide for all the essential knowledge on flexbox",
     },
     {
-      title: "GraphQL Note",
-      link: "https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack",
-      description:
-        "The large-scale contamination of the public sphere by rumours, hate speech, dangerous conspiracy theories and orchestrated deception campaigns is causing widespread concern around the world. These ills are collectively referred to as “information disorder”.",
-      create: "Kris",
-      create_date: "2022/07/07",
+      user: "andyp",
+      link: "https://reactrouter.com/docs/en/v6/getting-started/overview",
+      category: "Frontend",
+      title: "Guide to React Router",
+      description: "React router information!",
     },
     {
-      title: "MongoDb Note",
-      link: "https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack",
+      user: "pete",
+      link: "https://www.apollographql.com/docs/apollo-server/integrations/middleware/#apollo-server-express",
+      category: "Backend",
+      title: "Apollo Server Guide",
       description:
-        "The large-scale contamination of the public sphere by rumours, hate speech, dangerous conspiracy theories and orchestrated deception campaigns is causing widespread concern around the world. These ills are collectively referred to as “information disorder”.",
-      create: "Andrew",
-      create_date: "2022/07/07",
+        "This resource highlights how get an Apollo Server up and running on your server side applications.",
     },
   ];
+
+  const Resource
 
   const onSubmit = (data) => console.log(data);
   return (
