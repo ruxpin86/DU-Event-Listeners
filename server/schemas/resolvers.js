@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Resource } = require("../models");
+const { User, Resource, Messages } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -26,6 +26,9 @@ const resolvers = {
     // getResource: async (parent, { resourceId }) => {
     //   return Resource.findOne({ _id: resourceId });
     // },
+    getMessages: async () => {
+      return Messages.find();
+    },
   },
 
   Mutation: {
@@ -97,6 +100,20 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+  },
+
+  addMessage: async (parent, { userId, input }, context) => {
+    if (context.user) {
+      return User.findByIdAndUpdate(
+        { _id: userId },
+        { $addToSet: { messages: input } },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    }
+    throw new AuthenticationError("You need to be logged in!");
   },
 };
 

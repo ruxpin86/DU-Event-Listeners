@@ -1,16 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import io from "socket.io-client";
 import "../style/chat.css";
 import { useForm } from "react-hook-form";
 import { MdClose, MdOutlineHorizontalRule } from "react-icons/md";
 import { TiArrowUnsorted } from "react-icons/ti";
 import { RiFolderMusicFill, RiSendPlane2Fill } from "react-icons/ri";
 import { BiSmile } from "react-icons/bi";
-
 import Picker from "emoji-picker-react";
+import { ADD_MESSAGE } from "../utils/mutations";
+import { QUERY_MESSAGES } from "../utils/queries";
+
+//Socket.io Middleware
+const socket = io();
+
+//LIVE CHAT / SOCKET.IO
 export default function LiveChat() {
   const [chosenEmoji, setChosenEmoji] = useState(null);
   const [inputStr, setInputStr] = useState(" ");
   const [showPicker, setShowPicker] = useState(false);
+
+  //SOCKET.IO
+  const [isConnected, setIsConnected] = useState(socket.connected);
+  const [lastPong, setLastPong] = useState(null);
+
+  //MUTATIONS/QUERIES
+  const [addMessage, { error }] = useMutation(ADD_MESSAGE);
+  if (error) {
+    console.log(JSON.stringify(error));
+  }
+
+  useEffect(() => {
+    socket.on("connect", () => {
+      setIsConnected(true);
+    });
+
+    socket.on("disconnect", () => {
+      setIsConnected(false);
+    });
+
+    socket.on("pong", () => {
+      setLastPong(new Date().toISOString());
+    });
+
+    return () => {
+      socket.off("connect");
+      socket.off("disconnect");
+      socket.off("pong");
+    };
+  }, []);
+
+  const sendPing = () => {
+    socket.emit("ping");
+  };
+
   const {
     register,
     formState: { errors },
@@ -26,6 +69,18 @@ export default function LiveChat() {
       text: "yooooooo",
     },
   ];
+
+  //CHECK THIS!!! WE NEED TO ADD A messageFormDataVariable
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await addMessage({
+        variables: { messageFormData },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const onEmojiClick = (event, emojiObject) => {
     setInputStr((prevInput) => prevInput + emojiObject.emoji);
@@ -61,11 +116,9 @@ export default function LiveChat() {
           <div className="icons-frame right"></div>
         </div>
         <div className="body">
-          {data.map((data, i) => (
-            <p key={i}>
-              {data.username} : {data.text}
-            </p>
-          ))}
+          <p>Connected: {"" + isConnected}</p>
+          <p>Last pong: {lastPong || "-"}</p>
+          <button onClick={sendPing}>Send ping</button>
         </div>
         <div className="text-board">
           <div className="top">
