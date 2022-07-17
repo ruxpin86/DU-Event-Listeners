@@ -38,3 +38,13 @@ export const ADD_RESOURCE = gql`
     }
   }
 `;
+
+export const ADD_MESSAGE = gql`
+  mutation addMessage($input: MessageInput!) {
+    addMessage(input: $input) {
+      _id
+      body
+      user
+    }
+  }
+`;

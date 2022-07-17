@@ -72,3 +72,13 @@ export const QUERY_RESOURCE = gql`
     }
   }
 `;
+
+export const QUERY_MESSAGES = gql`
+  getMessages{
+    messages: {
+      _id
+      body
+      user
+    }
+  }
+`;

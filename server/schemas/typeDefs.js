@@ -27,6 +27,12 @@ const typeDefs = gql`
     description: String
   }
 
+  type Messages {
+    _id: ID
+    body: String
+    user: String
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -49,12 +55,23 @@ const typeDefs = gql`
     description: String
   }
 
+  input MessageInput {
+    messageId: ID
+    body: String
+  }
+
   type Query {
     allUsers: [User]!
+
     singleUser(userId: ID!): User
+
     getMe: User
+
     getAllResources: [Resource]!
+
     getResource(resourceId: ID!): Resource
+
+    getMessages: [Messages]!
   }
 
   type Mutation {
@@ -68,7 +85,9 @@ const typeDefs = gql`
 
     removeEvent(input: EventInput): Event
 
-    addResource(input: ResourceInput!): Resource
+    addResource(userId: ID, input: ResourceInput!): Resource
+
+    addMessage(userId: ID, input: MessageInput!): Messages
   }
 `;
 
