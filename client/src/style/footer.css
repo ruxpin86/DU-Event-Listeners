@@ -1,3 +1,11 @@
+a{
+    color:black
+}
+
+a:hover{
+    color: grey;
+}
+
 .footerEl{
     border-top: 3px solid black;
     text-align: center;
