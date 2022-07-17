@@ -58,6 +58,7 @@ const typeDefs = gql`
   input MessageInput {
     messageId: ID
     body: String
+    user: String
   }
 
   type Query {
@@ -87,7 +88,7 @@ const typeDefs = gql`
 
     addResource(userId: ID, input: ResourceInput!): Resource
 
-    addMessage(userId: ID, input: MessageInput!): Messages
+    addMessage(userId: ID, input: MessageInput): Messages
   }
 `;
 
