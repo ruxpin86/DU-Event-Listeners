@@ -88,7 +88,7 @@
   background-color: var(--orange);
 }
 
-@media only screen and (max-width: 1200px) {
+@media (max-width: 1200px) {
   .home-frame {
     flex-direction: column;
   }
