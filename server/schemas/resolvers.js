@@ -100,20 +100,19 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-  },
-
-  addMessage: async (parent, { userId, input }, context) => {
-    if (context.user) {
-      return User.findByIdAndUpdate(
-        { _id: userId },
-        { $addToSet: { messages: input } },
-        {
-          new: true,
-          runValidators: true,
-        }
-      );
-    }
-    throw new AuthenticationError("You need to be logged in!");
+    addMessage: async (parent, { userId, input }, context) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { messages: input } },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
   },
 };
 
