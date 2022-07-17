@@ -54,7 +54,6 @@ export default function Events() {
     setOpenFormPhon(false);
   };
 
- 
   console.log("selectValue", selectValue);
   return (
     <div className="event-frame">
@@ -73,7 +72,11 @@ export default function Events() {
       <div className="blog-block">
         <div className="left">
           {newdata.length > 0 ? (
-            newdata.map((data, i) => <EventCard data={data} i={i} key={i} />)
+            newdata.map((data, i) => (
+              <div className="card-frame">
+                <EventCard data={data} i={i} key={i} />
+              </div>
+            ))
           ) : (
             <h1>Events data is empty!!!</h1>
           )}
@@ -91,7 +94,7 @@ export default function Events() {
               <div className="right">
                 <div className="title">
                   <h2>Add Events</h2>
-                  <MdClose onClick={closeFunc} />
+                  <MdClose className="closeBtn" onClick={closeFunc} />
                 </div>
                 <AddEventForm />
               </div>
@@ -100,25 +103,6 @@ export default function Events() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // export default function Events() {
 //   const {
