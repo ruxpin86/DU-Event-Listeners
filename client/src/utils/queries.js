@@ -1,6 +1,5 @@
 import { gql } from "@apollo/client";
 
-//what is the difference
 export const QUERY_USERS = gql`
   query allUsers {
     users {
@@ -72,13 +71,5 @@ export const QUERY_RESOURCE = gql`
       description
       title
     }
-  }
-`;
-
-export const QUERY_MESSAGES = gql`
-  getMessages{
-      _id
-      body
-      user
   }
 `;
