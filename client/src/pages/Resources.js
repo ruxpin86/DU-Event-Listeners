@@ -7,9 +7,13 @@ import ResourceCard from "../components/ResourceCard";
 import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 //not sure if i need both of these resource queries
-import { QUERY_ALL_RESOURCES, QUERY_RESOURCE, QUERY_ME } from "../utils/queries";
+import {
+  QUERY_ALL_RESOURCES,
+  QUERY_RESOURCE,
+  QUERY_ME,
+} from "../utils/queries";
 import { ADD_RESOURCE } from "../utils/mutations";
-//need this so i can check if user is logged in 
+//need this so i can check if user is logged in
 import Auth from "../utils/auth";
 
 // export default function Resources() {
@@ -26,21 +30,21 @@ const Resources = () => {
     handleSubmit,
   } = useForm();
 
-  //query all resources first then query resource is used where and how? 
+  //query all resources first then query resource is used where and how?
   //if the user hits this page and they are logged in then they should see all resources displayed
-  const { resourceData } = useQuery(
-    resource ? QUERY_ALL_RESOURCES ,
-    {
-      variables: {}
-    }
+  // const { resourceData } = useQuery(
+  //   resource ? QUERY_ALL_RESOURCES ,
+  //   {
+  //     variables: {}
+  //   }
 
-  );
-   // get token
-    // const token = Auth.loggedIn() ? Auth.getToken() : null;
-    // // console.log("token IN sreachpage", token);
-    // if (!token) {
-    //   return false;
-    // }
+  // );
+  // get token
+  // const token = Auth.loggedIn() ? Auth.getToken() : null;
+  // // console.log("token IN sreachpage", token);
+  // if (!token) {
+  //   return false;
+  // }
 
   //how do i use the log in token to make sure user is logged in or not to allow them to see the page or not!
 
