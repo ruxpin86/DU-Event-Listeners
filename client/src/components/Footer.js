@@ -1,6 +1,7 @@
 import React from "react";
 import "../style/footer.css";
 
+
 export default function () {
   return (
     <>
@@ -16,6 +17,7 @@ export default function () {
           </ul>
         </div>
       </footer>
+
     </>
   );
 }
