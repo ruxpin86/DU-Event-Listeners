@@ -41,6 +41,12 @@ const userSchema = new Schema(
         ref: "Resource",
       },
     ],
+    messages: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Messages",
+      },
+    ],
   },
   {
     toJSON: {
