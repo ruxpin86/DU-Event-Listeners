@@ -9,7 +9,7 @@ import { RiFolderMusicFill, RiSendPlane2Fill } from "react-icons/ri";
 import { BiSmile } from "react-icons/bi";
 import Picker from "emoji-picker-react";
 import { ADD_MESSAGE } from "../utils/mutations";
-import { QUERY_MESSAGES } from "../utils/queries";
+// import { QUERY_MESSAGES } from "../utils/queries";
 
 //Socket.io Middleware
 const socket = io();
@@ -74,9 +74,9 @@ export default function LiveChat() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await addMessage({
-        variables: { messageFormData },
-      });
+      // const { data } = await addMessage({
+      //   variables: { messageFormData },
+      // });
     } catch (error) {
       console.error(error);
     }
