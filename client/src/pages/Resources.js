@@ -1,160 +1,144 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../style/resources.css";
-import { MdClose, MdControlPoint } from "react-icons/md";
+import { MdClose } from "react-icons/md";
+import { useForm } from "react-hook-form";
 import ResourceCard from "../components/ResourceCard";
-import AddResourceForm from "../components/AddResourceForm";
-import useBreakpoint from "../components/tool/useBreakpoint";
+//are we using react router??
+import { useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
+//not sure if i need both of these
+import { QUERY_ALL_RESOURCES, QUERY_RESOURCE } from "../utils/queries";
+import { ADD_RESOURCE } from "../utils/mutations";
 
-export default function Resources() {
-  const [webAddForm, setOpenForm] = useState(true);
-  const [openAddFormPhon, setOpenFormPhon] = useState(false);
-  const [selectValue, setSelect] = useState("all");
-  const [newdata, setNewdata] = useState([]);
-  const point = useBreakpoint();
+// export default function Resources() {
+//   const {
+//     register,
+//     formState: { errors },
+//     handleSubmit,
+//   } = useForm();
 
+const Resources = () => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  //how do i use the log in token to make sure user is logged in or not to allow them to see the page or not!
+
+  //changed data to match backend resourceSeeds key values
   const data = [
     {
-      title: "Css and Html",
-      link: "https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack",
-      description: "Creat react-app on your Heroko",
-      create: "Olly",
-      category: "frontend",
-      create_date: "2022/07/07",
+      user: "krisd",
+      link: "https://medium.com/@MarkPieszak/how-to-delete-all-node-modules-folders-on-your-machine-and-free-up-hd-space-f3954843aeda",
+      category: "other",
+      title: "How to Delete Node Modules",
+      description:
+        "This resource highlights how to remove the node_modules when they are taking up too much space on your machine",
     },
     {
-      title: "create-react-app-buildpack",
-      link: "https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack",
+      user: "ted",
+      link: "https://dev.to/underscorecode/css-selectors-the-full-reference-guide-3cbf",
+      category: "Frontend",
+      title: "CSS Selectors",
       description:
-        "The large-scale contamination of the public sphere by rumours, hate speech, dangerous conspiracy theories and orchestrated deception campaigns is causing widespread concern around the world. These ills are collectively referred to as “information disorder” .The disorder results from a range of factors. They include a rapidly changing media ecology and an increasingly fractious, populist and polarised political environment. The surge in misleading and false information about the Covid-19 pandemic has increased these concerns.",
-      create: "Peter",
-      category: "frontend",
-      create_date: "2022/07/07",
+        "This resource highlights some important details on CSS Selectors",
     },
     {
-      title: "react advanced",
-      link: "https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack",
+      user: "olly",
+      link: "https://flexbox.malven.co/",
+      category: "Frontend",
+      title: "Flexbox Cheat-Sheet",
       description:
-        "The large-scale contamination of the public sphere by rumours, hate speech, dangerous conspiracy theories and orchestrated deception campaigns is causing widespread concern around the world. These ills are collectively referred to as “information disorder”.",
-      create: "Ted",
-      category: "frontend",
-      create_date: "2022/07/07",
+        "This resource is quick guide for all the essential knowledge on flexbox",
     },
     {
-      title: "GraphQL Note",
-      link: "https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack",
-      description:
-        "The large-scale contamination of the public sphere by rumours, hate speech, dangerous conspiracy theories and orchestrated deception campaigns is causing widespread concern around the world. These ills are collectively referred to as “information disorder”.",
-      create: "Kris",
-      category: "backend",
-      create_date: "2022/07/07",
+      user: "andyp",
+      link: "https://reactrouter.com/docs/en/v6/getting-started/overview",
+      category: "Frontend",
+      title: "Guide to React Router",
+      description: "React router information!",
     },
     {
-      title: "MongoDb Note",
-      link: "https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack",
+      user: "pete",
+      link: "https://www.apollographql.com/docs/apollo-server/integrations/middleware/#apollo-server-express",
+      category: "Backend",
+      title: "Apollo Server Guide",
       description:
-        "The large-scale contamination of the public sphere by rumours, hate speech, dangerous conspiracy theories and orchestrated deception campaigns is causing widespread concern around the world. These ills are collectively referred to as “information disorder”.",
-      create: "Andrew",
-      category: "backend",
-      create_date: "2022/07/07",
+        "This resource highlights how get an Apollo Server up and running on your server side applications.",
     },
-    // {
-    //   title: "Github Note",
-    //   link: "https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack",
-    //   description:
-    //     "The large-scale contamination of the public sphere by rumours, hate speech, dangerous conspiracy theories and orchestrated deception campaigns is causing widespread concern around the world. These ills are collectively referred to as “information disorder”.",
-    //   create: "Justin",
-    //   category: "other",
-    //   create_date: "2022/07/07",
-    // },
   ];
-  useEffect(() => {
-    setNewdata(data);
-  }, []);
-  const closeFunc = () => {
-    setOpenFormPhon(false);
-  };
 
-  const changeSelect = (event) => {
-    setSelect(event.target.value);
-    if (data.length > 0) {
-      switch (event.target.value) {
-        case "all":
-          setNewdata(data);
-        case "frontend":
-          const frontendArr = data.filter(
-            (item) => item.category === "frontend"
-          );
-          setNewdata(frontendArr);
-          break;
-        case "backend":
-          const backendArr = data.filter((item) => item.category === "backend");
-          setNewdata(backendArr);
-          break;
-        case "other":
-          const otherArr = data.filter((item) => item.category === "other");
-          setNewdata(otherArr);
-          break;
-        default:
-          break;
-      }
-    }
-  };
-  console.log("selectValue", selectValue);
+  const onSubmit = (data) => console.log(data);
   return (
     <div className="resources-frame">
       <div className="title">
         <h1>Resources</h1>
-        <div className="icon-frame">
-          <MdControlPoint
-            className="addBtn"
-            onClick={() => setOpenFormPhon(!openAddFormPhon)}
-          />
-          <a href="/main">
-            <MdClose />
-          </a>
-        </div>
+        <a href="/main">
+          <MdClose />
+        </a>
       </div>
       <div className="blog-block">
         <div className="left">
           <div className="filter">
-            <select onChange={changeSelect} value={selectValue}>
-              <option value="all" disabled>
+            <select defaultValue={"DEFAULT"}>
+              <option value="DEFAULT" disabled>
                 Select Resources Type
               </option>
-              <option value="all">All Resources</option>
-              <option value="frontend">Front end</option>
-              <option value="backend">Back end</option>
-              <option value="other">Other</option>
+              <option value="1">Front end</option>
+              <option value="2">Back end</option>
+              <option value="3">Other</option>
             </select>
           </div>
-          {/* {newdata.map((data, i) => (
+          {data.map((data, i) => (
             <ResourceCard data={data} i={i} key={i} />
-          ))} */}
-          {newdata.length > 0 ? (
-            newdata.map((data, i) => <ResourceCard data={data} i={i} key={i} />)
-          ) : (
-            <h1>Resources data is empty!!!</h1>
-          )}
+          ))}
         </div>
-        {point === "lg"
-          ? webAddForm && (
-              <div className="right">
-                <div className="title">
-                  <h2>Add Resources</h2>
-                </div>
-                <AddResourceForm />
+        <div className="right">
+          <h2>Add Resources</h2>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <label>Title</label>
+            <input {...register("title", { required: true })} />
+            {errors.title && <p>Title is required</p>}
+            <label>Link</label>
+            <input {...register("link", { required: true })} />
+            {errors.link && <p>Link is required</p>}
+            <label>Description</label>
+            <input {...register("description", { required: true })} />
+            {errors.description && <p>Description is required</p>}
+            <div className="radio-frame">
+              <div className="radio-flex">
+                <input
+                  {...register("category", { required: true })}
+                  type="radio"
+                  value="frontend"
+                />
+                <label>Frontend</label>
               </div>
-            )
-          : openAddFormPhon && (
-              <div className="right">
-                <div className="title">
-                  <h2>Add Resources</h2>
-                  <MdClose onClick={closeFunc} />
-                </div>
-                <AddResourceForm />
+              <div className="radio-flex">
+                <input
+                  {...register("category", { required: true })}
+                  type="radio"
+                  value="backend"
+                />
+                <label>Backend</label>
               </div>
-            )}
+              <div className="radio-flex">
+                <input
+                  {...register("category", { required: true })}
+                  type="radio"
+                  value="other"
+                />
+                <label>Other</label>
+              </div>
+            </div>
+            {errors.category && <p>Type is required</p>}
+            <input className="submit-btn" type="submit" />
+          </form>
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default Resources;

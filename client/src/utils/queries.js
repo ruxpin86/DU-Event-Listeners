@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+//what is the difference
 export const QUERY_USERS = gql`
   query allUsers {
     users {
@@ -51,6 +52,7 @@ export const QUERY_ME = gql`
   }
 `;
 
+//hmm what is the difference here between this one and the one below?
 export const QUERY_ALL_RESOURCES = gql`
   query getAllResources {
     resource {
