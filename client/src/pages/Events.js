@@ -56,7 +56,7 @@ export default function Events() {
 
   console.log("selectValue", selectValue);
   return (
-    <div className="event-frame">
+    <div className="events-frame">
       <div className="title">
         <h1>Events</h1>
         <div className="icon-frame">

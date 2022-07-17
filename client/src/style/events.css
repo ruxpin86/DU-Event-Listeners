@@ -30,7 +30,7 @@
   width: 80%;
   height: 100%;
 }
-.event-frame .card {
+.events-frame .card {
   width: 100%;
   height: 100%;
   border-radius: 10px;
@@ -67,7 +67,7 @@
 .card-header:after {
   right: -13px;
 }
-.event-frame .card-body {
+.events-frame .card-body {
   /* height: 200px; */
   border: 4px solid black;
   border-top: none;
@@ -281,14 +281,14 @@ input[type="radio"]:focus {
   outline: 1px solid currentColor;
   /* outline-offset: max(2px, 0.15em); */
 }
-.event-frame .title .addBtn {
+.events-frame .title .addBtn {
   display: none;
   width: 3rem;
   height: 3rem;
   /* transform: rotate(45deg); */
 }
 @media (max-width: 1200px) {
-  .event-frame .title .addBtn {
+  .events-frame .title .addBtn {
     display: block;
   }
   .blog-block .left {
