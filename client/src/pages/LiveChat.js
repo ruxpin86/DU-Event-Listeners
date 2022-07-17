@@ -70,6 +70,18 @@ export default function LiveChat() {
     },
   ];
 
+  //CHECK THIS!!! WE NEED TO ADD A messageFormDataVariable
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await addMessage({
+        variables: { messageFormData },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const onEmojiClick = (event, emojiObject) => {
     setInputStr((prevInput) => prevInput + emojiObject.emoji);
     console.log("inputStr", inputStr);
