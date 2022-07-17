@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../style/resources.css";
-import { MdClose } from "react-icons/md";
-import { useForm } from "react-hook-form";
+import { MdClose, MdControlPoint } from "react-icons/md";
 import ResourceCard from "../components/ResourceCard";
+import AddResourceForm from "../components/AddResourceForm";
+import useBreakpoint from "../components/tool/useBreakpoint";
+
 export default function Resources() {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
+  const [webAddForm, setOpenForm] = useState(true);
+  const [openAddFormPhon, setOpenFormPhon] = useState(false);
+  const [selectValue, setSelect] = useState("all");
+  const [newdata, setNewdata] = useState([]);
+  const point = useBreakpoint();
 
   const data = [
     {
@@ -43,6 +45,7 @@ export default function Resources() {
       description:
         "The large-scale contamination of the public sphere by rumours, hate speech, dangerous conspiracy theories and orchestrated deception campaigns is causing widespread concern around the world. These ills are collectively referred to as “information disorder”.",
       create: "Kris",
+      category: "backend",
       create_date: "2022/07/07",
     },
     {
@@ -51,77 +54,106 @@ export default function Resources() {
       description:
         "The large-scale contamination of the public sphere by rumours, hate speech, dangerous conspiracy theories and orchestrated deception campaigns is causing widespread concern around the world. These ills are collectively referred to as “information disorder”.",
       create: "Andrew",
+      category: "backend",
       create_date: "2022/07/07",
     },
+    // {
+    //   title: "Github Note",
+    //   link: "https://elements.heroku.com/buildpacks/mars/create-react-app-buildpack",
+    //   description:
+    //     "The large-scale contamination of the public sphere by rumours, hate speech, dangerous conspiracy theories and orchestrated deception campaigns is causing widespread concern around the world. These ills are collectively referred to as “information disorder”.",
+    //   create: "Justin",
+    //   category: "other",
+    //   create_date: "2022/07/07",
+    // },
   ];
+  useEffect(() => {
+    setNewdata(data);
+  }, []);
+  const closeFunc = () => {
+    setOpenFormPhon(false);
+  };
 
-  const onSubmit = (data) => console.log(data);
+  const changeSelect = (event) => {
+    setSelect(event.target.value);
+    if (data.length > 0) {
+      switch (event.target.value) {
+        case "all":
+          setNewdata(data);
+        case "frontend":
+          const frontendArr = data.filter(
+            (item) => item.category === "frontend"
+          );
+          setNewdata(frontendArr);
+          break;
+        case "backend":
+          const backendArr = data.filter((item) => item.category === "backend");
+          setNewdata(backendArr);
+          break;
+        case "other":
+          const otherArr = data.filter((item) => item.category === "other");
+          setNewdata(otherArr);
+          break;
+        default:
+          break;
+      }
+    }
+  };
+  console.log("selectValue", selectValue);
   return (
     <div className="resources-frame">
       <div className="title">
         <h1>Resources</h1>
-        <a href="/main">
-          <MdClose />
-        </a>
+        <div className="icon-frame">
+          <MdControlPoint
+            className="addBtn"
+            onClick={() => setOpenFormPhon(!openAddFormPhon)}
+          />
+          <a href="/main">
+            <MdClose />
+          </a>
+        </div>
       </div>
       <div className="blog-block">
         <div className="left">
           <div className="filter">
-            <select defaultValue={"DEFAULT"}>
-              <option value="DEFAULT" disabled>
+            <select onChange={changeSelect} value={selectValue}>
+              <option value="all" disabled>
                 Select Resources Type
               </option>
-              <option value="1">Front end</option>
-              <option value="2">Back end</option>
-              <option value="3">Other</option>
+              <option value="all">All Resources</option>
+              <option value="frontend">Front end</option>
+              <option value="backend">Back end</option>
+              <option value="other">Other</option>
             </select>
           </div>
-          {data.map((data, i) => (
+          {/* {newdata.map((data, i) => (
             <ResourceCard data={data} i={i} key={i} />
-          ))}
+          ))} */}
+          {newdata.length > 0 ? (
+            newdata.map((data, i) => <ResourceCard data={data} i={i} key={i} />)
+          ) : (
+            <h1>Resources data is empty!!!</h1>
+          )}
         </div>
-        <div className="right">
-          <h2>Add Resources</h2>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <label>Title</label>
-            <input {...register("title", { required: true })} />
-            {errors.title && <p>Title is required</p>}
-            <label>Link</label>
-            <input {...register("link", { required: true })} />
-            {errors.link && <p>Link is required</p>}
-            <label>Description</label>
-            <input {...register("description", { required: true })} />
-            {errors.description && <p>Description is required</p>}
-            <div className="radio-frame">
-              <div className="radio-flex">
-                <input
-                  {...register("category", { required: true })}
-                  type="radio"
-                  value="frontend"
-                />
-                <label>Frontend</label>
+        {point === "lg"
+          ? webAddForm && (
+              <div className="right">
+                <div className="title">
+                  <h2>Add Resources</h2>
+                </div>
+                <AddResourceForm />
               </div>
-              <div className="radio-flex">
-                <input
-                  {...register("category", { required: true })}
-                  type="radio"
-                  value="backend"
-                />
-                <label>Backend</label>
+            )
+          : openAddFormPhon && (
+              <div className="right">
+                <div className="title">
+                  <h2>Add Resources</h2>
+                  <MdClose onClick={closeFunc} />
+                </div>
+                <AddResourceForm />
               </div>
-              <div className="radio-flex">
-                <input
-                  {...register("category", { required: true })}
-                  type="radio"
-                  value="other"
-                />
-                <label>Other</label>
-              </div>
-            </div>
-            {errors.category && <p>Type is required</p>}
-            <input className="submit-btn" type="submit" />
-          </form>
-        </div>
+            )}
       </div>
     </div>
   );

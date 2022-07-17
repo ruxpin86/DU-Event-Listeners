@@ -81,6 +81,10 @@ export default function Signup() {
           >
             Sign Up!
           </button>
+          <p>
+            Oops! One or more of the required fields is not valid, please try
+            again.
+          </p>
         </form>
       </Collapse>
     </>

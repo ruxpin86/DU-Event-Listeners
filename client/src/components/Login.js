@@ -6,12 +6,12 @@ import { useMutation } from "@apollo/client";
 import { Collapse } from "react-collapse";
 
 export default function Login() {
-  const [open, setOpen] = useState(false);
-
   const [loginFormData, setloginFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
+
+  const [open, setOpen] = useState(false);
 
   const [login, { error }] = useMutation(LOGIN_USER);
   if (error) {
@@ -37,7 +37,7 @@ export default function Login() {
     }
 
     setloginFormData({
-      username: "",
+      email: "",
       password: "",
     });
   };
@@ -52,11 +52,11 @@ export default function Login() {
         <br></br>
         <form className="login-form">
           <div className="loginEl">
-            <label for="username">Username</label>
+            <label for="email">Email</label>
             <input
               onChange={handleInputChange}
               type="text"
-              name="username"
+              name="email"
               value={loginFormData.username}
             ></input>
             <label for="password">Password</label>
@@ -75,6 +75,7 @@ export default function Login() {
           >
             Login
           </button>
+          <p>Oops! Please reenter a valid email and password</p>
         </form>
       </Collapse>
     </>

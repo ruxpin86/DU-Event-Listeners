@@ -64,7 +64,10 @@ select:focus {
   justify-content: space-between;
   align-items: center;
 }
-
+.title .icon-frame {
+  display: flex;
+  /* align-items: center; */
+}
 .openBtn {
   font-size: 1.8rem;
   transition: 0.7s;
@@ -91,11 +94,10 @@ select:focus {
 
 .blog-block .right {
   width: 35%;
-  height: 50vh;
+  height: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background-color: white; */
   border-radius: 15px;
   padding: 20px 0;
   border: 4px solid black;
@@ -108,7 +110,7 @@ select:focus {
 
 .blog-block form {
   width: 90%;
-  height: 100%;
+  height: 95%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -136,7 +138,7 @@ form .radio-frame .radio-flex input {
   outline: none;
 }
 .blog-block form .submit-btn {
-  margin-top: 2rem;
+  margin-top: 1rem;
   border: 3px solid black;
   transition: 0.3s;
 }
@@ -207,6 +209,30 @@ input[type="radio"]:focus {
   outline: 1px solid currentColor;
   /* outline-offset: max(2px, 0.15em); */
 }
-
-@media only screen and (max-width: 1200px) {
+.resources-frame .title .addBtn {
+  display: none;
+  width: 3rem;
+  height: 3rem;
+  /* transform: rotate(45deg); */
+}
+@media (max-width: 1200px) {
+  .resources-frame .title .addBtn {
+    display: block;
+  }
+  .blog-block .left {
+    width: 100%;
+  }
+  .blog-block .right {
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    background-color: #99c1de;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .blog-block .right svg {
+    width: 3rem;
+    height: 3rem;
+  }
 }
