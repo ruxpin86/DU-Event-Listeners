@@ -4,7 +4,9 @@ import Header from "../components/Header";
 import "../style/header.css";
 import Signup from "../components/Signup";
 import Login from "../components/Login";
+import Footer from "../components/Footer";
 import "../style/home.css";
+import "../style/footer.css";
 
 export default function Home() {
   return (
@@ -17,6 +19,9 @@ export default function Home() {
         </div>
         <div className="login">
           <Login />
+        </div>
+        <div className="footer">
+          <Footer />
         </div>
       </form>
     </div>
