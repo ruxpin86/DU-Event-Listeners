@@ -55,6 +55,11 @@ const typeDefs = gql`
     description: String!
   }
 
+  input MessageInput {
+    body: String
+    user: String
+  }
+
   type Query {
     allUsers: [User]!
 
@@ -82,7 +87,7 @@ const typeDefs = gql`
 
     addResource(userId: ID, input: ResourceInput): Resource
 
-    addMessage(messages: [ID]!): Messages
+    addMessage(userId: ID, input: MessageInput): Messages
   }
 `;
 
