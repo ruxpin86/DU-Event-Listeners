@@ -149,7 +149,6 @@ export default function LiveChat() {
             <textarea
               {...register("body", { required: true })}
               onChange={handleInputChange}
-              name="messageInput"
               value={messageFormData.messageInput}
             />
             <button
