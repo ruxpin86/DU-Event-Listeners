@@ -23,7 +23,7 @@ export default function ForumCard({ data, i }) {
         <form>
           <textarea></textarea>
           <button className="sendBtn submit-btn" type="submit">
-            Send
+            Reply
           </button>
         </form>
       </Collapse>

@@ -87,6 +87,10 @@ export default function Forum() {
     <div className="forum-frame">
       <div className="title">
         <h1>Forum</h1>
+        <MdControlPoint
+          className="addBtn"
+          onClick={() => setOpenFormPhon(!openAddFormPhon)}
+        />
         <a href="/main">
           <MdClose />
         </a>
@@ -109,5 +113,6 @@ export default function Forum() {
         <h1>Forum data is empty!!!</h1>
       )}
     </div>
+    
   );
 }
