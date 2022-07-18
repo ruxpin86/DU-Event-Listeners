@@ -40,10 +40,16 @@ const startApolloServer = async (typeDefs, resolvers) => {
         `Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`
       );
     });
+
     //ADDED THIS FOR SOCKET.IO!!!!
     const io = socketio(http);
     io.on("connection", (socket) => {
-      console.log("connected to socket");
+      socket.on("msg", (msg) => {
+        console.log(msg);
+        socket.broadcast.emit("msg", msg);
+      });
+      console.log("connected to socket", socket.id);
+      // io.emit("msg", "Welcome to the LiveChat!");
     });
   });
 };

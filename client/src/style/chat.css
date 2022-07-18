@@ -68,6 +68,7 @@
   background-color: black;
   border-bottom: 4px solid black;
   font-size: 1.2rem;
+  color: white;
 }
 .chat-room .body p {
   margin: 0;
