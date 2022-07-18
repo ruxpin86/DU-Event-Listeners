@@ -85,7 +85,7 @@ export default function LiveChat() {
     event.preventDefault();
     try {
       const { data } = await addMessage({
-        variables: { input: messageFormData },
+        variables: { messages: messageFormData },
       });
     } catch (error) {
       console.error(error);
