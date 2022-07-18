@@ -19,6 +19,9 @@ export default function LiveChat() {
   const [chosenEmoji, setChosenEmoji] = useState(null);
   const [inputStr, setInputStr] = useState(" ");
   const [showPicker, setShowPicker] = useState(false);
+  const [messageFormData, setMessageFormData] = useState({
+    messageInput: "",
+  });
 
   //SOCKET.IO
   const [isConnected, setIsConnected] = useState(socket.connected);
@@ -59,27 +62,37 @@ export default function LiveChat() {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const data = [
-    {
-      user: "Peter",
-      body: "What's upppppp!!!!!!",
-    },
-    {
-      user: "Olly",
-      body: "yooooooo",
-    },
-  ];
+
+  // const data = [
+  //   {
+  //     user: "Peter",
+  //     body: "What's upppppp!!!!!!",
+  //   },
+  //   {
+  //     user: "Olly",
+  //     body: "yooooooo",
+  //   },
+  // ];
 
   //CHECK THIS!!! WE NEED TO ADD A messageFormDataVariable
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setMessageFormData({ ...messageFormData, [name]: value });
+  };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      // const { data } = await addMessage({
-      //   variables: { messageFormData },
-      // });
+      const { data } = await addMessage({
+        variables: { messageFormData },
+      });
     } catch (error) {
       console.error(error);
     }
+    setMessageFormData({
+      messageInput: "",
+    });
   };
 
   const onEmojiClick = (event, emojiObject) => {
@@ -111,7 +124,7 @@ export default function LiveChat() {
           </div>
           <div className="title">
             <RiFolderMusicFill />
-            <p>Kris--Terminal-zsh</p>
+            <p>Terminal-zsh</p>
           </div>
           <div className="icons-frame right"></div>
         </div>
@@ -132,13 +145,18 @@ export default function LiveChat() {
               onChange={(e) => setInputStr(e.target.value)}
             ></textarea>
           </form> */}
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form>
             <textarea
               {...register("body", { required: true })}
-              value={inputStr}
-              onChange={(e) => setInputStr(e.target.value)}
+              onChange={handleInputChange}
+              name="messageInput"
+              value={messageFormData.messageInput}
             />
-            <button className="submit-btn" type="submit">
+            <button
+              onClick={handleFormSubmit}
+              className="submit-btn"
+              type="submit"
+            >
               <RiSendPlane2Fill />
             </button>
           </form>
