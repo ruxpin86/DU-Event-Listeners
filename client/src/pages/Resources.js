@@ -8,21 +8,20 @@ import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 //not sure if i need both of these resource queries
 import {
-  QUERY_ALL_RESOURCES,
-  // QUERY_RESOURCE,
-  // QUERY_ME,
+  // QUERY_ALL_RESOURCES,
+
+  QUERY_ME,
 } from "../utils/queries";
 import { ADD_RESOURCE } from "../utils/mutations";
 //need this so i can check if user is logged in
 import Auth from "../utils/auth";
-
-// export default function Resources() {
-//   const {
-//     register,
-//     formState: { errors },
-//     handleSubmit,
-//   } = useForm();
-
+//query all resources first then query resource is used where and how?
+//if the user hits this page and they are logged in then they should see all resources displayed
+// const { resourceData } = useQuery(
+//   resource ? QUERY_ALL_RESOURCES ,
+//   {
+//     variables: {}
+//   }
 const Resources = () => {
   const {
     register,
@@ -30,21 +29,26 @@ const Resources = () => {
     handleSubmit,
   } = useForm();
 
-  //query all resources first then query resource is used where and how?
-  //if the user hits this page and they are logged in then they should see all resources displayed
-  // const { resourceData } = useQuery(
-  //   resource ? QUERY_ALL_RESOURCES ,
-  //   {
-  //     variables: {}
-  //   }
+  const { loading, uData, error: userError } = useQuery(QUERY_ME);
+  //this is how we unpack QUERY_ME
+  //mess around here... userData and uData is coming back undefined
+  const userData = uData?.getMe || {};
 
-  // );
+  //if this is working get data compliled into addResource and boom
+  const [addResource, { error }] = useMutation(ADD_RESOURCE);
+  if (error || userError) {
+    console.log(JSON.stringify(error || userError));
+  }
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
+
   // get token
-  // const token = Auth.loggedIn() ? Auth.getToken() : null;
-  // // console.log("token IN sreachpage", token);
-  // if (!token) {
-  //   return false;
-  // }
+  const token = Auth.loggedIn() ? Auth.getToken() : null;
+  // console.log("token IN sreachpage", token);
+  if (!token) {
+    return false;
+  }
 
   //how do i use the log in token to make sure user is logged in or not to allow them to see the page or not!
 
@@ -91,7 +95,10 @@ const Resources = () => {
     },
   ];
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (submitResult) => {
+    console.log(submitResult);
+    console.log(userData);
+  };
   return (
     <div className="resources-frame">
       <div className="title">

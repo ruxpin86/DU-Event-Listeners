@@ -14,8 +14,11 @@ const resolvers = {
     },
 
     getMe: async (parent, args, context) => {
+      // return User.findOne({ _id: "62d32684b3e6fe38d694f1aa" });
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        // return User.findOne({ _id: context.user._id });
+        const currentUser = await User.findOne({ _id: context.user._id });
+        return currentUser;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -24,9 +27,6 @@ const resolvers = {
       return Resource.find();
     },
 
-    // getResource: async (parent, { resourceId }) => {
-    //   return Resource.findOne({ _id: resourceId });
-    // },
     getMessages: async () => {
       return Messages.find();
     },

@@ -35,20 +35,29 @@ export const QUERY_SINGLE_USER = gql`
     }
   }
 `;
+// You may need to put this back in but i was messing with the QUERY_ME on the front end here, feel free to change back!
 
+// export const QUERY_ME = gql`
+//   query getMe {
+//     getMe {
+//       _id
+//       username
+//       events {
+//         creator
+//         eventId
+//         creator
+//         eventName
+//         description
+//         link
+//       }
+//     }
+//   }
+// `;
 export const QUERY_ME = gql`
-  query getMe {
-    user {
+  {
+    getMe {
       _id
       username
-      events {
-        creator
-        eventId
-        creator
-        eventName
-        description
-        link
-      }
     }
   }
 `;
