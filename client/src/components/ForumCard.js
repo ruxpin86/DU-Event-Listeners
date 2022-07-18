@@ -7,11 +7,7 @@ export default function ForumCard({ data, i }) {
   return (
     <div className={[open ? "open" : "", "forum-card"].join(" ")} key={i}>
       <div className="title">
-        <h2>
-          <a href={data.link} target="_blank" rel="noreferrer">
-            {data.title}
-          </a>
-        </h2>
+        <p>{data.description}</p>
         <button
           className={[open ? "open" : "", "openBtn"].join(" ")}
           onClick={() => setOpen(!open)}
@@ -22,13 +18,18 @@ export default function ForumCard({ data, i }) {
       <span>
         {data.create_date} by {data.create}
       </span>
-      <p>{data.description}</p>
+
       <Collapse isOpened={open}>
-        <input></input>
+        <form>
+          <textarea></textarea>
+          <button className="sendBtn submit-btn" type="submit">
+            Send
+          </button>
+        </form>
       </Collapse>
-      <button className="moreBtn" onClick={() => setOpen(!open)}>
+      {/* <button className="moreBtn" onClick={() => setOpen(!open)}>
         More
-      </button>
+      </button> */}
     </div>
   );
 }
