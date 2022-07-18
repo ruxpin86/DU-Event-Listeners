@@ -9,8 +9,8 @@ import { useMutation } from "@apollo/client";
 //not sure if i need both of these resource queries
 import {
   QUERY_ALL_RESOURCES,
-  QUERY_RESOURCE,
-  QUERY_ME,
+  // QUERY_RESOURCE,
+  // QUERY_ME,
 } from "../utils/queries";
 import { ADD_RESOURCE } from "../utils/mutations";
 //need this so i can check if user is logged in

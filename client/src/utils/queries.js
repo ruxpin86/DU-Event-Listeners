@@ -1,5 +1,7 @@
 import { gql } from "@apollo/client";
 
+//this is where we are querying what we want the user to see, matching what is in typeDefs.js
+
 export const QUERY_USERS = gql`
   query allUsers {
     users {
@@ -51,7 +53,6 @@ export const QUERY_ME = gql`
   }
 `;
 
-//hmm what is the difference here between this one and the one below?
 export const QUERY_ALL_RESOURCES = gql`
   query getAllResources {
     resource {
@@ -67,9 +68,11 @@ export const QUERY_RESOURCE = gql`
   query getResource {
     resource {
       _id
+      user
       link
-      description
+      category
       title
+      description
     }
   }
 `;
