@@ -74,7 +74,6 @@ export default function LiveChat() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-
       // const { data } = await addMessage({
       //   variables: { messageFormData },
       // });
