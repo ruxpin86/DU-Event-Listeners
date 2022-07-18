@@ -101,6 +101,9 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     addMessage: async (parent, { userId, input }, context) => {
+      console.log(`userId value is ${userId}`);
+      console.log(`Input value is ${input}`);
+      console.log(JSON.stringify(input));
       if (context.user) {
         return User.findOneAndUpdate(
           { _id: userId },
