@@ -48,12 +48,11 @@ const typeDefs = gql`
   }
 
   input ResourceInput {
-    resourceId: ID
-    user: String
-    link: String
-    title: String
-    category: String
-    description: String
+    user: String!
+    link: String!
+    title: String!
+    category: String!
+    description: String!
   }
 
   type Query {
@@ -63,7 +62,7 @@ const typeDefs = gql`
 
     getMe: User
 
-    getAllResources: [Resource]!
+    getAllResources: [Resource]
 
     getResource(resourceId: ID!): Resource
 
@@ -81,7 +80,7 @@ const typeDefs = gql`
 
     removeEvent(input: EventInput): Event
 
-    addResource(userId: ID, input: ResourceInput!): Resource
+    addResource(userId: ID, input: ResourceInput): Resource
 
     addMessage(messages: [ID]!): Messages
   }

@@ -1,6 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Resource, Messages } = require("../models");
 const { signToken } = require("../utils/auth");
+const { ObjectId } = require("mongoose").Types;
 
 const resolvers = {
   Query: {
@@ -19,9 +20,9 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    // getAllResources: async () => {
-    //   return Resource.find();
-    // },
+    getAllResources: async () => {
+      return Resource.find();
+    },
 
     // getResource: async (parent, { resourceId }) => {
     //   return Resource.findOne({ _id: resourceId });
@@ -89,14 +90,23 @@ const resolvers = {
 
     addResource: async (parent, { userId, input }, context) => {
       if (context.user) {
-        return User.findOneAndUpdate(
-          { _id: userId },
-          { $addToSet: { resources: input } },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
+        console.log(input);
+        try {
+          const resource = await Resource.create(input);
+          const updateUserByResource = await User.findByIdAndUpdate(
+            { _id: userId },
+            { $push: { resources: resource._id } },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          console.log(resource);
+          return { resource, updateUserByResource };
+        } catch (error) {
+          console.log(error);
+          return error;
+        }
       }
       throw new AuthenticationError("You need to be logged in!");
     },
