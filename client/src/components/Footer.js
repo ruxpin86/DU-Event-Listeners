@@ -12,46 +12,61 @@ export default function () {
           <ul className="footer-list">
             <li>
               Olly
-              <a href="https://github.com/ollyhite">
+              <a href="https://github.com/ollyhite" target="blank">
                 <AiFillGithub size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/pei-yun-hite-29a3b49a/">
+              <a
+                href="https://www.linkedin.com/in/pei-yun-hite-29a3b49a/"
+                target="blank"
+              >
                 <AiFillLinkedin size={20} />
               </a>
             </li>
             <li>
               Andy
-              <a href="https://github.com/andypieratt">
+              <a href="https://github.com/andypieratt" target="blank">
                 <AiFillGithub size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/andrew-pieratt/">
+              <a
+                href="https://www.linkedin.com/in/andrew-pieratt/"
+                target="blank"
+              >
                 <AiFillLinkedin size={20} />
               </a>
             </li>
             <li>
               Kris
-              <a href="https://github.com/MinnieAkuma199">
+              <a href="https://github.com/MinnieAkuma199" target="blank">
                 <AiFillGithub size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/kristyn-del-campo-banrevy-8060b2197/">
+              <a
+                href="https://www.linkedin.com/in/kristyn-del-campo-banrevy-8060b2197/"
+                target="blank"
+              >
                 <AiFillLinkedin size={20} />
               </a>
             </li>
             <li>
               Peter
-              <a href="https://github.com/PeterBookmyer">
+              <a href="https://github.com/PeterBookmyer" target="blank">
                 <AiFillGithub size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/peter-bookmyer-60a77144/">
+              <a
+                href="https://www.linkedin.com/in/peter-bookmyer-60a77144/"
+                target="blank"
+              >
                 <AiFillLinkedin size={20} />
               </a>
             </li>
             <li>
               Ted
-              <a href="https://github.com/ruxpin86">
+              <a href="https://github.com/ruxpin86" target="blank">
                 <AiFillGithub size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/william-glynn-71b269125/">
+              <a
+                href="https://www.linkedin.com/in/william-ted-glynn-71b269125"
+                target="blank"
+              >
                 <AiFillLinkedin size={20} />
               </a>
             </li>
