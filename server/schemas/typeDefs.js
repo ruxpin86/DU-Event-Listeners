@@ -8,6 +8,7 @@ const typeDefs = gql`
     password: String
     events: [Event]
     resources: [Resource]
+    messages: [Messages]
   }
 
   type Event {
@@ -55,9 +56,9 @@ const typeDefs = gql`
     description: String
   }
 
-  input MessageInput {
+  input messageInput {
     messageId: ID
-    body: String
+    body: [String]
     user: String
   }
 
@@ -88,7 +89,7 @@ const typeDefs = gql`
 
     addResource(userId: ID, input: ResourceInput!): Resource
 
-    addMessage(userId: ID, input: MessageInput): Messages
+    addMessage(input: messageInput!): User
   }
 `;
 
