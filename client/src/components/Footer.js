@@ -42,7 +42,7 @@ export default function () {
               <a href="https://github.com/PeterBookmyer">
                 <AiFillGithub size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/william-glynn-71b269125/">
+              <a href="https://www.linkedin.com/in/peter-bookmyer-60a77144/">
                 <AiFillLinkedin size={20} />
               </a>
             </li>
