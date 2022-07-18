@@ -110,18 +110,26 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+
     addMessage: async (parent, { userId, messages }, context) => {
       console.log(`userId value is ${userId}`);
       console.log(`Input value is ${messages}`);
       if (context.user) {
-        return User.findOneAndUpdate(
-          { _id: userId },
-          { $addToSet: { messages: messages } },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
+        try {
+          const message = await Messages.create(input);
+          const updatedUser = await User.findByIdAndUpdate(
+            { _id: userId },
+            { $push: { messages: message._id } },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          console.log(message);
+          return { message, updatedUser };
+        } catch (err) {
+          console.error(err);
+        }
       }
       throw new AuthenticationError("You need to be logged in!");
     },
