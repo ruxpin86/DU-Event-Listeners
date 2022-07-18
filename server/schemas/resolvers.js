@@ -21,7 +21,6 @@ const resolvers = {
     },
 
     getAllResources: async () => {
-      //add code here
       return Resource.find();
     },
 
