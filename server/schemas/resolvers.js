@@ -100,11 +100,13 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addMessage: async (parent, { userId, input }, context) => {
+    addMessage: async (parent, { userId, messages }, context) => {
+      console.log(`userId value is ${userId}`);
+      console.log(`Input value is ${messages}`);
       if (context.user) {
         return User.findOneAndUpdate(
           { _id: userId },
-          { $addToSet: { messages: input } },
+          { $addToSet: { messages: messages } },
           {
             new: true,
             runValidators: true,

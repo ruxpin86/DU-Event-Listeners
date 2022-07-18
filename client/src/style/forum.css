@@ -7,3 +7,80 @@
   align-items: center;
   padding-top: 2rem;
 }
+.forum-frame .filter {
+  width: 80%;
+  margin-bottom: 20px;
+}
+.filter select {
+  width: 100%;
+  height: 3rem;
+  background-color: transparent;
+  border: 4px solid black;
+}
+select:focus {
+  outline: none;
+}
+
+.ReactCollapse--collapse {
+  transition: height 500ms;
+}
+.forum-frame .forum-card {
+  width: 70%;
+  border: 4px solid black;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+}
+
+.forum-card .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forum-card form {
+  width: 80%;
+  height: 5rem;
+  border: 4px solid black;
+  border-radius: 5px;
+  margin: 2rem 0;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 1rem;
+}
+.forum-card form textarea {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+}
+.title .icon-frame {
+  display: flex;
+  /* align-items: center; */
+}
+.openBtn {
+  font-size: 1.8rem;
+  transition: 0.7s;
+}
+.openBtn.open {
+  transform: rotate(180deg);
+}
+
+.sendBtn {
+  height: 2rem;
+  /* margin-top: 1rem; */
+  /* padding: 5px 10px; */
+  /* width: fit-content; */
+  border: 3px solid black;
+  transition: 0.3s;
+  /* align-self: flex-end; */
+}
+
+.sendBtn:hover {
+  cursor: default;
+  border-radius: 2px;
+  color: rgb(164, 117, 208);
+  border: 5px solid rgb(164, 117, 208);
+}
