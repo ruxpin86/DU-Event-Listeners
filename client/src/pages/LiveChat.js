@@ -61,12 +61,12 @@ export default function LiveChat() {
   } = useForm();
   const data = [
     {
-      username: "Peter",
-      text: "What's upppppp!!!!!!",
+      user: "Peter",
+      body: "What's upppppp!!!!!!",
     },
     {
-      username: "Olly",
-      text: "yooooooo",
+      user: "Olly",
+      body: "yooooooo",
     },
   ];
 
@@ -74,7 +74,6 @@ export default function LiveChat() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-
       // const { data } = await addMessage({
       //   variables: { messageFormData },
       // });
@@ -135,7 +134,7 @@ export default function LiveChat() {
           </form> */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <textarea
-              {...register("text", { required: true })}
+              {...register("body", { required: true })}
               value={inputStr}
               onChange={(e) => setInputStr(e.target.value)}
             />
