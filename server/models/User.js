@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const Events = require("./Events");
 const Resource = require("./Resource");
 //  const instant-messagingSchema = require("./Instant-Messaging"); Maybe we will need this for instant messaging
+const messages = require("../models/Instant-Messaging");
 
 const userSchema = new Schema(
   {
@@ -41,12 +42,7 @@ const userSchema = new Schema(
         ref: "Resource",
       },
     ],
-    messages: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Messages",
-      },
-    ],
+    messages: [messages.schema],
   },
   {
     toJSON: {
