@@ -22,21 +22,21 @@ export default function Forum() {
       create_date: "2022/07/07",
     },
     {
-      topic: "Ask the Class",
+      topic: "projectHelp",
       description:
         "Has anyone worked with React Animations and have some advice?",
       create: "Olly",
       create_date: "2022/07/07",
     },
     {
-      topic: "Class Activities",
+      topic: "classActivities",
       description:
         "Does anyone have a copy of the MERN mini project that I can take a look at?",
       create: "Ted",
       create_date: "2022/07/07",
     },
     {
-      topic: "Random",
+      topic: "random",
       description:
         "My dog has been sitting staring at me while I code for the last three hours, I think he needs a walk",
       create: "Kris",
@@ -56,26 +56,25 @@ export default function Forum() {
       switch (event.target.value) {
         case "all":
           setNewdata(data);
+          break;
         case "classActivities":
           const classActArr = data.filter(
-            (item) => item.category === "classActivities"
+            (item) => item.topic === "classActivities"
           );
           setNewdata(classActArr);
           break;
         case "projectHelp":
           const projectHelpArr = data.filter(
-            (item) => item.category === "projectHelp"
+            (item) => item.topic === "projectHelp"
           );
           setNewdata(projectHelpArr);
           break;
-        case "shoutout":
-          const shoutoutArr = data.filter(
-            (item) => item.category === "shoutout"
-          );
+        case "Shoutout":
+          const shoutoutArr = data.filter((item) => item.topic === "Shoutout");
           setNewdata(shoutoutArr);
           break;
         case "random":
-          const randomArr = data.filter((item) => item.category === "random");
+          const randomArr = data.filter((item) => item.topic === "random");
           setNewdata(randomArr);
           break;
         default:
