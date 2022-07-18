@@ -8,6 +8,7 @@ const typeDefs = gql`
     password: String
     events: [Event]
     resources: [Resource]
+    messages: [Messages]
   }
 
   type Event {
@@ -29,7 +30,7 @@ const typeDefs = gql`
 
   type Messages {
     _id: ID
-    body: String
+    messages: [String]
     user: String
   }
 
@@ -52,12 +53,6 @@ const typeDefs = gql`
     title: String!
     category: String!
     description: String!
-  }
-
-  input MessageInput {
-    messageId: ID
-    body: String
-    user: String
   }
 
   type Query {
@@ -87,7 +82,7 @@ const typeDefs = gql`
 
     addResource(userId: ID, input: ResourceInput): Resource
 
-    addMessage(userId: ID, input: MessageInput): Messages
+    addMessage(messages: [ID]!): Messages
   }
 `;
 
