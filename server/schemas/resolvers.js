@@ -115,7 +115,7 @@ const resolvers = {
           const resource = await Resource.create(input);
           const updateUserByResource = await User.findByIdAndUpdate(
             { _id: userId },
-            { $push: { resources: resource._id } },
+            { $push: { resources: resource } },
             {
               new: true,
               runValidators: true,
