@@ -68,8 +68,7 @@ const typeDefs = gql`
   }
 
   input MessageInput {
-    body: String
-    user: String
+    messages: String
   }
 
   input ForumInput {
