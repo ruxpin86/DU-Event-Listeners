@@ -159,7 +159,7 @@ const resolvers = {
           const forumPost = await Forum.create(input);
           const updatedUser = await User.findByIdAndUpdate(
             { _id: userId },
-            { $push: { forum: forumPost._id } },
+            { $push: { forum: forumPost } },
             {
               new: true,
               runValidators: true,
