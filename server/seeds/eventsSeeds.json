@@ -1,14 +1,18 @@
 [
-{
-    "creator":"krisd",
+  {
+    "creator": "krisd",
     "eventName": "poolParty",
-    "description":"pool party splash"
-},
-{
-    "creator":"andyp",
-    "eventName": "coffeeMeetup",
-    "description":"come drink coffee" , 
-    "link": "https://www.eventbrite.com/d/online/coding/"
-}
-    
+    "description": "pool party splash",
+    "location": "denver",
+    "eventDate": "2022/07/21",
+    "link": ""
+  },
+  {
+    "creator": "olly",
+    "eventName": "join us",
+    "description": "yoyoyo",
+    "location": "denver",
+    "eventDate": "2022/07/18",
+    "link": "https://google.com"
+  }
 ]

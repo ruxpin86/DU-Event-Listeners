@@ -56,3 +56,19 @@ export const ADD_MESSAGE = gql`
     }
   }
 `;
+
+export const ADD_EVENT = gql`
+  mutation addEvent($input: EventInput) {
+    addEvent(input: $input) {
+      event {
+        _id
+        creator
+        eventName
+        description
+        location
+        eventDate
+        link
+      }
+    }
+  }
+`;
