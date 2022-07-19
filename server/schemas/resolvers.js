@@ -109,12 +109,15 @@ const resolvers = {
     },
 
     addResource: async (parent, { userId, input }, context) => {
+      console.log(`userId value is ${userId}`);
+      console.log(`Input value is ${input}`);
       if (context.user) {
         // console.log()
         try {
           const resource = await Resource.create(input);
           const updateUserByResource = await User.findByIdAndUpdate(
             { _id: userId },
+            //changed this from resource._id to just resource that way ALL the resource data is being pushed not just id
             { $push: { resources: resource } },
             {
               new: true,
