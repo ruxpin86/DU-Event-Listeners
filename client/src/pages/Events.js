@@ -6,7 +6,8 @@ import AddEventForm from "../components/AddEventForm";
 import useBreakpoint from "../components/tool/useBreakpoint";
 import { useQuery } from "@apollo/client";
 import { QUERY_EVENT } from "../utils/queries";
-
+import Auth from "../utils/auth";
+import PacmanLoader from "react-spinners/PacmanLoader";
 export default function Events() {
   const [webAddForm, setOpenForm] = useState(true);
   const [openAddFormPhon, setOpenFormPhon] = useState(false);
@@ -15,6 +16,8 @@ export default function Events() {
   const { loading, data, error: eventError } = useQuery(QUERY_EVENT);
   const eventsData = data?.getAllEvents || {};
   console.log("eventsData", eventsData);
+  const token = Auth.loggedIn() ? Auth.getToken() : null;
+
   if (data) {
     console.log(data);
   }
@@ -22,6 +25,11 @@ export default function Events() {
   useEffect(() => {
     setAllData(eventsData);
   }, []);
+
+  // if (!token) {
+  //   window.location.href = "/";
+  // }
+
   const closeFunc = () => {
     setOpenFormPhon(false);
   };
@@ -47,7 +55,9 @@ export default function Events() {
       </div>
       <div className="blog-block">
         <div className="left">
-          {eventsData.length > 0 ? (
+          {loading ? (
+            <PacmanLoader />
+          ) : eventsData.length > 0 ? (
             eventsData.map((data, i) => (
               <div className="card-frame" key={i}>
                 <EventCard data={data} i={i} key={i} />
@@ -57,24 +67,24 @@ export default function Events() {
             <h1>Events data is empty!!!</h1>
           )}
         </div>
-        {point === "lg"
-          ? webAddForm && (
-              <div className="right">
-                <div className="title">
-                  <h2>Add Events</h2>
-                </div>
-                <AddEventForm updateData={updateData} />
+        {point === "lg" ? (
+          <div className="right">
+            <div className="title">
+              <h2>Add Events</h2>
+            </div>
+            <AddEventForm updateData={updateData} />
+          </div>
+        ) : (
+          openAddFormPhon && (
+            <div className={[openAddFormPhon ? "" : "hide", "right"].join(" ")}>
+              <div className="title">
+                <h2>Add Events</h2>
+                <MdClose className="closeBtn" onClick={closeFunc} />
               </div>
-            )
-          : openAddFormPhon && (
-              <div className="right">
-                <div className="title">
-                  <h2>Add Events</h2>
-                  <MdClose className="closeBtn" onClick={closeFunc} />
-                </div>
-                <AddEventForm updateData={updateData} />
-              </div>
-            )}
+              <AddEventForm updateData={updateData} />
+            </div>
+          )
+        )}
       </div>
     </div>
   );
