@@ -1,5 +1,6 @@
 a{
-    color:black
+    color:black;
+    transition: .3s;
 }
 
 a:hover{

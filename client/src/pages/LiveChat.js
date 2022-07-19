@@ -57,10 +57,6 @@ export default function LiveChat() {
       setIsConnected(false);
     });
 
-    // socket.on("pong", () => {
-    //   setLastPong(new Date().toISOString());
-    // });
-
     socket.on("msg", (msg) => {
       msgRef.current.push(msg);
       trigger();
@@ -86,6 +82,8 @@ export default function LiveChat() {
     console.log(event.target.value);
     setMessageFormData(event.target.value);
   };
+
+  //NEED TO IMPORT USER DATA TO USER IN messageObject
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
