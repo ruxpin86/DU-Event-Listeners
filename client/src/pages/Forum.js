@@ -42,6 +42,12 @@ export default function Forum() {
       create: "Kris",
       create_date: "2022/07/07",
     },
+    {
+      topic: "classActivities",
+      description: "How are you guys doing on PWAs?  Anyone got those nailed?",
+      create: "Andy",
+      create_date: "2022/07/07",
+    },
   ];
   useEffect(() => {
     setNewdata(data);
@@ -85,12 +91,14 @@ export default function Forum() {
   console.log("selectValue", selectValue);
   return (
     <div className="forum-frame">
+      <div className="hide">Add Post</div>
       <div className="title">
         <h1>Forum</h1>
         <MdControlPoint
           className="addBtn"
           onClick={() => setOpenFormPhon(!openAddFormPhon)}
         />
+
         <a href="/main">
           <MdClose />
         </a>
@@ -112,7 +120,7 @@ export default function Forum() {
       ) : (
         <h1>Forum data is empty!!!</h1>
       )}
+      {openAddFormPhon && <ForumAddPostForm />}
     </div>
-    
   );
 }
