@@ -79,6 +79,7 @@ const resolvers = {
           const event = await Events.create(input);
           const updateUserByEvents = await User.findByIdAndUpdate(
             { _id: context.user._id },
+            //maybe change to events: event
             { $addToSet: { events: event._id } },
             {
               new: true,

@@ -7,11 +7,7 @@ import ResourceCard from "../components/ResourceCard";
 import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 //not sure if i need both of these resource queries
-import {
-  // QUERY_ALL_RESOURCES,
-
-  QUERY_ME,
-} from "../utils/queries";
+import { QUERY_ALL_RESOURCES, QUERY_ME } from "../utils/queries";
 import { ADD_RESOURCE } from "../utils/mutations";
 //need this so i can check if user is logged in
 import Auth from "../utils/auth";
@@ -29,12 +25,18 @@ const Resources = () => {
     handleSubmit,
   } = useForm();
 
-  const { loading, data, error: userError } = useQuery(QUERY_ME);
-  // const { loading, data, error: userError } = useQuery(QUERY_ME,QUERY_ALL_RESOURCES );
+  // const { loading, data, error: userError } = useQuery(QUERY_ME);
+  const {
+    loading,
+    data,
+    error: userError,
+  } = useQuery(QUERY_ME, QUERY_ALL_RESOURCES);
   //this is how we unpack QUERY_ME
   const userData = data?.getMe || {};
+  const allResources = data?.resource || [];
+  console.log(allResources);
   //think this is how i want to useState?
-  // const [resourceData, setUserResource] = useState([]);
+  const [resourceData, setUserResource] = useState([]);
   //if this is working get data compliled into addResource and boom
   const [addResource, { error }] = useMutation(ADD_RESOURCE);
   if (error || userError) {
@@ -93,10 +95,10 @@ const Resources = () => {
         "This resource highlights how get an Apollo Server up and running on your server side applications.",
     },
   ];
-
+  // const emptyArray = [];
   const onSubmit = async (submitResult) => {
-    // console.log(submitResult);
-    console.log(userData);
+    // // console.log(submitResult);
+    // console.log(userData);
     // submitResult.preventDefault();
     const newSubmitResult = { ...submitResult, user: userData._id };
     //trying to map through to show all resources to user
@@ -104,16 +106,16 @@ const Resources = () => {
       const userResource = await addResource({
         variables: { userId: userData._id, input: { ...newSubmitResult } },
       });
-      console.log(userResource);
-      //this may be wrong idk where items is coming from
-      // const userResource = items.map((data) => ({
-      //   user: data.user,
-      //   link: data.link,
-      //   category: data.category,
-      //   title: data.title,
-      //   description: data.description,
-      // }));
-      // setUserResource(userResource)
+      // console.log(userResource);
+      //instead of userResource we need to put into an empty array
+      resourceData.map((data) => ({
+        user: data.user,
+        link: data.link,
+        category: data.category,
+        title: data.title,
+        description: data.description,
+      }));
+      setUserResource(userResource);
     } catch (error) {
       console.error(error);
     }
