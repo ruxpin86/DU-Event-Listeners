@@ -176,6 +176,9 @@ select:focus {
   position: static;
   top: 120px;
 }
+.blog-block .right.hide {
+  display: none;
+}
 .blog-block form p {
   color: red;
 }
@@ -287,6 +290,19 @@ input[type="radio"]:focus {
   height: 3rem;
   /* transform: rotate(45deg); */
 }
+
+.blog-block .left .icon-box {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.blog-block .left .icon-box span {
+  width: 100px;
+  height: 100%;
+}
+
 @media (max-width: 1200px) {
   .events-frame .title .addBtn {
     display: block;

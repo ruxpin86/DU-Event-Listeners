@@ -28,7 +28,7 @@ export default function AddEventForm({ updateData }) {
         variables: { input: { ...data } },
       });
       console.log("newEvent", newEvent);
-      updateData();
+      // updateData();
     } catch (err) {
       console.error(err);
       console.log(JSON.stringify(err));

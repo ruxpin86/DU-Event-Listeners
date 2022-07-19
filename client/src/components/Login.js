@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import "../style/login.css";
 import Auth from "../utils/auth";
 import { LOGIN_USER } from "../utils/mutations";
@@ -11,6 +12,14 @@ export default function Login() {
     password: "",
   });
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const resetState = () => {
+    // setValid(true);
+    setEmail("");
+    setPassword("");
+  };
+
   const [open, setOpen] = useState(false);
 
   const [login, { error }] = useMutation(LOGIN_USER);
@@ -18,13 +27,19 @@ export default function Login() {
     console.log(JSON.stringify(error));
   }
 
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setloginFormData({ ...loginFormData, [name]: value });
   };
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
+  const handleFormSubmit = async (data) => {
+    console.log(data);
 
     try {
       const { data } = await login({
@@ -35,14 +50,9 @@ export default function Login() {
     } catch (err) {
       console.error(err);
     }
-
-    setloginFormData({
-      email: "",
-      password: "",
-    });
   };
-
   console.log(loginFormData);
+
   return (
     <>
       <h2 className="main-page-form" onClick={() => setOpen(!open)}>
@@ -50,7 +60,7 @@ export default function Login() {
       </h2>
       <Collapse isOpened={open}>
         <br></br>
-        <form className="login-form">
+        <form onSubmit={handleSubmit(handleFormSubmit)} className="login-form">
           <div className="loginEl">
             <label htmlFor="email">Email</label>
             <input
@@ -71,12 +81,24 @@ export default function Login() {
           <button
             onClick={handleFormSubmit}
             className="login-btn"
-            type="button"
+            type="submit"
           >
             Login
           </button>
-          <p>Oops! Please reenter a valid email and password</p>
         </form>
+        {/* <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="email">Email</label>
+        <input {...register("email", { required: true })} />
+        {errors.email && <p>Email is required</p>}
+        <label htmlFor="password">Password</label>
+        <input {...register("password", { required: true })} />
+        {errors.password && <p>Password is required</p>}
+
+        <button className="login-btn" type="submit">
+            Login
+          </button>
+        <input type="submit" />
+      </form> */}
       </Collapse>
     </>
   );
