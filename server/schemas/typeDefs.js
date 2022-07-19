@@ -8,6 +8,8 @@ const typeDefs = gql`
     password: String
     events: [Event]
     resources: [Resource]
+    messages: [Messages]
+    forum: [Forum]
   }
 
   type Event {
@@ -15,6 +17,8 @@ const typeDefs = gql`
     creator: String
     eventName: String
     description: String
+    location: String
+    eventDate: String
     link: String
   }
 
@@ -27,21 +31,35 @@ const typeDefs = gql`
     description: String
   }
 
+  type Messages {
+    _id: ID
+    messages: [String]
+    user: String
+  }
+
+  type Forum {
+    _id: ID
+    description: String
+    topic: String
+    creator: String
+    createdAt: String
+  }
+
   type Auth {
     token: ID!
     user: User
   }
 
   input EventInput {
-    eventId: ID
-    creator: String!
-    eventName: String!
-    description: String!
+    creator: String
+    eventName: String
+    description: String
+    location: String
+    eventDate: String
     link: String
   }
 
   input ResourceInput {
-    resourceId: ID
     user: String
     link: String
     title: String
@@ -49,26 +67,51 @@ const typeDefs = gql`
     description: String
   }
 
+  input MessageInput {
+    messages: String
+  }
+
+  input ForumInput {
+    topic: String
+    description: String
+    creator: String
+    createdAt: String
+  }
+
   type Query {
     allUsers: [User]!
+
     singleUser(userId: ID!): User
+
     getMe: User
-    getAllResources: [Resource]!
+
+    getAllResources: [Resource]
+
     getResource(resourceId: ID!): Resource
+
+    getMessages: [Messages]!
+
+    getAllEvents: [Event]
+
+    getForum: [Forum]!
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
 
-    login(username: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
 
     removeUser: User
 
-    addEvent(userId: ID!, input: EventInput): Event
+    addEvent(input: EventInput): Event
 
     removeEvent(input: EventInput): Event
 
-    addResource(input: ResourceInput!): Resource
+    addResource(userId: ID, input: ResourceInput): Resource
+
+    addMessage(userId: ID, input: MessageInput): Messages
+
+    addToForum(userId: ID, input: ForumInput): Forum
   }
 `;
 

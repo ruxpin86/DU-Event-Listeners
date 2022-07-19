@@ -15,6 +15,14 @@ const eventSchema = new Schema({
     type: String,
     required: true,
   },
+  location: {
+    type: String,
+    required: true,
+  },
+  eventDate: {
+    type: String,
+    required: true,
+  },
   link: {
     type: String,
   },

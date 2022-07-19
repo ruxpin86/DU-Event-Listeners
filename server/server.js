@@ -3,7 +3,8 @@ const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
 const path = require("path");
 const { authMiddleware } = require("./utils/auth");
-
+//Socket.io import
+const socketio = require("socket.io");
 const { typeDefs, resolvers } = require("./schemas");
 const db = require("./config/connection");
 
@@ -33,11 +34,22 @@ const startApolloServer = async (typeDefs, resolvers) => {
   server.applyMiddleware({ app });
 
   db.once("open", () => {
-    app.listen(PORT, () => {
+    const http = app.listen(PORT, () => {
       console.log(`Now running on ${PORT}`);
       console.log(
         `Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`
       );
+    });
+
+    //ADDED THIS FOR SOCKET.IO!!!!
+    const io = socketio(http);
+    io.on("connection", (socket) => {
+      socket.on("msg", (msg) => {
+        console.log(msg);
+        socket.broadcast.emit("msg", msg);
+      });
+      console.log("connected to socket w/ uuid:", socket.id);
+      // io.emit("msg", "Welcome to the LiveChat!");
     });
   });
 };

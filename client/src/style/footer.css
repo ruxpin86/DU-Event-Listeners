@@ -1,0 +1,20 @@
+a{
+    color:black;
+    transition: .3s;
+}
+
+a:hover{
+    color: grey;
+}
+
+.footerEl{
+    border-top: 3px solid black;
+    text-align: center;
+}
+
+.footer-list{
+    display: flex;
+    justify-content: space-around;
+    text-decoration: none;
+    list-style: none;
+}

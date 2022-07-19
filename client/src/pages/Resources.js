@@ -1,18 +1,59 @@
+
 import { useQuery, useMutation } from "@apollo/client";
 import { ADD_RESOURCE } from '../utils'
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 import "../style/resources.css";
 import { MdClose } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import ResourceCard from "../components/ResourceCard";
-export default function Resources() {
+
+import { useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
+import { QUERY_ALL_RESOURCES, QUERY_ME } from "../utils/queries";
+import { ADD_RESOURCE } from "../utils/mutations";
+//need Auth so i can check if user is logged in
+import Auth from "../utils/auth";
+const Resources = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
-  const data = [
+  // const { loading, data, error: userError } = useQuery(QUERY_ME);
+  const {
+    loading,
+    data,
+    error: userError,
+  } = useQuery(QUERY_ME, QUERY_ALL_RESOURCES);
+  //this is how we unpack QUERY_ME
+  const userData = data?.getMe || {};
+  //empty array in allResources now
+  const allResources = data?.resource || [];
+
+  //think this is how i want to useState?
+  const [resourceData, setUserResource] = useState([]);
+  //if this is working get data compliled into addResource and boom
+  const [addResource, { error }] = useMutation(ADD_RESOURCE);
+  if (error || userError) {
+    console.log(JSON.stringify(error || userError));
+  }
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
+
+  // get token
+  const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+  if (!token) {
+    return false;
+  }
+
+  //changed data to match backend resourceSeeds key values
+  const fakeData = [
     {
       user: "krisd",
       link: "https://medium.com/@MarkPieszak/how-to-delete-all-node-modules-folders-on-your-machine-and-free-up-hd-space-f3954843aeda",
@@ -22,7 +63,9 @@ export default function Resources() {
         "This resource highlights how to remove the node_modules when they are taking up too much space on your machine",
     },
     {
-      user: "krisd",
+
+      user: "ted",
+
       link: "https://dev.to/underscorecode/css-selectors-the-full-reference-guide-3cbf",
       category: "Frontend",
       title: "CSS Selectors",
@@ -53,17 +96,38 @@ export default function Resources() {
         "This resource highlights how get an Apollo Server up and running on your server side applications.",
     },
   ];
-
-  const Resource
-
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (submitResult) => {
+    // // console.log(submitResult);
+    // console.log(userData);
+    // submitResult.preventDefault();
+    const newSubmitResult = { ...submitResult, user: userData._id };
+    //trying to map through to show all resources to user
+    try {
+      const userResource = await addResource({
+        variables: { userId: userData._id, input: { ...newSubmitResult } },
+      });
+      // console.log(userResource);
+      allResources.map((data) => ({
+        user: data.userData.user,
+        link: data.userData.link,
+        category: data.userData.category,
+        title: data.userData.title,
+        description: data.userData.description,
+      }));
+      console.log(allResources);
+      //this console log is coming up as an empty array
+      setUserResource(userResource);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className="resources-frame">
       <div className="title">
         <h1>Resources</h1>
-        <a href="/main">
+        <Link to="/main">
           <MdClose />
-        </a>
+        </Link>
       </div>
       <div className="blog-block">
         <div className="left">
@@ -77,7 +141,7 @@ export default function Resources() {
               <option value="3">Other</option>
             </select>
           </div>
-          {data.map((data, i) => (
+          {fakeData.map((data, i) => (
             <ResourceCard data={data} i={i} key={i} />
           ))}
         </div>
@@ -126,4 +190,6 @@ export default function Resources() {
       </div>
     </div>
   );
-}
+};
+
+export default Resources;

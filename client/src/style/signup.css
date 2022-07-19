@@ -2,7 +2,7 @@
     transition: height 500ms;
 }
 
-h2:hover{
+.main-page-form:hover{
     cursor: s-resize;
     color:cadetblue;
 }
