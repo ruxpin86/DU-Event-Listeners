@@ -13,7 +13,7 @@ export default function Home() {
     <div className="background">
       <h1 className="welcome">Welcome Alumni & Students!</h1>
       <br></br>
-      <form className="main-form">
+      <div className="main-form">
         <div className="signup">
           <Signup />
         </div>
@@ -23,7 +23,7 @@ export default function Home() {
         <div className="footer">
           <Footer />
         </div>
-      </form>
+      </div>
     </div>
   );
 }
