@@ -29,10 +29,10 @@ const Resources = () => {
     handleSubmit,
   } = useForm();
 
-  const { loading, uData, error: userError } = useQuery(QUERY_ME);
+  const { loading, data, error: userError } = useQuery(QUERY_ME);
   //this is how we unpack QUERY_ME
   //mess around here... userData and uData is coming back undefined
-  const userData = uData?.getMe || {};
+  const userData = data?.getMe || {};
 
   //if this is working get data compliled into addResource and boom
   const [addResource, { error }] = useMutation(ADD_RESOURCE);
@@ -53,7 +53,7 @@ const Resources = () => {
   //how do i use the log in token to make sure user is logged in or not to allow them to see the page or not!
 
   //changed data to match backend resourceSeeds key values
-  const data = [
+  const fakeData = [
     {
       user: "krisd",
       link: "https://medium.com/@MarkPieszak/how-to-delete-all-node-modules-folders-on-your-machine-and-free-up-hd-space-f3954843aeda",
@@ -119,7 +119,7 @@ const Resources = () => {
               <option value="3">Other</option>
             </select>
           </div>
-          {data.map((data, i) => (
+          {fakeData.map((data, i) => (
             <ResourceCard data={data} i={i} key={i} />
           ))}
         </div>

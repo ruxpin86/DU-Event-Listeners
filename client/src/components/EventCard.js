@@ -1,37 +1,24 @@
-import React, { useState } from "react";
-import { Collapse } from "react-collapse";
-import { IoIosArrowDown } from "react-icons/io";
+import React from "react";
 export default function EventCard({ data, i }) {
-  const [open, setOpen] = useState(false);
-
   return (
     <div className="card" key={i}>
       <div className="card-header">
-        <h1>{data.eventTitle}</h1>
+        {data.link ? (
+          <h1>
+            <a href={data.link} target="_blank">
+              {data.eventName}
+            </a>
+          </h1>
+        ) : (
+          <h1>{data.eventName}</h1>
+        )}
       </div>
       <div className="card-body">
         <h2>{data.eventDate}</h2>
         <p>{data.description}</p>
-        <h2>{data.eventHost}</h2>
-        <h2>{data.eventLocation}</h2>
+        <h2>{data.creator}</h2>
+        <h2>{data.location}</h2>
       </div>
     </div>
   );
 }
-
-// {
-//   data.map((data, i) => (
-//     <div className="card" key={i}>
-//       <div className="card-header">
-//         <h1>{data.eventTitle}</h1>
-//       </div>
-//       <div className="card-body">
-//         <h2>{data.eventDate}</h2>
-//         <p>{data.description}</p>
-//         <h2>{data.eventHost}</h2>
-
-//         <h2>{data.eventLocation}</h2>
-//       </div>
-//     </div>
-//   ));
-// }

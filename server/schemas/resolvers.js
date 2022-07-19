@@ -1,5 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Resource, Messages, Forum } = require("../models");
+
+const { User, Resource, Messages, Forum, Events} = require("../models");
+
 const { signToken } = require("../utils/auth");
 const { ObjectId } = require("mongoose").Types;
 
@@ -31,8 +33,13 @@ const resolvers = {
       return Messages.find();
     },
 
+    getAllEvents: async () => {
+      return Events.find();
+
+
     getForum: async () => {
       return Forum.find();
+
     },
   },
 

@@ -13,9 +13,11 @@ const typeDefs = gql`
 
   type Event {
     _id: ID
-    creator: String
-    eventName: String
-    description: String
+    creator: String!
+    eventName: String!
+    description: String!
+    location: String!
+    eventDate: String!
     link: String
   }
 
@@ -47,10 +49,11 @@ const typeDefs = gql`
   }
 
   input EventInput {
-    eventId: ID
     creator: String!
     eventName: String!
     description: String!
+    location: String!
+    eventDate: String!
     link: String
   }
 
@@ -87,7 +90,11 @@ const typeDefs = gql`
 
     getMessages: [Messages]!
 
+
+    getAllEvents: [Event]
+
     getForum: [Forum]!
+
   }
 
   type Mutation {
@@ -97,7 +104,7 @@ const typeDefs = gql`
 
     removeUser: User
 
-    addEvent(userId: ID!, input: EventInput): Event
+    addEvent(input: EventInput): Event
 
     removeEvent(input: EventInput): Event
 

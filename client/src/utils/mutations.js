@@ -57,6 +57,21 @@ export const ADD_MESSAGE = gql`
   }
 `;
 
+
+export const ADD_EVENT = gql`
+  mutation addEvent($input: EventInput) {
+    addEvent(input: $input) {
+      event {
+        _id
+        creator
+        eventName
+        description
+        location
+        eventDate
+        link
+      }
+      }
+      }`;
 export const ADD_TO_FORUM = gql`
   mutation addToForum($input: ForumInput, $userId: ID) {
     addToForum(input: $input, userId: $userId) {
@@ -65,6 +80,7 @@ export const ADD_TO_FORUM = gql`
       description
       creator
       createdAt
+
     }
   }
 `;
