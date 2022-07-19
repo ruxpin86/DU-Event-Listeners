@@ -8,6 +8,7 @@ import { RiFolderMusicFill, RiSendPlane2Fill } from "react-icons/ri";
 import { BiSmile } from "react-icons/bi";
 import Picker from "emoji-picker-react";
 import { ADD_MESSAGE } from "../utils/mutations";
+import { QUERY_ME } from "../utils/queries";
 // import { QUERY_MESSAGES } from "../utils/queries";
 
 //Socket.io Middleware
@@ -25,6 +26,15 @@ export default function LiveChat() {
   const trigger = () => setTrig((b) => !b);
   const [scrollTop, setScrollTop] = useState(0);
   const [scrolling, setScrolling] = useState(false);
+
+  //Query Me
+  // const { loading, data, error: userError } = useQuery(QUERY_ME);
+  // if (userError) {
+  //   console.log(JSON.stringify(userError));
+  // }
+  // const userData = data?.me;
+  // const username = userData?.username;
+  // console.log(userData);
 
   //SOCKET.IO
   const [isConnected, setIsConnected] = useState(socket.connected);
@@ -57,10 +67,6 @@ export default function LiveChat() {
       setIsConnected(false);
     });
 
-    // socket.on("pong", () => {
-    //   setLastPong(new Date().toISOString());
-    // });
-
     socket.on("msg", (msg) => {
       msgRef.current.push(msg);
       trigger();
@@ -81,17 +87,27 @@ export default function LiveChat() {
   };
 
   //CHECK THIS!!! WE NEED TO ADD A messageFormDataVariable
+  const { loading, data, error: userError } = useQuery(QUERY_ME);
+  console.log(data);
+  if (userError) {
+    console.log(JSON.stringify(userError));
+  }
+  const userData = data?.getMe;
+  const username = userData?.username;
+  console.log(userData);
 
   const handleInputChange = (event) => {
     console.log(event.target.value);
     setMessageFormData(event.target.value);
   };
 
+  //NEED TO IMPORT USER DATA TO USER IN messageObject
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log("submit", messageFormData);
     let messageObject = {
-      user: "me",
+      user: username,
       msg: messageFormData,
     };
     socket.emit("msg", messageObject);
