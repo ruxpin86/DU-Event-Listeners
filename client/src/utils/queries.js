@@ -55,7 +55,6 @@ export const QUERY_ME = gql`
       }
       resources {
         _id
-        user
         link
         category
         title
@@ -75,18 +74,6 @@ export const QUERY_ALL_RESOURCES = gql`
     resource {
       _id
       link
-      description
-      title
-    }
-  }
-`;
-
-export const QUERY_RESOURCE = gql`
-  query getResource {
-    resource {
-      _id
-      user
-      link
       category
       title
       description
@@ -94,6 +81,18 @@ export const QUERY_RESOURCE = gql`
   }
 `;
 
+// export const QUERY_RESOURCE = gql`
+//   query getResource {
+//     resource {
+// _id
+// user
+// link
+// category
+// title
+// description
+//     }
+//   }
+// `;
 
 export const QUERY_EVENT = gql`
   query getAllEvents {
@@ -105,9 +104,9 @@ export const QUERY_EVENT = gql`
       location
       eventDate
       link
- }
- }
- `;
+    }
+  }
+`;
 export const QUERY_FORUM = gql`
   query getForum {
     forum {
@@ -116,7 +115,6 @@ export const QUERY_FORUM = gql`
       topic
       description
       createdAt
-
     }
   }
 `;

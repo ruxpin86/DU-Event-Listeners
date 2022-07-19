@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../style/resources.css";
 import { MdClose } from "react-icons/md";
 import { useForm } from "react-hook-form";
@@ -30,10 +30,11 @@ const Resources = () => {
   } = useForm();
 
   const { loading, data, error: userError } = useQuery(QUERY_ME);
+  // const { loading, data, error: userError } = useQuery(QUERY_ME,QUERY_ALL_RESOURCES );
   //this is how we unpack QUERY_ME
-  //mess around here... userData and uData is coming back undefined
   const userData = data?.getMe || {};
-
+  //think this is how i want to useState?
+  // const [resourceData, setUserResource] = useState([]);
   //if this is working get data compliled into addResource and boom
   const [addResource, { error }] = useMutation(ADD_RESOURCE);
   if (error || userError) {
@@ -45,12 +46,10 @@ const Resources = () => {
 
   // get token
   const token = Auth.loggedIn() ? Auth.getToken() : null;
-  // console.log("token IN sreachpage", token);
+
   if (!token) {
     return false;
   }
-
-  //how do i use the log in token to make sure user is logged in or not to allow them to see the page or not!
 
   //changed data to match backend resourceSeeds key values
   const fakeData = [
@@ -95,9 +94,29 @@ const Resources = () => {
     },
   ];
 
-  const onSubmit = (submitResult) => {
-    console.log(submitResult);
+  const onSubmit = async (submitResult) => {
+    // console.log(submitResult);
     console.log(userData);
+    // submitResult.preventDefault();
+    const newSubmitResult = { ...submitResult, user: userData._id };
+    //trying to map through to show all resources to user
+    try {
+      const userResource = await addResource({
+        variables: { userId: userData._id, input: { ...newSubmitResult } },
+      });
+      console.log(userResource);
+      //this may be wrong idk where items is coming from
+      // const userResource = items.map((data) => ({
+      //   user: data.user,
+      //   link: data.link,
+      //   category: data.category,
+      //   title: data.title,
+      //   description: data.description,
+      // }));
+      // setUserResource(userResource)
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div className="resources-frame">

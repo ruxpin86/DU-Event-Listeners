@@ -108,7 +108,7 @@ const resolvers = {
 
     addResource: async (parent, { userId, input }, context) => {
       if (context.user) {
-        console.log(input);
+        // console.log()
         try {
           const resource = await Resource.create(input);
           const updateUserByResource = await User.findByIdAndUpdate(
@@ -119,7 +119,7 @@ const resolvers = {
               runValidators: true,
             }
           );
-          console.log(resource);
+          // console.log(resource);
           return { resource, updateUserByResource };
         } catch (error) {
           console.log(error);
