@@ -98,7 +98,13 @@ export default function LiveChat() {
   }
   const userData = data?.getMe;
   const username = userData?.username;
+  const userId = userData?._id;
+
+  //THIS ONE FOR GRABBING USER MESSAGE
+  const userMessage = userData?.messages;
   console.log(userData);
+  console.log(userMessage);
+  console.log(userId);
 
   const handleInputChange = (event) => {
     console.log(event.target.value);
@@ -109,6 +115,7 @@ export default function LiveChat() {
     event.preventDefault();
     console.log("submit", messageFormData);
     let messageObject = {
+      userID: userId,
       user: username,
       msg: messageFormData,
     };
@@ -117,9 +124,12 @@ export default function LiveChat() {
     msgRef.current.push(messageObject);
     trigger();
     // try {
-    //   const { data } = await addMessage({
-    //     variables: { messages: messageFormData },
-    //   });
+    const { data } = await addMessage({
+      variables: {
+        userId: messageObject.userID,
+        input: { messages: messageObject.msg },
+      },
+    });
     // } catch (error) {
     //   console.error(error);
     // }

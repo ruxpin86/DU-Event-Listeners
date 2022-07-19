@@ -51,7 +51,7 @@ export const ADD_MESSAGE = gql`
   mutation addMessage($input: MessageInput, $userId: ID) {
     addMessage(input: $input, userId: $userId) {
       _id
-      body
+      messages
       user
     }
   }

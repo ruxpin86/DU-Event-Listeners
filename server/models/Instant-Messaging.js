@@ -2,9 +2,11 @@ const { Schema, model } = require("mongoose");
 
 const messageSchema = new Schema(
   {
-    body: {
-      type: String,
-    },
+    messages: [
+      {
+        type: String,
+      },
+    ],
     user: {
       type: String,
     },
