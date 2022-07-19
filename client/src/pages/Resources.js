@@ -6,18 +6,10 @@ import ResourceCard from "../components/ResourceCard";
 
 import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
-//not sure if i need both of these resource queries
 import { QUERY_ALL_RESOURCES, QUERY_ME } from "../utils/queries";
 import { ADD_RESOURCE } from "../utils/mutations";
-//need this so i can check if user is logged in
+//need Auth so i can check if user is logged in
 import Auth from "../utils/auth";
-//query all resources first then query resource is used where and how?
-//if the user hits this page and they are logged in then they should see all resources displayed
-// const { resourceData } = useQuery(
-//   resource ? QUERY_ALL_RESOURCES ,
-//   {
-//     variables: {}
-//   }
 const Resources = () => {
   const {
     register,
@@ -33,8 +25,9 @@ const Resources = () => {
   } = useQuery(QUERY_ME, QUERY_ALL_RESOURCES);
   //this is how we unpack QUERY_ME
   const userData = data?.getMe || {};
+  //empty array in allResources now
   const allResources = data?.resource || [];
-  console.log(allResources);
+
   //think this is how i want to useState?
   const [resourceData, setUserResource] = useState([]);
   //if this is working get data compliled into addResource and boom
@@ -95,7 +88,6 @@ const Resources = () => {
         "This resource highlights how get an Apollo Server up and running on your server side applications.",
     },
   ];
-  // const emptyArray = [];
   const onSubmit = async (submitResult) => {
     // // console.log(submitResult);
     // console.log(userData);
@@ -107,14 +99,15 @@ const Resources = () => {
         variables: { userId: userData._id, input: { ...newSubmitResult } },
       });
       // console.log(userResource);
-      //instead of userResource we need to put into an empty array
-      resourceData.map((data) => ({
-        user: data.user,
-        link: data.link,
-        category: data.category,
-        title: data.title,
-        description: data.description,
+      allResources.map((data) => ({
+        user: data.userData.user,
+        link: data.userData.link,
+        category: data.userData.category,
+        title: data.userData.title,
+        description: data.userData.description,
       }));
+      console.log(allResources);
+      //this console log is coming up as an empty array
       setUserResource(userResource);
     } catch (error) {
       console.error(error);
