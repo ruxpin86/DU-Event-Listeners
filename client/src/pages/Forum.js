@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../style/forum.css";
 import { MdClose, MdControlPoint } from "react-icons/md";
 import ForumCard from "../components/ForumCard";
@@ -108,9 +109,9 @@ export default function Forum() {
           onClick={() => setOpenFormPhon(!openAddFormPhon)}
         />
 
-        <a href="/main">
+        <Link to="/main">
           <MdClose />
-        </a>
+        </Link>
       </div>
       <div className="filter">
         <select onChange={changeSelect} value={selectValue}>

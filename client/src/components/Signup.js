@@ -31,7 +31,7 @@ export default function Signup() {
   } = useForm();
 
   const onSubmit = async (submitData) => {
-    console.log("submitdata", submitData);
+    // console.log("submitdata", submitData);
     // setUserFormData({
     //   username: data.username,
     //   email: data.email,
@@ -54,7 +54,7 @@ export default function Signup() {
     // });
   };
 
-  console.log("userFormData", userFormData);
+  // console.log("userFormData", userFormData);
   return (
     <>
       <h2 className="main-page-form" onClick={() => setOpen(!open)}>
@@ -62,40 +62,6 @@ export default function Signup() {
       </h2>
       <Collapse isOpened={open}>
         <br></br>
-        {/* <form className="signup-form">
-          <div className="signupEl">
-            <label htmlFor="email">Email</label>
-            <input
-              onChange={handleInputChange}
-              type="text"
-              name="email"
-            ></input>
-            <label htmlFor="username">Username</label>
-            <input
-              onChange={handleInputChange}
-              type="text"
-              name="username"
-            ></input>
-            <label htmlFor="password">Password</label>
-            <input
-              onChange={handleInputChange}
-              type="password"
-              name="password"
-            ></input>
-          </div>
-          <br></br>
-          <button
-            onClick={handleFormSubmit}
-            className="signup-btn"
-            type="button"
-          >
-            Sign Up!
-          </button>
-          <p>
-            Oops! One or more of the required fields is not valid, please try
-            again.
-          </p>
-        </form> */}
         <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
           <label>Email</label>
           <input {...register("email", { required: true })} />

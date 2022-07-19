@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../style/resources.css";
 import { MdClose } from "react-icons/md";
 import { useForm } from "react-hook-form";
@@ -117,9 +118,9 @@ const Resources = () => {
     <div className="resources-frame">
       <div className="title">
         <h1>Resources</h1>
-        <a href="/main">
+        <Link to="/main">
           <MdClose />
-        </a>
+        </Link>
       </div>
       <div className="blog-block">
         <div className="left">
