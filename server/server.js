@@ -48,7 +48,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
         console.log(msg);
         socket.broadcast.emit("msg", msg);
       });
-      console.log("connected to socket", socket.id);
+      console.log("connected to socket w/ uuid:", socket.id);
       // io.emit("msg", "Welcome to the LiveChat!");
     });
   });

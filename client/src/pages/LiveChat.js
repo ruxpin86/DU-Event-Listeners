@@ -23,6 +23,8 @@ export default function LiveChat() {
   const msgRef = useRef([]);
   const [trig, setTrig] = useState(false);
   const trigger = () => setTrig((b) => !b);
+  const [scrollTop, setScrollTop] = useState(0);
+  const [scrolling, setScrolling] = useState(false);
 
   //SOCKET.IO
   const [isConnected, setIsConnected] = useState(socket.connected);
@@ -35,18 +37,29 @@ export default function LiveChat() {
   }
 
   useEffect(() => {
-    socket.on("connect", () => {
-      console.log(socket.id);
-      setIsConnected(true);
-    });
+    socket.on(
+      "connect",
+      () => {
+        console.log(socket.id);
+        setIsConnected(true);
+        const onScroll = (e) => {
+          setScrollTop(e.target.documentElement.scrollTop);
+          setScrolling(e.target.documentElement.scrollTop > scrollTop);
+        };
+        window.addEventListener("scroll", onScroll);
+
+        return () => window.removeEventListener("scroll", onScroll);
+      },
+      [scrollTop]
+    );
 
     socket.on("disconnect", () => {
       setIsConnected(false);
     });
 
-    socket.on("pong", () => {
-      setLastPong(new Date().toISOString());
-    });
+    // socket.on("pong", () => {
+    //   setLastPong(new Date().toISOString());
+    // });
 
     socket.on("msg", (msg) => {
       msgRef.current.push(msg);
@@ -132,9 +145,13 @@ export default function LiveChat() {
         </div>
         <div className="body">
           <p>Connected: {"" + isConnected}</p>
-          <p>Last pong: {lastPong || "-"}</p>
-          <button onClick={sendPing}>Send ping</button>
-          {msgRef.current.map((msg) => `${msg.user}: ${msg.msg}`)}
+          <p>Welcome to LiveChat :D</p>
+          {/* <p>Last pong: {lastPong || "=ping"}</p> */}
+          {msgRef.current.map((msg) => (
+            <p>
+              {msg.user}: {msg.msg}
+            </p>
+          ))}
         </div>
         <div className="text-board">
           <div className="top">
@@ -144,6 +161,7 @@ export default function LiveChat() {
           </div>
           <form>
             <textarea
+              className="chat-form"
               onChange={handleInputChange}
               value={messageFormData.messageInput}
             ></textarea>
