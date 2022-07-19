@@ -122,3 +122,8 @@ textarea:focus {
   width: 1.5rem;
   height: 1.5rem;
 }
+
+.submit-btn{
+  margin-right: 1rem;
+  border-radius: 5px;
+}

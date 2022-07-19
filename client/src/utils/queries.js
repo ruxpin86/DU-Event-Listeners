@@ -37,7 +37,6 @@ export const QUERY_SINGLE_USER = gql`
     }
   }
 `;
-// You may need to put this back in but i was messing with the QUERY_ME on the front end here, feel free to change back!
 
 export const QUERY_ME = gql`
   query getMe {
@@ -80,19 +79,6 @@ export const QUERY_ALL_RESOURCES = gql`
     }
   }
 `;
-
-// export const QUERY_RESOURCE = gql`
-//   query getResource {
-//     resource {
-// _id
-// user
-// link
-// category
-// title
-// description
-//     }
-//   }
-// `;
 
 export const QUERY_EVENT = gql`
   query getAllEvents {

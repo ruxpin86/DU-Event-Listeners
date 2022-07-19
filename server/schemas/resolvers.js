@@ -20,6 +20,7 @@ const resolvers = {
       if (context.user) {
         // return User.findOne({ _id: context.user._id });
         const currentUser = await User.findOne({ _id: context.user._id });
+        console.log(currentUser);
         return currentUser;
       }
       throw new AuthenticationError("You need to be logged in!");
@@ -130,15 +131,15 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addMessage: async (parent, { userId, messages }, context) => {
+    addMessage: async (parent, { userId, input }, context) => {
       console.log(`userId value is ${userId}`);
-      console.log(`Input value is ${messages}`);
+      console.log(`Input value is ${input}`);
       if (context.user) {
         try {
           const message = await Messages.create(input);
           const updatedUser = await User.findByIdAndUpdate(
             { _id: userId },
-            { $push: { messages: message._id } },
+            { $push: { messages: message } },
             {
               new: true,
               runValidators: true,
