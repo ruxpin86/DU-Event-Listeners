@@ -12,13 +12,13 @@ export default function Login() {
     password: "",
   });
 
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const resetState = () => {
-  //   setValid(true);
-  //   setEmail("");
-  //   setPassword("");
-  // };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const resetState = () => {
+    // setValid(true);
+    setEmail("");
+    setPassword("");
+  };
 
   const [open, setOpen] = useState(false);
 
@@ -38,9 +38,8 @@ export default function Login() {
     setloginFormData({ ...loginFormData, [name]: value });
   };
 
-  const onSubmit = async (data) => {
+  const handleFormSubmit = async (data) => {
     console.log(data);
-    // event.preventDefault();
 
     try {
       const { data } = await login({
@@ -60,7 +59,7 @@ export default function Login() {
         Welcome Back! (Login)
       </h2>
       <Collapse isOpened={open}>
-        {/* <br></br>
+        <br></br>
         <form onSubmit={handleSubmit(handleFormSubmit)} className="login-form">
           <div className="loginEl">
             <label htmlFor="email">Email</label>
@@ -86,20 +85,20 @@ export default function Login() {
           >
             Login
           </button>
-        </form> */}
-        <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="email">Email</label>
-          <input {...register("email", { required: true })} />
-          {errors.email && <p>Email is required</p>}
-          <label htmlFor="password">Password</label>
-          <input {...register("password", { required: true })} />
-          {errors.password && <p>Password is required</p>}
-
-          {/* <button className="login-btn" type="submit">
-            Login
-          </button> */}
-          <input type="submit" />
         </form>
+        {/* <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="email">Email</label>
+        <input {...register("email", { required: true })} />
+        {errors.email && <p>Email is required</p>}
+        <label htmlFor="password">Password</label>
+        <input {...register("password", { required: true })} />
+        {errors.password && <p>Password is required</p>}
+
+        <button className="login-btn" type="submit">
+            Login
+          </button>
+        <input type="submit" />
+      </form> */}
       </Collapse>
     </>
   );
