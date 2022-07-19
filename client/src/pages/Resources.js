@@ -31,8 +31,10 @@ const Resources = () => {
   } = useQuery(QUERY_ME, QUERY_ALL_RESOURCES);
   //this is how we unpack QUERY_ME
   const userData = data?.getMe || {};
+
   //empty array in allResources now
-  const allResources = data?.resource || [];
+  const allResources = data?.resources || [];
+  console.log(allResources);
 
   //think this is how i want to useState?
   const [resourceData, setUserResource] = useState([]);
@@ -97,24 +99,28 @@ const Resources = () => {
     },
   ];
   const onSubmit = async (submitResult) => {
-    // // console.log(submitResult);
+    console.log(submitResult);
     // console.log(userData);
     // submitResult.preventDefault();
     const newSubmitResult = { ...submitResult, user: userData._id };
     //trying to map through to show all resources to user
     try {
       const userResource = await addResource({
+        // variables: {
+        //   userId: userData._id,
+        //   input: { resources: newSubmitResult },
+        // },
         variables: { userId: userData._id, input: { ...newSubmitResult } },
       });
       // console.log(userResource);
-      allResources.map((data) => ({
-        user: data.userData.user,
-        link: data.userData.link,
-        category: data.userData.category,
-        title: data.userData.title,
-        description: data.userData.description,
-      }));
-      console.log(allResources);
+      // newSubmitResult.map((data) => ({
+      //   user: data.userData.user,
+      //   link: data.userData.link,
+      //   category: data.userData.category,
+      //   title: data.userData.title,
+      //   description: data.userData.description,
+      // }));
+
       //this console log is coming up as an empty array
       setUserResource(userResource);
     } catch (error) {
