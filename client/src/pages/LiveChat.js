@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import io from "socket.io-client";
 import "../style/chat.css";
@@ -146,9 +147,9 @@ export default function LiveChat() {
     <div className="chat-frame">
       <div className="title">
         <h1>Live Chat</h1>
-        <a href="/main">
+        <Link to="/main">
           <MdClose />
-        </a>
+        </Link>
       </div>
       <div className="chat-room">
         <div className="header">
