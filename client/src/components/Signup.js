@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 import "../style/signup.css";
@@ -23,13 +24,22 @@ export default function Signup() {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-
+  const onSubmit = async (submitData) => {
+    console.log("submitdata", submitData);
+    // setUserFormData({
+    //   username: data.username,
+    //   email: data.email,
+    //   password: data.password,
+    // });
     try {
       const { data } = await addUser({
-        variables: { ...userFormData },
+        variables: { ...submitData },
       });
       console.log(data);
       Auth.login(data.addUser.token);
@@ -37,14 +47,14 @@ export default function Signup() {
       console.error(err);
     }
 
-    setUserFormData({
-      username: "",
-      email: "",
-      password: "",
-    });
+    // setUserFormData({
+    //   username: "",
+    //   email: "",
+    //   password: "",
+    // });
   };
 
-  console.log(userFormData);
+  console.log("userFormData", userFormData);
   return (
     <>
       <h2 className="main-page-form" onClick={() => setOpen(!open)}>
@@ -52,7 +62,7 @@ export default function Signup() {
       </h2>
       <Collapse isOpened={open}>
         <br></br>
-        <form className="signup-form">
+        {/* <form className="signup-form">
           <div className="signupEl">
             <label htmlFor="email">Email</label>
             <input
@@ -85,6 +95,24 @@ export default function Signup() {
             Oops! One or more of the required fields is not valid, please try
             again.
           </p>
+        </form> */}
+        <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
+          <label>Email</label>
+          <input {...register("email", { required: true })} />
+          {errors.email && <p>Email is required</p>}
+          <label>Username</label>
+          <input {...register("username", { required: true })} />
+          {errors.username && <p>Username is required</p>}
+          <label>Password</label>
+          <input
+            type="password"
+            {...register("password", { required: true })}
+          />
+          {errors.password && <p>Password is required</p>}
+
+          <button className="signup-btn" type="submit">
+            Login
+          </button>
         </form>
       </Collapse>
     </>

@@ -38,9 +38,9 @@ export default function Login() {
     setloginFormData({ ...loginFormData, [name]: value });
   };
 
-  const handleFormSubmit = async (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-
+    setloginFormData({ email: data.email, password: data.password });
     try {
       const { data } = await login({
         variables: { ...loginFormData },
@@ -58,9 +58,10 @@ export default function Login() {
       <h2 className="main-page-form" onClick={() => setOpen(!open)}>
         Welcome Back! (Login)
       </h2>
+      {/* <h2 className="main-page-form">Welcome Back! (Login)</h2> */}
       <Collapse isOpened={open}>
         <br></br>
-        <form onSubmit={handleSubmit(handleFormSubmit)} className="login-form">
+        {/* <form onSubmit={handleSubmit(handleFormSubmit)} className="login-form">
           <div className="loginEl">
             <label htmlFor="email">Email</label>
             <input
@@ -85,20 +86,24 @@ export default function Login() {
           >
             Login
           </button>
-        </form>
-        {/* <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="email">Email</label>
-        <input {...register("email", { required: true })} />
-        {errors.email && <p>Email is required</p>}
-        <label htmlFor="password">Password</label>
-        <input {...register("password", { required: true })} />
-        {errors.password && <p>Password is required</p>}
+        </form> */}
+        {/* <LoginForm /> */}
+        <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+          <label>Email</label>
+          <input {...register("email", { required: true })} />
+          {errors.email && <p>Email is required</p>}
+          <label>Password</label>
+          <input
+            type="password"
+            {...register("password", { required: true })}
+          />
+          {errors.password && <p>Password is required</p>}
 
-        <button className="login-btn" type="submit">
+          <button className="login-btn" type="submit">
             Login
           </button>
-        <input type="submit" />
-      </form> */}
+          <input type="submit" />
+        </form>
       </Collapse>
     </>
   );
