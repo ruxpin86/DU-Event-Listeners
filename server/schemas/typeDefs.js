@@ -9,6 +9,7 @@ const typeDefs = gql`
     events: [Event]
     resources: [Resource]
     messages: [Messages]
+    forum: [Forum]
   }
 
   type Event {
@@ -39,6 +40,7 @@ const typeDefs = gql`
   type Forum {
     _id: ID
     description: String
+    topic: String
     creator: String
     createdAt: String
   }
@@ -58,11 +60,11 @@ const typeDefs = gql`
   }
 
   input ResourceInput {
-    user: String!
-    link: String!
-    title: String!
-    category: String!
-    description: String!
+    user: String
+    link: String
+    title: String
+    category: String
+    description: String
   }
 
   input MessageInput {
@@ -70,10 +72,10 @@ const typeDefs = gql`
   }
 
   input ForumInput {
-    topic: String!
-    description: String!
-    creator: String!
-    createdAt: String!
+    topic: String
+    description: String
+    creator: String
+    createdAt: String
   }
 
   type Query {

@@ -5,61 +5,70 @@ import ForumCard from "../components/ForumCard";
 import ForumAddPostForm from "../components/ForumAddPostForm";
 import ForumAddReplyForm from "../components/ForumAddReplyForm";
 import useBreakpoint from "../components/tool/useBreakpoint";
+import { useQuery } from "@apollo/client";
+import { QUERY_FORUM } from "../utils/queries";
 
 export default function Forum() {
   const [webAddForm, setOpenForm] = useState(true);
   const [openAddFormPhon, setOpenFormPhon] = useState(false);
   const [selectValue, setSelect] = useState("all");
+  const [allForumData, setAllData] = useState([]);
   const [newdata, setNewdata] = useState([]);
   const point = useBreakpoint();
+  const { loading, data, error: forumError } = useQuery(QUERY_FORUM);
+  const forumData = data?.getAllForum || {};
+  console.log("forumData", forumData);
+  if (data) {
+    console.log(data);
+  }
 
-  const data = [
-    {
-      topic: "Shoutout",
-      description:
-        "Shoutout to Olly for the help on module 21 homework..thanks for helping to get my App deployed to Heroku",
-      create: "Peter",
-      create_date: "2022/07/07",
-    },
-    {
-      topic: "projectHelp",
-      description:
-        "Has anyone worked with React Animations and have some advice?",
-      create: "Olly",
-      create_date: "2022/07/07",
-    },
-    {
-      topic: "classActivities",
-      description:
-        "Does anyone have a copy of the MERN mini project that I can take a look at?",
-      create: "Ted",
-      create_date: "2022/07/07",
-    },
-    {
-      topic: "random",
-      description:
-        "My dog has been sitting staring at me while I code for the last three hours, I think he needs a walk",
-      create: "Kris",
-      create_date: "2022/07/07",
-    },
-    {
-      topic: "classActivities",
-      description: "How are you guys doing on PWAs?  Anyone got those nailed?",
-      create: "Andy",
-      create_date: "2022/07/07",
-    },
-  ];
+  // const data = [
+  //   {
+  //     topic: "Shoutout",
+  //     description:
+  //       "Shoutout to Olly for the help on module 21 homework..thanks for helping to get my App deployed to Heroku",
+  //     create: "Peter",
+  //     create_date: "2022/07/07",
+  //   },
+  //   {
+  //     topic: "projectHelp",
+  //     description:
+  //       "Has anyone worked with React Animations and have some advice?",
+  //     create: "Olly",
+  //     create_date: "2022/07/07",
+  //   },
+  //   {
+  //     topic: "classActivities",
+  //     description:
+  //       "Does anyone have a copy of the MERN mini project that I can take a look at?",
+  //     create: "Ted",
+  //     create_date: "2022/07/07",
+  //   },
+  //   {
+  //     topic: "random",
+  //     description:
+  //       "My dog has been sitting staring at me while I code for the last three hours, I think he needs a walk",
+  //     create: "Kris",
+  //     create_date: "2022/07/07",
+  //   },
+  //   {
+  //     topic: "classActivities",
+  //     description: "How are you guys doing on PWAs?  Anyone got those nailed?",
+  //     create: "Andy",
+  //     create_date: "2022/07/07",
+  //   },
+  // ];
   useEffect(() => {
-    setNewdata(data);
+    setAllData(forumData);
   }, []);
   const closeFunc = () => {
     setOpenFormPhon(false);
   };
 
-  const changeSelect = (event) => {
-    setSelect(event.target.value);
+  const changeSelect = (forum) => {
+    setSelect(forum.target.value);
     if (data.length > 0) {
-      switch (event.target.value) {
+      switch (forum.target.value) {
         case "all":
           setNewdata(data);
           break;

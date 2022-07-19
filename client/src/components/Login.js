@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
 import "../style/login.css";
 import Auth from "../utils/auth";
 import { LOGIN_USER } from "../utils/mutations";
@@ -12,26 +11,12 @@ export default function Login() {
     password: "",
   });
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const resetState = () => {
-    // setValid(true);
-    setEmail("");
-    setPassword("");
-  };
-
   const [open, setOpen] = useState(false);
 
   const [login, { error }] = useMutation(LOGIN_USER);
   if (error) {
     console.log(JSON.stringify(error));
   }
-
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -50,9 +35,14 @@ export default function Login() {
     } catch (err) {
       console.error(err);
     }
-  };
-  console.log(loginFormData);
 
+    setloginFormData({
+      email: "",
+      password: "",
+    });
+  };
+
+  console.log(loginFormData);
   return (
     <>
       <h2 className="main-page-form" onClick={() => setOpen(!open)}>
@@ -82,7 +72,7 @@ export default function Login() {
           <button
             onClick={handleFormSubmit}
             className="login-btn"
-            type="submit"
+            type="button"
           >
             Login
           </button>
