@@ -14,10 +14,10 @@ export default function Forum() {
   const [openAddFormPhon, setOpenFormPhon] = useState(false);
   const [selectValue, setSelect] = useState("all");
   const [allForumData, setAllData] = useState([]);
-  const [newdata, setNewdata] = useState([]);
+  const [newData, setNewdata] = useState([]);
   const point = useBreakpoint();
   const { loading, data, error: forumError } = useQuery(QUERY_FORUM);
-  const forumData = data?.getAllForum || {};
+  const forumData = data?.getForum || {};
   console.log("forumData", forumData);
   if (data) {
     console.log(data);
@@ -60,37 +60,40 @@ export default function Forum() {
   //   },
   // ];
   useEffect(() => {
-    setAllData(forumData);
+    setNewdata(forumData);
   }, []);
   const closeFunc = () => {
     setOpenFormPhon(false);
   };
 
-  const changeSelect = (forum) => {
-    setSelect(forum.target.value);
-    if (data.length > 0) {
-      switch (forum.target.value) {
+  const changeSelect = (event) => {
+    console.log(event.target.value);
+    // setSelect(event.target.value);
+    if (forumData.length > 0) {
+      switch (event.target.value) {
         case "all":
-          setNewdata(data);
+          setNewdata(forumData);
           break;
         case "classActivities":
-          const classActArr = data.filter(
+          const classActArr = forumData.filter(
             (item) => item.topic === "classActivities"
           );
           setNewdata(classActArr);
           break;
         case "projectHelp":
-          const projectHelpArr = data.filter(
+          const projectHelpArr = forumData.filter(
             (item) => item.topic === "projectHelp"
           );
           setNewdata(projectHelpArr);
           break;
-        case "Shoutout":
-          const shoutoutArr = data.filter((item) => item.topic === "Shoutout");
+        case "shoutout":
+          const shoutoutArr = forumData.filter(
+            (item) => item.topic === "shoutout"
+          );
           setNewdata(shoutoutArr);
           break;
         case "random":
-          const randomArr = data.filter((item) => item.topic === "random");
+          const randomArr = forumData.filter((item) => item.topic === "random");
           setNewdata(randomArr);
           break;
         default:
@@ -98,7 +101,12 @@ export default function Forum() {
       }
     }
   };
-  console.log("selectValue", selectValue);
+
+  const updateData = () => {
+    console.log("refresh");
+    window.location.reload();
+  };
+
   return (
     <div className="forum-frame">
       <div className="hide">Add Post</div>
@@ -114,8 +122,8 @@ export default function Forum() {
         </Link>
       </div>
       <div className="filter">
-        <select onChange={changeSelect} value={selectValue}>
-          <option value="all" disabled>
+        <select onChange={changeSelect}>
+          <option defaultValue="default" disabled>
             Select Forum Topic
           </option>
           <option value="all">All Topics</option>
@@ -125,12 +133,14 @@ export default function Forum() {
           <option value="random">Random</option>
         </select>
       </div>
-      {newdata.length > 0 ? (
-        newdata.map((data, i) => <ForumCard data={data} i={i} key={i} />)
-      ) : (
-        <h1>Forum data is empty!!!</h1>
-      )}
-      {openAddFormPhon && <ForumAddPostForm />}
+      <div className="cardFrame">
+        {newData.length > 0 ? (
+          newData.map((data, i) => <ForumCard data={data} i={i} key={i} />)
+        ) : (
+          <h1>Forum data is empty!!!</h1>
+        )}
+        {openAddFormPhon && <ForumAddPostForm updateData={updateData} />}
+      </div>
     </div>
   );
 }

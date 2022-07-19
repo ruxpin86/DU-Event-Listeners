@@ -155,7 +155,7 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addToForum: async (paretn, { userId, input }, context) => {
+    addToForum: async (parent, { userId, input }, context) => {
       try {
         if (context.user) {
           const forumPost = await Forum.create(input);
