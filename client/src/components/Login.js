@@ -28,30 +28,51 @@ export default function Login() {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = async (submitData) => {
-    try {
-      const { data } = await login({
-        variables: { ...submitData },
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    handleSubmit(async (submitData) => {
+      console.log(submitData);
+      try {
+        const { data } = await login({
+          variables: { ...submitData },
+        });
+        // console.log(data);
+        Auth.login(data.login.token);
+      } catch (err) {
+        console.error(err);
+      }
+
+      setloginFormData({
+        email: "",
+        password: "",
       });
-      console.log(data);
-      Auth.login(data.login.token);
-    } catch (err) {
-      console.error(err);
-    }
-
-    setloginFormData({
-      email: "",
-      password: "",
-    });
+    })(event);
   };
+  // const onSubmit = async (submitData, event) => {
+  //   console.log(event);
+  //   try {
+  //     const { data } = await login({
+  //       variables: { ...submitData },
+  //     });
+  //     console.log(data);
+  //     Auth.login(data.login.token);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
 
-  console.log(loginFormData);
+  //   setloginFormData({
+  //     email: "",
+  //     password: "",
+  //   });
+  // };
+
+  // console.log(loginFormData);
   return (
     <>
       <h2 className="main-page-form" onClick={() => setOpen(!open)}>
         Welcome Back! (Login)
       </h2>
-      {/* <h2 className="main-page-form">Welcome Back! (Login)</h2> */}
       <Collapse isOpened={open}>
         <br></br>
         {/* <form onSubmit={handleSubmit(handleFormSubmit)} className="login-form">
@@ -81,7 +102,7 @@ export default function Login() {
           </button>
         </form> */}
         {/* <LoginForm /> */}
-        <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="login-form" onSubmit={onSubmit}>
           <label>Email</label>
           <input {...register("email", { required: true })} />
           {errors.email && <p>Email is required</p>}
