@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../style/resources.css";
 import { MdClose } from "react-icons/md";
 import { useForm } from "react-hook-form";
@@ -6,22 +6,10 @@ import ResourceCard from "../components/ResourceCard";
 
 import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
-//not sure if i need both of these resource queries
-import {
-  // QUERY_ALL_RESOURCES,
-
-  QUERY_ME,
-} from "../utils/queries";
+import { QUERY_ALL_RESOURCES, QUERY_ME } from "../utils/queries";
 import { ADD_RESOURCE } from "../utils/mutations";
-//need this so i can check if user is logged in
+//need Auth so i can check if user is logged in
 import Auth from "../utils/auth";
-//query all resources first then query resource is used where and how?
-//if the user hits this page and they are logged in then they should see all resources displayed
-// const { resourceData } = useQuery(
-//   resource ? QUERY_ALL_RESOURCES ,
-//   {
-//     variables: {}
-//   }
 const Resources = () => {
   const {
     register,
@@ -29,11 +17,19 @@ const Resources = () => {
     handleSubmit,
   } = useForm();
 
-  const { loading, data, error: userError } = useQuery(QUERY_ME);
+  // const { loading, data, error: userError } = useQuery(QUERY_ME);
+  const {
+    loading,
+    data,
+    error: userError,
+  } = useQuery(QUERY_ME, QUERY_ALL_RESOURCES);
   //this is how we unpack QUERY_ME
-  //mess around here... userData and uData is coming back undefined
   const userData = data?.getMe || {};
+  //empty array in allResources now
+  const allResources = data?.resource || [];
 
+  //think this is how i want to useState?
+  const [resourceData, setUserResource] = useState([]);
   //if this is working get data compliled into addResource and boom
   const [addResource, { error }] = useMutation(ADD_RESOURCE);
   if (error || userError) {
@@ -45,12 +41,10 @@ const Resources = () => {
 
   // get token
   const token = Auth.loggedIn() ? Auth.getToken() : null;
-  // console.log("token IN sreachpage", token);
+
   if (!token) {
     return false;
   }
-
-  //how do i use the log in token to make sure user is logged in or not to allow them to see the page or not!
 
   //changed data to match backend resourceSeeds key values
   const fakeData = [
@@ -94,10 +88,30 @@ const Resources = () => {
         "This resource highlights how get an Apollo Server up and running on your server side applications.",
     },
   ];
-
-  const onSubmit = (submitResult) => {
-    console.log(submitResult);
-    console.log(userData);
+  const onSubmit = async (submitResult) => {
+    // // console.log(submitResult);
+    // console.log(userData);
+    // submitResult.preventDefault();
+    const newSubmitResult = { ...submitResult, user: userData._id };
+    //trying to map through to show all resources to user
+    try {
+      const userResource = await addResource({
+        variables: { userId: userData._id, input: { ...newSubmitResult } },
+      });
+      // console.log(userResource);
+      allResources.map((data) => ({
+        user: data.userData.user,
+        link: data.userData.link,
+        category: data.userData.category,
+        title: data.userData.title,
+        description: data.userData.description,
+      }));
+      console.log(allResources);
+      //this console log is coming up as an empty array
+      setUserResource(userResource);
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div className="resources-frame">

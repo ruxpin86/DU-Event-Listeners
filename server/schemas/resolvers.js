@@ -80,6 +80,7 @@ const resolvers = {
           const event = await Events.create(input);
           const updateUserByEvents = await User.findByIdAndUpdate(
             { _id: context.user._id },
+            //maybe change to events: event
             { $addToSet: { events: event._id } },
             {
               new: true,
@@ -109,7 +110,7 @@ const resolvers = {
 
     addResource: async (parent, { userId, input }, context) => {
       if (context.user) {
-        console.log(input);
+        // console.log()
         try {
           const resource = await Resource.create(input);
           const updateUserByResource = await User.findByIdAndUpdate(
@@ -120,7 +121,7 @@ const resolvers = {
               runValidators: true,
             }
           );
-          console.log(resource);
+          // console.log(resource);
           return { resource, updateUserByResource };
         } catch (error) {
           console.log(error);
