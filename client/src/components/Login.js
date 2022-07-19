@@ -11,6 +11,14 @@ export default function Login() {
     password: "",
   });
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const resetState = () => {
+    setValid(true);
+    setEmail("");
+    setPassword("");
+  };
+
   const [open, setOpen] = useState(false);
 
   const [login, { error }] = useMutation(LOGIN_USER);
@@ -25,6 +33,12 @@ export default function Login() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    // const emailChange = (event) => {
+    //   setEmail(event.target.value);
+    // }
+    // const passwordChange = (event) => {
+    //   setPassword(event.target.value);
+    // }
 
     try {
       const { data } = await login({

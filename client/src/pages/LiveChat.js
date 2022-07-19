@@ -164,9 +164,11 @@ export default function LiveChat() {
           <p>Welcome to LiveChat :D</p>
           {/* <p>Last pong: {lastPong || "=ping"}</p> */}
           {msgRef.current.map((msg) => (
-            <p>
-              {msg.user}: {msg.msg}
-            </p>
+            <div>
+              <p>
+                {msg.user}: {msg.msg}
+              </p>
+            </div>
           ))}
         </div>
         <div className="text-board">
