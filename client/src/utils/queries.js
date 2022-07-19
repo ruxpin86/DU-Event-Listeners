@@ -94,6 +94,7 @@ export const QUERY_RESOURCE = gql`
   }
 `;
 
+
 export const QUERY_EVENT = gql`
   query getAllEvents {
     getAllEvents {
@@ -104,6 +105,18 @@ export const QUERY_EVENT = gql`
       location
       eventDate
       link
+ }
+ }
+ `;
+export const QUERY_FORUM = gql`
+  query getForum {
+    forum {
+      _id
+      creator
+      topic
+      description
+      createdAt
+
     }
   }
 `;

@@ -1,5 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Resource, Messages, Events } = require("../models");
+
+const { User, Resource, Messages, Forum, Events} = require("../models");
+
 const { signToken } = require("../utils/auth");
 const { ObjectId } = require("mongoose").Types;
 
@@ -30,8 +32,14 @@ const resolvers = {
     getMessages: async () => {
       return Messages.find();
     },
+
     getAllEvents: async () => {
       return Events.find();
+
+
+    getForum: async () => {
+      return Forum.find();
+
     },
   },
 
@@ -135,6 +143,26 @@ const resolvers = {
         }
       }
       throw new AuthenticationError("You need to be logged in!");
+    },
+
+    addToForum: async (paretn, { userId, input }, context) => {
+      try {
+        if (context.user) {
+          const forumPost = await Forum.create(input);
+          const updatedUser = await User.findByIdAndUpdate(
+            { _id: userId },
+            { $push: { forum: forumPost._id } },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          console.log(forumPost);
+          return { forumPost, updatedUser };
+        }
+      } catch (err) {
+        console.error(err);
+      }
     },
   },
 };

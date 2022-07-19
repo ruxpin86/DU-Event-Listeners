@@ -48,14 +48,15 @@ export const ADD_RESOURCE = gql`
 `;
 
 export const ADD_MESSAGE = gql`
-  mutation addMessage($input: MessageInput) {
-    addMessage(input: $input) {
+  mutation addMessage($input: MessageInput, $userId: ID) {
+    addMessage(input: $input, userId: $userId) {
       _id
       body
       user
     }
   }
 `;
+
 
 export const ADD_EVENT = gql`
   mutation addEvent($input: EventInput) {
@@ -69,6 +70,17 @@ export const ADD_EVENT = gql`
         eventDate
         link
       }
+      }
+      }`;
+export const ADD_TO_FORUM = gql`
+  mutation addToForum($input: ForumInput, $userId: ID) {
+    addToForum(input: $input, userId: $userId) {
+      _id
+      topic
+      description
+      creator
+      createdAt
+
     }
   }
 `;
