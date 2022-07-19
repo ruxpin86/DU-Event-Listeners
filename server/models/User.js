@@ -43,6 +43,12 @@ const userSchema = new Schema(
       },
     ],
     messages: [messages.schema],
+    forum: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Forum",
+      },
+    ],
   },
   {
     toJSON: {

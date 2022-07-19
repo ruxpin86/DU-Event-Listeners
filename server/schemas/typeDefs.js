@@ -34,6 +34,13 @@ const typeDefs = gql`
     user: String
   }
 
+  type Forum {
+    _id: ID
+    description: String
+    creator: String
+    createdAt: String
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -60,6 +67,13 @@ const typeDefs = gql`
     user: String
   }
 
+  input ForumInput {
+    topic: String!
+    description: String!
+    creator: String!
+    createdAt: String!
+  }
+
   type Query {
     allUsers: [User]!
 
@@ -72,6 +86,8 @@ const typeDefs = gql`
     getResource(resourceId: ID!): Resource
 
     getMessages: [Messages]!
+
+    getForum: [Forum]!
   }
 
   type Mutation {
@@ -88,6 +104,8 @@ const typeDefs = gql`
     addResource(userId: ID, input: ResourceInput): Resource
 
     addMessage(userId: ID, input: MessageInput): Messages
+
+    addToForum(userId: ID, input: ForumInput): Forum
   }
 `;
 
