@@ -73,16 +73,24 @@ const resolvers = {
       return { token, user };
     },
 
-    addEvent: async (parent, { userId, input }, context) => {
+    addEvent: async (parent, { input }, context) => {
       if (context.user) {
-        return User.findOneAndUpdate(
-          { _id: userId },
-          { $addToSet: { events: input } },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
+        try {
+          const event = await Events.create(input);
+          const updateUserByEvents = await User.findByIdAndUpdate(
+            { _id: context.user._id },
+            { $addToSet: { events: event._id } },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          console.log({ event, updateUserByEvents });
+          return { updateUserByEvents };
+        } catch (error) {
+          console.log(error);
+          return error;
+        }
       }
       throw new AuthenticationError("You need to be logged in!");
     },
