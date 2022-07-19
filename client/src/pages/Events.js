@@ -10,42 +10,27 @@ import { QUERY_EVENT } from "../utils/queries";
 export default function Events() {
   const [webAddForm, setOpenForm] = useState(true);
   const [openAddFormPhon, setOpenFormPhon] = useState(false);
-  const [selectValue, setSelect] = useState("all");
-  const [newdata, setNewdata] = useState([]);
+  const [allEventsData, setAllData] = useState([]);
   const point = useBreakpoint();
   const { loading, data, error: eventError } = useQuery(QUERY_EVENT);
   const eventsData = data?.getAllEvents || {};
-
   console.log("eventsData", eventsData);
   if (data) {
     console.log(data);
   }
-  const eventsDate = [
-    {
-      creator: "krisd",
-      eventName: "poolParty",
-      description: "pool party splash",
-      location: "denver",
-      eventDate: "2022/07/21",
-    },
-    {
-      creator: "olly",
-      eventName: "join us",
-      description: "yoyoyo",
-      location: "denver",
-      eventDate: "2022/07/18",
-      link: "https://google.com",
-    },
-  ];
 
   useEffect(() => {
-    setNewdata(data);
+    setAllData(eventsData);
   }, []);
   const closeFunc = () => {
     setOpenFormPhon(false);
   };
 
-  console.log("selectValue", selectValue);
+  const updateData = () => {
+    console.log("refresh");
+    window.location.reload();
+  };
+
   return (
     <div className="events-frame">
       <div className="title">
@@ -62,8 +47,8 @@ export default function Events() {
       </div>
       <div className="blog-block">
         <div className="left">
-          {eventsDate.length > 0 ? (
-            eventsDate.map((data, i) => (
+          {eventsData.length > 0 ? (
+            eventsData.map((data, i) => (
               <div className="card-frame" key={i}>
                 <EventCard data={data} i={i} key={i} />
               </div>
@@ -78,7 +63,7 @@ export default function Events() {
                 <div className="title">
                   <h2>Add Events</h2>
                 </div>
-                <AddEventForm />
+                <AddEventForm updateData={updateData} />
               </div>
             )
           : openAddFormPhon && (
@@ -87,7 +72,7 @@ export default function Events() {
                   <h2>Add Events</h2>
                   <MdClose className="closeBtn" onClick={closeFunc} />
                 </div>
-                <AddEventForm />
+                <AddEventForm updateData={updateData} />
               </div>
             )}
       </div>

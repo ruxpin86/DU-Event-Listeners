@@ -4,12 +4,12 @@ import Auth from "../utils/auth";
 import { QUERY_ME } from "../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
 import { ADD_EVENT } from "../utils/mutations";
-export default function AddEventForm() {
+export default function AddEventForm({ updateData }) {
   const { loading, data, error: userError } = useQuery(QUERY_ME);
   //this is how we unpack QUERY_ME
   //mess around here... userData and uData is coming back undefined
   const userData = data?.getMe || {};
-  console.log("userData", userData);
+  // console.log("userData", userData);
 
   const [addEvent, { error }] = useMutation(ADD_EVENT);
   if (error) {
@@ -28,6 +28,7 @@ export default function AddEventForm() {
         variables: { input: { ...data } },
       });
       console.log("newEvent", newEvent);
+      updateData();
     } catch (err) {
       console.error(err);
       console.log(JSON.stringify(err));

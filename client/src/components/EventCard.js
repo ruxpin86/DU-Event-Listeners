@@ -1,5 +1,6 @@
 import React from "react";
 export default function EventCard({ data, i }) {
+  // console.log(data);
   return (
     <div className="card" key={i}>
       <div className="card-header">
