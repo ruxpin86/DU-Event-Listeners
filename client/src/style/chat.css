@@ -74,6 +74,11 @@
   font-size: 1.2rem;
   color: rgb(5, 211, 77);
 }
+
+.message .user-name {
+  color: rgb(133, 229, 255);
+}
+
 .chat-room .body p {
   /* overflow: scroll;
   display: flex;
