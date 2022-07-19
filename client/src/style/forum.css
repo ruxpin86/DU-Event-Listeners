@@ -6,7 +6,25 @@
   flex-direction: column;
   align-items: center;
   padding-top: 2rem;
+  position: relative;
 }
+
+.forum-frame .postform {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: 10rem;
+  border: 4px solid black;
+  border-radius: 15px;
+  background-color: #99c1de;
+  font-size: 1.5rem;
+}
+
 .forum-frame .filter {
   width: 80%;
   margin-bottom: 20px;
@@ -57,7 +75,7 @@ select:focus {
   background-color: transparent;
   border: none;
 }
-.title .icon-frame {
+.title {
   display: flex;
   /* align-items: center; */
 }
@@ -87,8 +105,45 @@ select:focus {
 }
 
 .addBtn {
-  /* display: none; */
   width: 3rem;
   height: 3rem;
   /* transform: rotate(45deg); */
+}
+
+.hide {
+  margin-left: 3rem;
+}
+
+.submit-btn {
+  margin-top: 1rem;
+  border: 3px solid black;
+  transition: 0.3s;
+}
+.submit-btn:hover {
+  cursor: default;
+  border-radius: 2px;
+  color: rgb(164, 117, 208);
+  border: 5px solid rgb(164, 117, 208);
+}
+
+.descripInput {
+  width: 80%;
+}
+
+@media (max-width: 1200px) {
+  .forum-frame .title .addBtn {
+    display: block;
+  }
+  .blog-block .left {
+    width: 100%;
+  }
+  .blog-block .right {
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    background-color: #99c1de;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }

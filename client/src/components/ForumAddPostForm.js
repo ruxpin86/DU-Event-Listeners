@@ -11,9 +11,12 @@ export default function ForumAddPostForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="postform" onSubmit={handleSubmit(onSubmit)}>
         <label>Description</label>
-        <input {...register("description", { required: true })} />
+        <input
+          className="descripInput"
+          {...register("description", { required: true })}
+        />
         {errors.link && <p>Description is required</p>}
         <div className="radio-frame">
           <div className="radio-flex">
