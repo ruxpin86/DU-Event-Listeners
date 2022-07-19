@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import "../style/login.css";
 import Auth from "../utils/auth";
 import { LOGIN_USER } from "../utils/mutations";
@@ -22,13 +23,15 @@ export default function Login() {
     const { name, value } = event.target;
     setloginFormData({ ...loginFormData, [name]: value });
   };
-
-  const onSubmit = async (data) => {
-    console.log(data);
-    setloginFormData({ email: data.email, password: data.password });
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const onSubmit = async (submitData) => {
     try {
       const { data } = await login({
-        variables: { ...loginFormData },
+        variables: { ...submitData },
       });
       console.log(data);
       Auth.login(data.login.token);
@@ -92,7 +95,6 @@ export default function Login() {
           <button className="login-btn" type="submit">
             Login
           </button>
-          <input type="submit" />
         </form>
       </Collapse>
     </>
