@@ -1,10 +1,5 @@
-
-import { useQuery, useMutation } from "@apollo/client";
-import { ADD_RESOURCE } from '../utils'
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
 import "../style/resources.css";
 import { MdClose } from "react-icons/md";
 import { useForm } from "react-hook-form";
@@ -24,15 +19,13 @@ const Resources = () => {
   } = useForm();
 
   // const { loading, data, error: userError } = useQuery(QUERY_ME);
-  const {
-    loading,
-    data,
-    error: userError,
-  } = useQuery(QUERY_ME, QUERY_ALL_RESOURCES);
+  const { loading, data, error: userError } = useQuery(QUERY_ALL_RESOURCES);
   //this is how we unpack QUERY_ME
-  const userData = data?.getMe || {};
+  // const userData = data?.getMe || {};
+
   //empty array in allResources now
-  const allResources = data?.resource || [];
+  const allResources = data?.getAllResources || [];
+  console.log(data);
 
   //think this is how i want to useState?
   const [resourceData, setUserResource] = useState([]);
@@ -63,9 +56,7 @@ const Resources = () => {
         "This resource highlights how to remove the node_modules when they are taking up too much space on your machine",
     },
     {
-
       user: "ted",
-
       link: "https://dev.to/underscorecode/css-selectors-the-full-reference-guide-3cbf",
       category: "Frontend",
       title: "CSS Selectors",
@@ -97,26 +88,29 @@ const Resources = () => {
     },
   ];
   const onSubmit = async (submitResult) => {
-    // // console.log(submitResult);
-    // console.log(userData);
-    // submitResult.preventDefault();
-    const newSubmitResult = { ...submitResult, user: userData._id };
+    console.log(submitResult);
     //trying to map through to show all resources to user
     try {
       const userResource = await addResource({
-        variables: { userId: userData._id, input: { ...newSubmitResult } },
+        // variables: {
+        //   userId: userData._id,
+        //   input: { resources: newSubmitResult },
+        // },
+        // variables: { userId: userData._id, input: { ...newSubmitResult } },
+        variables: { input: { ...submitResult } },
       });
       // console.log(userResource);
-      allResources.map((data) => ({
-        user: data.userData.user,
-        link: data.userData.link,
-        category: data.userData.category,
-        title: data.userData.title,
-        description: data.userData.description,
-      }));
-      console.log(allResources);
+      // newSubmitResult.map((data) => ({
+      //   user: data.userData.user,
+      //   link: data.userData.link,
+      //   category: data.userData.category,
+      //   title: data.userData.title,
+      //   description: data.userData.description,
+      // }));
+
       //this console log is coming up as an empty array
-      setUserResource(userResource);
+      // setUserResource(userResource);
+      console.log(userResource);
     } catch (error) {
       console.error(error);
     }
@@ -141,7 +135,7 @@ const Resources = () => {
               <option value="3">Other</option>
             </select>
           </div>
-          {fakeData.map((data, i) => (
+          {allResources.map((data, i) => (
             <ResourceCard data={data} i={i} key={i} />
           ))}
         </div>

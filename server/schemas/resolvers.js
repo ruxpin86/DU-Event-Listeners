@@ -109,14 +109,17 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addResource: async (parent, { userId, input }, context) => {
+    addResource: async (parent, { input }, context) => {
       if (context.user) {
-        // console.log()
         try {
-          const resource = await Resource.create(input);
+          const resource = await Resource.create({
+            ...input,
+            user: context.user.username,
+          });
+          console.log(resource);
           const updateUserByResource = await User.findByIdAndUpdate(
-            { _id: userId },
-            { $push: { resources: resource._id } },
+            { _id: context.user._id },
+            { $push: { resources: resource } },
             {
               new: true,
               runValidators: true,
