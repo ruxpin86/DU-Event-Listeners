@@ -1,5 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Resource, Messages } = require("../models");
+
+const { User, Resource, Messages, Forum, Events } = require("../models");
+
 const { signToken } = require("../utils/auth");
 const { ObjectId } = require("mongoose").Types;
 
@@ -14,8 +16,11 @@ const resolvers = {
     },
 
     getMe: async (parent, args, context) => {
+      // return User.findOne({ _id: "62d32684b3e6fe38d694f1aa" });
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        // return User.findOne({ _id: context.user._id });
+        const currentUser = await User.findOne({ _id: context.user._id });
+        return currentUser;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -24,11 +29,16 @@ const resolvers = {
       return Resource.find();
     },
 
-    // getResource: async (parent, { resourceId }) => {
-    //   return Resource.findOne({ _id: resourceId });
-    // },
     getMessages: async () => {
       return Messages.find();
+    },
+
+    getAllEvents: async () => {
+      return Events.find();
+    },
+
+    getForum: async () => {
+      return Forum.find();
     },
   },
 
@@ -110,7 +120,8 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addMessage: async (parent, { userId, input }, context) => {
+
+    addMessage: async (parent, { userId, messages }, context) => {
       console.log(`userId value is ${userId}`);
       console.log(`Input value is ${messages}`);
       if (context.user) {
@@ -131,6 +142,26 @@ const resolvers = {
         }
       }
       throw new AuthenticationError("You need to be logged in!");
+    },
+
+    addToForum: async (paretn, { userId, input }, context) => {
+      try {
+        if (context.user) {
+          const forumPost = await Forum.create(input);
+          const updatedUser = await User.findByIdAndUpdate(
+            { _id: userId },
+            { $push: { forum: forumPost._id } },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          console.log(forumPost);
+          return { forumPost, updatedUser };
+        }
+      } catch (err) {
+        console.error(err);
+      }
     },
   },
 };

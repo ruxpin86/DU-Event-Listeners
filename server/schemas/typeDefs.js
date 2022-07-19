@@ -13,9 +13,11 @@ const typeDefs = gql`
 
   type Event {
     _id: ID
-    creator: String
-    eventName: String
-    description: String
+    creator: String!
+    eventName: String!
+    description: String!
+    location: String!
+    eventDate: String!
     link: String
   }
 
@@ -34,16 +36,24 @@ const typeDefs = gql`
     user: String
   }
 
+  type Forum {
+    _id: ID
+    description: String
+    creator: String
+    createdAt: String
+  }
+
   type Auth {
     token: ID!
     user: User
   }
 
   input EventInput {
-    eventId: ID
     creator: String!
     eventName: String!
     description: String!
+    location: String!
+    eventDate: String!
     link: String
   }
 
@@ -60,6 +70,13 @@ const typeDefs = gql`
     user: String
   }
 
+  input ForumInput {
+    topic: String!
+    description: String!
+    creator: String!
+    createdAt: String!
+  }
+
   type Query {
     allUsers: [User]!
 
@@ -72,6 +89,12 @@ const typeDefs = gql`
     getResource(resourceId: ID!): Resource
 
     getMessages: [Messages]!
+
+
+    getAllEvents: [Event]
+
+    getForum: [Forum]!
+
   }
 
   type Mutation {
@@ -81,13 +104,15 @@ const typeDefs = gql`
 
     removeUser: User
 
-    addEvent(userId: ID!, input: EventInput): Event
+    addEvent(input: EventInput): Event
 
     removeEvent(input: EventInput): Event
 
     addResource(userId: ID, input: ResourceInput): Resource
 
     addMessage(userId: ID, input: MessageInput): Messages
+
+    addToForum(userId: ID, input: ForumInput): Forum
   }
 `;
 

@@ -52,14 +52,14 @@ export default function Login() {
         <br></br>
         <form className="login-form">
           <div className="loginEl">
-            <label for="email">Email</label>
+            <label htmlFor="email">Email</label>
             <input
               onChange={handleInputChange}
               type="text"
               name="email"
               value={loginFormData.username}
             ></input>
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input
               onChange={handleInputChange}
               type="password"

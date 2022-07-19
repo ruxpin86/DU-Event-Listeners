@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import io from "socket.io-client";
 import "../style/chat.css";
@@ -19,6 +19,10 @@ export default function LiveChat() {
   const [inputStr, setInputStr] = useState(" ");
   const [showPicker, setShowPicker] = useState(false);
   const [messageFormData, setMessageFormData] = useState("");
+  const [messageArray, setMessageArray] = useState(["yooo"]);
+  const msgRef = useRef([]);
+  const [trig, setTrig] = useState(false);
+  const trigger = () => setTrig((b) => !b);
 
   //SOCKET.IO
   const [isConnected, setIsConnected] = useState(socket.connected);
@@ -32,6 +36,7 @@ export default function LiveChat() {
 
   useEffect(() => {
     socket.on("connect", () => {
+      console.log(socket.id);
       setIsConnected(true);
     });
 
@@ -43,10 +48,18 @@ export default function LiveChat() {
       setLastPong(new Date().toISOString());
     });
 
+    socket.on("msg", (msg) => {
+      msgRef.current.push(msg);
+      trigger();
+      console.log("received msg", msg, msgRef.current);
+    });
+
     return () => {
       socket.off("connect");
       socket.off("disconnect");
       socket.off("pong");
+      socket.off("msg");
+      // socket.disconnect();
     };
   }, []);
 
@@ -64,6 +77,14 @@ export default function LiveChat() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log("submit", messageFormData);
+    let messageObject = {
+      user: "me",
+      msg: messageFormData,
+    };
+    socket.emit("msg", messageObject);
+    // setMessageArray([...messageArray, messageFormData]);
+    msgRef.current.push(messageObject);
+    trigger();
     // try {
     //   const { data } = await addMessage({
     //     variables: { messages: messageFormData },
@@ -113,6 +134,7 @@ export default function LiveChat() {
           <p>Connected: {"" + isConnected}</p>
           <p>Last pong: {lastPong || "-"}</p>
           <button onClick={sendPing}>Send ping</button>
+          {msgRef.current.map((msg) => `${msg.user}: ${msg.msg}`)}
         </div>
         <div className="text-board">
           <div className="top">
@@ -123,7 +145,6 @@ export default function LiveChat() {
           <form>
             <textarea
               onChange={handleInputChange}
-              name="messageInput"
               value={messageFormData.messageInput}
             ></textarea>
             <button
