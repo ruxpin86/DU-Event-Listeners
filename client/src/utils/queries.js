@@ -104,7 +104,7 @@ export const QUERY_EVENT = gql`
 `;
 export const QUERY_FORUM = gql`
   query getForum {
-    forum {
+    getForum {
       _id
       creator
       topic

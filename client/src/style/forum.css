@@ -9,6 +9,16 @@
   position: relative;
 }
 
+.cardFrame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
 .forum-frame .postform {
   display: flex;
   flex-direction: column;

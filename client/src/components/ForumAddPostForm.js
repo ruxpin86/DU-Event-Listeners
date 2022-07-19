@@ -32,7 +32,7 @@ export default function ForumAddPostForm({ updateData }) {
         variables: { userId: userData._id, input: { ...newData } },
       });
       console.log("newPost", newPost);
-      // updateData();
+      updateData();
     } catch (err) {
       console.error(err);
       console.log(JSON.stringify(err));

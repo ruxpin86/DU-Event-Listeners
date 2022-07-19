@@ -16,7 +16,7 @@ export default function ForumCard({ data, i }) {
         </button>
       </div>
       <span>
-        {data.create_date} by {data.create}
+        {data.createdAt} by {data.creator}
       </span>
 
       <Collapse isOpened={open}>
