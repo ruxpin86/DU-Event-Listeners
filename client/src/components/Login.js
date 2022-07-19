@@ -75,33 +75,6 @@ export default function Login() {
       </h2>
       <Collapse isOpened={open}>
         <br></br>
-        {/* <form onSubmit={handleSubmit(handleFormSubmit)} className="login-form">
-          <div className="loginEl">
-            <label htmlFor="email">Email</label>
-            <input
-              onChange={handleInputChange}
-              type="text"
-              name="email"
-              value={loginFormData.username}
-            ></input>
-            <label htmlFor="password">Password</label>
-            <input
-              onChange={handleInputChange}
-              type="password"
-              name="password"
-              value={loginFormData.password}
-            ></input>
-          </div>
-          <br></br>
-          <button
-            onClick={handleFormSubmit}
-            className="login-btn"
-            type="button"
-          >
-            Login
-          </button>
-        </form> */}
-        {/* <LoginForm /> */}
         <form className="login-form" onSubmit={onSubmit}>
           <label>Email</label>
           <input {...register("email", { required: true })} />
