@@ -118,7 +118,7 @@ const resolvers = {
           const updateUserByResource = await User.findByIdAndUpdate(
             { _id: userId },
             //changed this from resource._id to just resource that way ALL the resource data is being pushed not just id
-            { $push: { resources: resource } },
+            { $push: { resources: resource._id } },
             {
               new: true,
               runValidators: true,

@@ -91,17 +91,17 @@ const Resources = () => {
     },
   ];
   const onSubmit = async (submitResult) => {
-    // // console.log(submitResult);
+    console.log(submitResult);
     // console.log(userData);
     // submitResult.preventDefault();
     const newSubmitResult = { ...submitResult, user: userData._id };
     //trying to map through to show all resources to user
     try {
       const userResource = await addResource({
-        variables: {
-          userId: userData._id,
-          input: { resources: newSubmitResult },
-        },
+        // variables: {
+        //   userId: userData._id,
+        //   input: { resources: newSubmitResult },
+        // },
         variables: { userId: userData._id, input: { ...newSubmitResult } },
       });
       // console.log(userResource);
