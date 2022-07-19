@@ -1,5 +1,10 @@
+
+import { useQuery, useMutation } from "@apollo/client";
+import { ADD_RESOURCE } from '../utils'
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import "../style/resources.css";
 import { MdClose } from "react-icons/md";
 import { useForm } from "react-hook-form";
@@ -58,7 +63,9 @@ const Resources = () => {
         "This resource highlights how to remove the node_modules when they are taking up too much space on your machine",
     },
     {
+
       user: "ted",
+
       link: "https://dev.to/underscorecode/css-selectors-the-full-reference-guide-3cbf",
       category: "Frontend",
       title: "CSS Selectors",
