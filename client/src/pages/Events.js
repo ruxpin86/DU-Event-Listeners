@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../style/events.css";
 import { MdClose, MdControlPoint } from "react-icons/md";
 import EventCard from "../components/EventCard";
@@ -48,9 +49,9 @@ export default function Events() {
             className="addBtn"
             onClick={() => setOpenFormPhon(!openAddFormPhon)}
           />
-          <a href="/main">
+          <Link to="/main">
             <MdClose />
-          </a>
+          </Link>
         </div>
       </div>
       <div className="blog-block">
