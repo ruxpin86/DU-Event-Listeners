@@ -64,6 +64,13 @@ export const QUERY_ME = gql`
         messages
         user
       }
+      forum {
+        _id
+        creator
+        topic
+        description
+        createdAt
+      }
     }
   }
 `;
