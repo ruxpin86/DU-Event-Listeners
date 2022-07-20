@@ -19,6 +19,7 @@
 }
 
 .signup-btn{
+    margin-top: 1rem;
     padding: 3px;
     width: fit-content;
     border: 3px solid black;
