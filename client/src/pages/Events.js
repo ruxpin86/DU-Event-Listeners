@@ -39,7 +39,8 @@ export default function Events() {
 
   const updateData = () => {
     console.log("refresh");
-    navigate("/main");
+    // navigate(0);
+    // navigate("/main");
     navigate("/events");
   };
 

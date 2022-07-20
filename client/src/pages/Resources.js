@@ -58,7 +58,7 @@ const Resources = (props) => {
   const updateData = () => {
     console.log("refresh");
     // navigate(0);
-    navigate("/main");
+    // navigate("/main");
     navigate("/resources");
   };
 
