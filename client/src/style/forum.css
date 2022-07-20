@@ -83,8 +83,9 @@ select:focus {
 }
 .forum-card form textarea {
   width: 100%;
+  height: 95%;
   background-color: transparent;
-  border: none;
+  /* border: none; */
 }
 .title {
   display: flex;
@@ -143,8 +144,6 @@ select:focus {
 .descripInput {
   width: 80%;
 }
-
-
 
 @media (max-width: 1200px) {
   .forum-frame .title .addBtn {

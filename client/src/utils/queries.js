@@ -71,6 +71,11 @@ export const QUERY_ME = gql`
         topic
         description
         createdAt
+        replies {
+          forumId
+          reply
+          user
+        }
       }
     }
   }
@@ -110,6 +115,11 @@ export const QUERY_FORUM = gql`
       topic
       description
       createdAt
+      replies {
+        forumId
+        reply
+        user
+      }
     }
   }
 `;
