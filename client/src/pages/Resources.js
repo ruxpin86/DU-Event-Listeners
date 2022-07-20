@@ -40,16 +40,16 @@ const Resources = (props) => {
   if (userError) {
     console.log(JSON.stringify(userError));
   }
-  // if (loading) {
-  //   return <PacmanLoader />;
-  // }
+  if (loading) {
+    return <PacmanLoader />;
+  }
 
-  // get token
-  // const token = Auth.loggedIn() ? Auth.getToken() : null;
+  get token
+  const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-  // if (!token) {
-  //   return <p>You need to Log in</p>;
-  // }
+  if (!token) {
+    return <p>You need to Log in</p>;
+  }
 
   const fakeData = [
     {
