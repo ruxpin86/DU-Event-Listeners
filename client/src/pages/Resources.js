@@ -44,11 +44,11 @@ const Resources = (props) => {
   // }
 
   // get token
-  const token = Auth.loggedIn() ? Auth.getToken() : null;
+  // const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-  if (!token) {
-    return false;
-  }
+  // if (!token) {
+  //   return <p>You need to Log in</p>;
+  // }
 
   const fakeData = [
     {
