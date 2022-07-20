@@ -139,6 +139,13 @@ export default function LiveChat() {
     inputRef.current.focus();
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key == "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleFormSubmit(onsubmit)();
+    }
+  };
+
   const onEmojiClick = (event, emojiObject) => {
     setInputStr((prevInput) => prevInput + emojiObject.emoji);
     console.log("inputStr", inputStr);
@@ -200,6 +207,7 @@ export default function LiveChat() {
             ></textarea>
             <button
               onClick={handleFormSubmit}
+              onKeyPress={handleKeyPress}
               className="submit-btn"
               type="submit"
             >
