@@ -4,8 +4,6 @@ import "../style/resources.css";
 import { MdClose, MdControlPoint } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import ResourceCard from "../components/ResourceCard";
-//creating pacman loading symbol
-import PacmanLoader from "react-spinners/PacmanLoader";
 
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_RESOURCES } from "../utils/queries";
