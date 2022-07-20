@@ -50,6 +50,12 @@ select:focus {
   height: 0;
   transition: 0.7s;
 }
+.resources-card a {
+  transition: 0;
+}
+.resources-card a:hover {
+  color: #ee9694;
+}
 /* .left .resources-card.open {
   height: 100%;
 } */
