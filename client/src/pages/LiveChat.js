@@ -47,6 +47,8 @@ export default function LiveChat() {
     console.log(JSON.stringify(error));
   }
 
+  const inputRef = useRef(null);
+
   useEffect(() => {
     socket.on(
       "connect",
@@ -80,6 +82,7 @@ export default function LiveChat() {
       socket.off("pong");
       socket.off("msg");
       // socket.disconnect();
+      inputRef.current.focus();
     };
   }, []);
 
@@ -129,12 +132,18 @@ export default function LiveChat() {
         input: { messages: messageObject.msg },
       },
     });
-    // } catch (error) {
-    //   console.error(error);
-    // }
-    // setMessageFormData({
-    //   messageInput: "",
-    // });
+
+    setMessageFormData({
+      messageInput: "",
+    });
+    inputRef.current.focus();
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key == "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleFormSubmit(onsubmit)();
+    }
   };
 
   const onEmojiClick = (event, emojiObject) => {
@@ -142,7 +151,7 @@ export default function LiveChat() {
     console.log("inputStr", inputStr);
     setShowPicker(false);
   };
-  const onSubmit = (data) => console.log(data);
+  // const onSubmit = (data) => console.log(data);
   return (
     <div className="chat-frame">
       <div className="title">
@@ -190,12 +199,15 @@ export default function LiveChat() {
           </div>
           <form>
             <textarea
+              autoFocus
+              ref={inputRef}
               className="chat-form"
               onChange={handleInputChange}
               value={messageFormData.messageInput}
             ></textarea>
             <button
               onClick={handleFormSubmit}
+              onKeyPress={handleKeyPress}
               className="submit-btn"
               type="submit"
             >
