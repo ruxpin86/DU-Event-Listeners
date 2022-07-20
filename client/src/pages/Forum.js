@@ -14,10 +14,10 @@ export default function Forum() {
   const [openAddFormPhon, setOpenFormPhon] = useState(false);
   const [selectValue, setSelect] = useState("all");
   const [allForumData, setAllData] = useState([]);
-  const [newData, setNewdata] = useState([]);
+  const [newData, setNewdata] = useState(null);
   const point = useBreakpoint();
   const { loading, data, error: forumError } = useQuery(QUERY_FORUM);
-  const forumData = data?.getForum || {};
+  const forumData = data?.getForum || [];
   console.log("forumData", forumData);
   if (data) {
     console.log(data);
@@ -106,7 +106,7 @@ export default function Forum() {
     console.log("refresh");
     window.location.reload();
   };
-
+  console.log(newData);
   return (
     <div className="forum-frame">
       <div className="hide">Add Post</div>
@@ -134,11 +134,14 @@ export default function Forum() {
         </select>
       </div>
       <div className="cardFrame">
-        {newData.length > 0 ? (
+        {/* {newData.length > 0 ? (
           newData.map((data, i) => <ForumCard data={data} i={i} key={i} />)
         ) : (
           <h1>Forum data is empty!!!</h1>
-        )}
+        )} */}
+        {newData
+          ? newData.map((data, i) => <ForumCard data={data} i={i} key={i} />)
+          : forumData.map((data, i) => <ForumCard data={data} i={i} key={i} />)}
         {openAddFormPhon && (
           <ForumAddPostForm updateData={updateData} closeFunc={closeFunc} />
         )}
