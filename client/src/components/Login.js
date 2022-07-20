@@ -68,7 +68,7 @@ export default function Login() {
   //   });
   // };
 
-  // console.log(loginFormData);
+  console.log(loginFormData);
   return (
     <>
       <h2 className="main-page-form" onClick={() => setOpen(!open)}>
@@ -76,18 +76,22 @@ export default function Login() {
       </h2>
       <Collapse isOpened={open}>
         <br></br>
-        <form className="login-form" onSubmit={onSubmit}>
+        <form className="login-form">
           <label>Email</label>
-          <input {...register("email", { required: true })} />
+          <input
+            {...register("email", { required: true })}
+            onChange={handleInputChange}
+          />
           {errors.email && <p>Email is required</p>}
           <label>Password</label>
           <input
             type="password"
             {...register("password", { required: true })}
+            onChange={handleInputChange}
           />
           {errors.password && <p>Password is required</p>}
           <Link to="/main">
-            <button className="login-btn" type="submit">
+            <button onClick={onSubmit} className="login-btn" type="submit">
               Login
             </button>
           </Link>
