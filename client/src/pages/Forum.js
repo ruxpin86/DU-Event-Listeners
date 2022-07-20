@@ -68,7 +68,7 @@ export default function Forum() {
 
   const updateData = () => {
     console.log("refresh");
-    navigate("/forum");
+    navigate(0);
   };
   console.log(newData);
   return (
