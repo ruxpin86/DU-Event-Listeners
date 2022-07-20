@@ -30,8 +30,6 @@ export default function Login() {
     handleSubmit,
   } = useForm();
 
-  const navigate = useNavigate();
-
   const onSubmit = (event) => {
     event.preventDefault();
     handleSubmit(async (submitData) => {
@@ -42,7 +40,6 @@ export default function Login() {
         });
         // console.log(data);
         Auth.login(data.login.token);
-        navigate("/main");
       } catch (err) {
         console.error(err);
       }
@@ -90,9 +87,7 @@ export default function Login() {
           />
           {errors.password && <p>Password is required</p>}
           <Link to="/main">
-            <button className="login-btn" type="submit">
-              Login
-            </button>
+            <button className="login-btn">Login</button>
           </Link>
         </form>
       </Collapse>
