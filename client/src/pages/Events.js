@@ -39,7 +39,7 @@ export default function Events() {
 
   const updateData = () => {
     console.log("refresh");
-    navigate("/events");
+    navigate(0);
   };
 
   return (

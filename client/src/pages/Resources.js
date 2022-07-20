@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
-import { Link, Routes, Route, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../style/resources.css";
 import { MdClose, MdControlPoint } from "react-icons/md";
 import { useForm } from "react-hook-form";
@@ -51,55 +51,13 @@ const Resources = (props) => {
     return false;
   }
 
-  const fakeData = [
-    {
-      user: "krisd",
-      link: "https://medium.com/@MarkPieszak/how-to-delete-all-node-modules-folders-on-your-machine-and-free-up-hd-space-f3954843aeda",
-      category: "other",
-      title: "How to Delete Node Modules",
-      description:
-        "This resource highlights how to remove the node_modules when they are taking up too much space on your machine",
-    },
-    {
-      user: "ted",
-      link: "https://dev.to/underscorecode/css-selectors-the-full-reference-guide-3cbf",
-      category: "frontend",
-      title: "CSS Selectors",
-      description:
-        "This resource highlights some important details on CSS Selectors",
-    },
-    {
-      user: "olly",
-      link: "https://flexbox.malven.co/",
-      category: "frontend",
-      title: "Flexbox Cheat-Sheet",
-      description:
-        "This resource is quick guide for all the essential knowledge on flexbox",
-    },
-    {
-      user: "andyp",
-      link: "https://reactrouter.com/docs/en/v6/getting-started/overview",
-      category: "frontend",
-      title: "Guide to React Router",
-      description: "React router information!",
-    },
-    {
-      user: "pete",
-      link: "https://www.apollographql.com/docs/apollo-server/integrations/middleware/#apollo-server-express",
-      category: "backend",
-      title: "Apollo Server Guide",
-      description:
-        "This resource highlights how get an Apollo Server up and running on your server side applications.",
-    },
-  ];
-
   const closeFunc = () => {
     setOpenFormPhon(false);
   };
 
   const updateData = () => {
     console.log("refresh");
-    navigate("/resources");
+    navigate(0);
   };
 
   const changeSelect = (event) => {
