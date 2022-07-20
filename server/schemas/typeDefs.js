@@ -43,6 +43,13 @@ const typeDefs = gql`
     topic: String
     creator: String
     createdAt: String
+    replies: [Reply]
+  }
+
+  type Reply {
+    forumId: String
+    reply: String
+    user: String
   }
 
   type Auth {
@@ -76,6 +83,12 @@ const typeDefs = gql`
     description: String
     creator: String
     createdAt: String
+  }
+
+  input ReplyInput {
+    forumId: String
+    reply: String
+    user: String
   }
 
   type Query {
@@ -113,6 +126,8 @@ const typeDefs = gql`
     addMessage(userId: ID, input: MessageInput): Messages
 
     addToForum(userId: ID, input: ForumInput): Forum
+
+    addReply(input: ReplyInput): Forum
   }
 `;
 
