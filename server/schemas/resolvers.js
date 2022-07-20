@@ -177,6 +177,39 @@ const resolvers = {
         console.error(err);
       }
     },
+
+    addReply: async (parent, { input }, context) => {
+      console.log("backend reply", input);
+      if (context.user) {
+        try {
+          // const resource = await Resource.create({
+          //   ...input,
+          //   user: context.user.username,
+          // });
+          const newReply = await Forum.findByIdAndUpdate(
+            { _id: input.forumId },
+            {
+              $push: {
+                replies: {
+                  ...input,
+                  user: context.user.username,
+                },
+              },
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          console.log(newReply);
+          return { resource, updateUserByResource };
+        } catch (error) {
+          console.log(error);
+          return error;
+        }
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
   },
 };
 
