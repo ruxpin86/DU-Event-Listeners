@@ -13,6 +13,7 @@ import AddResourceForm from "../components/AddResourceForm";
 import useBreakpoint from "../components/tool/useBreakpoint";
 //need Auth so i can check if user is logged in
 import Auth from "../utils/auth";
+import PacmanLoader from "react-spinners/PacmanLoader";
 
 const Resources = (props) => {
   const {
@@ -42,7 +43,7 @@ const Resources = (props) => {
     console.log(JSON.stringify(userError));
   }
   // if (loading) {
-  //   return <h2>Loading...</h2>;
+  //   return <PacmanLoader />;
   // }
 
   // get token
@@ -162,11 +163,21 @@ const Resources = (props) => {
           </div>
           {loading ? (
             <PacmanLoader />
+          ) : newData ? (
+            newData.map((data, i) => <ResourceCard data={data} i={i} key={i} />)
           ) : (
             allResources.map((data, i) => (
               <ResourceCard data={data} i={i} key={i} />
             ))
           )}
+
+          {/* {newData
+            ? newData.map((data, i) => (
+                <ResourceCard data={data} i={i} key={i} />
+              ))
+            : allResources.map((data, i) => (
+                <ResourceCard data={data} i={i} key={i} />
+              ))} */}
         </div>
         {/* <div className="right">
           <h2>Add Resources</h2>

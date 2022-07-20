@@ -82,7 +82,7 @@ export default function LiveChat() {
       socket.off("pong");
       socket.off("msg");
       // socket.disconnect();
-      inputRef.current.focus();
+      // inputRef.current.focus();
     };
   }, []);
 

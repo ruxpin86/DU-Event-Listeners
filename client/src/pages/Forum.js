@@ -60,9 +60,9 @@ export default function Forum() {
   //     create_date: "2022/07/07",
   //   },
   // ];
-  useEffect(() => {
-    setNewdata(forumData);
-  }, []);
+  // useEffect(() => {
+  //   setNewdata(forumData);
+  // }, []);
   const closeFunc = () => {
     setOpenFormPhon(false);
   };
@@ -123,10 +123,10 @@ export default function Forum() {
         </Link>
       </div>
       <div className="filter">
-        <select onChange={changeSelect}>
-          <option defaultValue="default" disabled>
+        <select onChange={changeSelect} defaultValue="all">
+          {/* <option defaultValue="default" disabled>
             Select Forum Topic
-          </option>
+          </option> */}
           <option value="all">All Topics</option>
           <option value="classActivities">Class Activities</option>
           <option value="projectHelp">Project Help</option>
