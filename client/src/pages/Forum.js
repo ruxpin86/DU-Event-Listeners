@@ -139,7 +139,9 @@ export default function Forum() {
         ) : (
           <h1>Forum data is empty!!!</h1>
         )}
-        {openAddFormPhon && <ForumAddPostForm updateData={updateData} />}
+        {openAddFormPhon && (
+          <ForumAddPostForm updateData={updateData} closeFunc={closeFunc} />
+        )}
       </div>
     </div>
   );
