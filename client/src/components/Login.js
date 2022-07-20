@@ -87,7 +87,9 @@ export default function Login() {
           />
           {errors.password && <p>Password is required</p>}
           <Link to="/main">
-            <button className="login-btn">Login</button>
+            <button className="login-btn" type="submit">
+              Login
+            </button>
           </Link>
         </form>
       </Collapse>
