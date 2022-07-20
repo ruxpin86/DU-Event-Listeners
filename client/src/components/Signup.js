@@ -75,10 +75,11 @@ export default function Signup() {
             {...register("password", { required: true })}
           />
           {errors.password && <p>Password is required</p>}
-
-          <button className="signup-btn" type="submit">
-            Login
-          </button>
+          <Link to="/main">
+            <button className="signup-btn" type="submit">
+              Login
+            </button>
+          </Link>
         </form>
       </Collapse>
     </>
