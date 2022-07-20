@@ -136,6 +136,7 @@ export default function LiveChat() {
     setMessageFormData({
       messageInput: "",
     });
+    inputRef.current.focus();
   };
 
   const onEmojiClick = (event, emojiObject) => {
