@@ -57,7 +57,9 @@ const Resources = (props) => {
 
   const updateData = () => {
     console.log("refresh");
-    navigate(0);
+    // navigate(0);
+    navigate("/main");
+    navigate("/resources");
   };
 
   const changeSelect = (event) => {
