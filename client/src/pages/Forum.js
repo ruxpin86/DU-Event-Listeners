@@ -142,9 +142,20 @@ export default function Forum() {
         ) : (
           <h1>Forum data is empty!!!</h1>
         )}
-        {newData
+        {/* {newData
           ? newData.map((data, i) => <ForumCard data={data} i={i} key={i} />)
           : forumData.map((data, i) => <ForumCard data={data} i={i} key={i} />)}
+        {openAddFormPhon && (
+          <ForumAddPostForm updateData={updateData} closeFunc={closeFunc} />
+        )} */}
+
+        {loading ? (
+          <PacmanLoader />
+        ) : newData ? (
+          newData.map((data, i) => <ForumCard data={data} i={i} key={i} />)
+        ) : (
+          forumData.map((data, i) => <ForumCard data={data} i={i} key={i} />)
+        )}
         {openAddFormPhon && (
           <ForumAddPostForm updateData={updateData} closeFunc={closeFunc} />
         )}
