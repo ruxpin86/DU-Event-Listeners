@@ -60,7 +60,7 @@ const typeDefs = gql`
   }
 
   input ResourceInput {
-    user: String
+    # user: String
     link: String
     title: String
     category: String
@@ -107,7 +107,8 @@ const typeDefs = gql`
 
     removeEvent(input: EventInput): Event
 
-    addResource(userId: ID, input: ResourceInput): Resource
+    # addResource(userId: ID, input: ResourceInput): Resource
+    addResource(input: ResourceInput): Resource
 
     addMessage(userId: ID, input: MessageInput): Messages
 
