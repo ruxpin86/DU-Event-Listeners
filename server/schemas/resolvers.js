@@ -5,6 +5,7 @@ const { User, Resource, Messages, Forum, Events } = require("../models");
 const { signToken } = require("../utils/auth");
 const { ObjectId } = require("mongoose").Types;
 
+//this needs to match queries.js
 const resolvers = {
   Query: {
     allUsers: async () => {

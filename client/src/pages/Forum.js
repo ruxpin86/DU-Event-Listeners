@@ -8,6 +8,7 @@ import ForumAddReplyForm from "../components/ForumAddReplyForm";
 import useBreakpoint from "../components/tool/useBreakpoint";
 import { useQuery } from "@apollo/client";
 import { QUERY_FORUM } from "../utils/queries";
+import PacmanLoader from "react-spinners/PacmanLoader";
 
 export default function Forum() {
   const [webAddForm, setOpenForm] = useState(true);
@@ -134,7 +135,9 @@ export default function Forum() {
         </select>
       </div>
       <div className="cardFrame">
-        {newData.length > 0 ? (
+        {loading ? (
+          <PacmanLoader />
+        ) : newData.length > 0 ? (
           newData.map((data, i) => <ForumCard data={data} i={i} key={i} />)
         ) : (
           <h1>Forum data is empty!!!</h1>

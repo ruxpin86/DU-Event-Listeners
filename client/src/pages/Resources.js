@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../style/resources.css";
 import { MdClose } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import ResourceCard from "../components/ResourceCard";
+//creating pacman loading symbol
+import PacmanLoader from "react-spinners/PacmanLoader";
 
 import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
@@ -18,7 +20,6 @@ const Resources = () => {
     handleSubmit,
   } = useForm();
 
-  // const { loading, data, error: userError } = useQuery(QUERY_ME);
   const { loading, data, error: userError } = useQuery(QUERY_ALL_RESOURCES);
   //this is how we unpack QUERY_ME
   // const userData = data?.getMe || {};
@@ -34,9 +35,9 @@ const Resources = () => {
   if (error || userError) {
     console.log(JSON.stringify(error || userError));
   }
-  if (loading) {
-    return <h2>Loading...</h2>;
-  }
+  // if (loading) {
+  //   return <h2>Loading...</h2>;
+  // }
 
   // get token
   const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -44,7 +45,6 @@ const Resources = () => {
   if (!token) {
     return false;
   }
-
   //changed data to match backend resourceSeeds key values
   const fakeData = [
     {
@@ -89,25 +89,10 @@ const Resources = () => {
   ];
   const onSubmit = async (submitResult) => {
     console.log(submitResult);
-    //trying to map through to show all resources to user
     try {
       const userResource = await addResource({
-        // variables: {
-        //   userId: userData._id,
-        //   input: { resources: newSubmitResult },
-        // },
-        // variables: { userId: userData._id, input: { ...newSubmitResult } },
         variables: { input: { ...submitResult } },
       });
-      // console.log(userResource);
-      // newSubmitResult.map((data) => ({
-      //   user: data.userData.user,
-      //   link: data.userData.link,
-      //   category: data.userData.category,
-      //   title: data.userData.title,
-      //   description: data.userData.description,
-      // }));
-
       //this console log is coming up as an empty array
       // setUserResource(userResource);
       console.log(userResource);
@@ -135,9 +120,13 @@ const Resources = () => {
               <option value="3">Other</option>
             </select>
           </div>
-          {allResources.map((data, i) => (
-            <ResourceCard data={data} i={i} key={i} />
-          ))}
+          {loading ? (
+            <PacmanLoader />
+          ) : (
+            allResources.map((data, i) => (
+              <ResourceCard data={data} i={i} key={i} />
+            ))
+          )}
         </div>
         <div className="right">
           <h2>Add Resources</h2>
