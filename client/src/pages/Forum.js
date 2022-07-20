@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import "../style/forum.css";
 import { MdClose, MdControlPoint } from "react-icons/md";
 import ForumCard from "../components/ForumCard";
@@ -64,9 +64,11 @@ export default function Forum() {
     }
   };
 
+  const navigate = useNavigate();
+
   const updateData = () => {
     console.log("refresh");
-    window.location.reload();
+    navigate("/forum");
   };
   console.log(newData);
   return (

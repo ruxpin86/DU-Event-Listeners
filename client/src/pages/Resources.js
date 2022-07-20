@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import "../style/resources.css";
 import { MdClose, MdControlPoint } from "react-icons/md";
 import { useForm } from "react-hook-form";
@@ -24,6 +24,7 @@ const Resources = (props) => {
   const [selectValue, setSelect] = useState("all");
   const [allData, setAllData] = useState([]);
   const [newData, setNewdata] = useState([]);
+  const navigate = useNavigate();
 
   //empty array in allResources now
   const { loading, data, error: userError } = useQuery(QUERY_ALL_RESOURCES);
@@ -98,7 +99,7 @@ const Resources = (props) => {
 
   const updateData = () => {
     console.log("refresh");
-    window.location.reload();
+    navigate("/resources");
   };
 
   const changeSelect = (event) => {
