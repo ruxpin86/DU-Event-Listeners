@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
+import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import "../style/signup.css";
 import Auth from "../utils/auth";
 import { Collapse } from "react-collapse";
