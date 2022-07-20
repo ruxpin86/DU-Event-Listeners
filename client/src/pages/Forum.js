@@ -24,45 +24,6 @@ export default function Forum() {
     console.log(data);
   }
 
-  // const data = [
-  //   {
-  //     topic: "Shoutout",
-  //     description:
-  //       "Shoutout to Olly for the help on module 21 homework..thanks for helping to get my App deployed to Heroku",
-  //     create: "Peter",
-  //     create_date: "2022/07/07",
-  //   },
-  //   {
-  //     topic: "projectHelp",
-  //     description:
-  //       "Has anyone worked with React Animations and have some advice?",
-  //     create: "Olly",
-  //     create_date: "2022/07/07",
-  //   },
-  //   {
-  //     topic: "classActivities",
-  //     description:
-  //       "Does anyone have a copy of the MERN mini project that I can take a look at?",
-  //     create: "Ted",
-  //     create_date: "2022/07/07",
-  //   },
-  //   {
-  //     topic: "random",
-  //     description:
-  //       "My dog has been sitting staring at me while I code for the last three hours, I think he needs a walk",
-  //     create: "Kris",
-  //     create_date: "2022/07/07",
-  //   },
-  //   {
-  //     topic: "classActivities",
-  //     description: "How are you guys doing on PWAs?  Anyone got those nailed?",
-  //     create: "Andy",
-  //     create_date: "2022/07/07",
-  //   },
-  // ];
-  // useEffect(() => {
-  //   setNewdata(forumData);
-  // }, []);
   const closeFunc = () => {
     setOpenFormPhon(false);
   };

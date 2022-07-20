@@ -81,3 +81,13 @@ export const ADD_TO_FORUM = gql`
     }
   }
 `;
+
+export const ADD_TO_REPLY = gql`
+  mutation addReply($input: ReplyInput) {
+    addReply(input: $input) {
+      forumId
+      reply
+      user
+    }
+  }
+`;

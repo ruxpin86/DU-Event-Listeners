@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-
+const replySchema = require("./Reply");
 const forumSchema = new Schema(
   {
     topic: {
@@ -18,6 +18,7 @@ const forumSchema = new Schema(
       type: String,
       required: true,
     },
+    replies: [replySchema],
   },
   {
     toJSON: {

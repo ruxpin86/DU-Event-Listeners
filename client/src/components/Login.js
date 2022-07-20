@@ -86,9 +86,9 @@ export default function Login() {
             {...register("password", { required: true })}
           />
           {errors.password && <p>Password is required</p>}
-          <Link to="/main">
-            <button className="login-btn">Login</button>
-          </Link>
+          {/* <Link to="/main"> */}
+          <button className="login-btn">Login</button>
+          {/* </Link> */}
         </form>
       </Collapse>
     </>
