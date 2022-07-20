@@ -17,6 +17,7 @@
   height: 100%;
   overflow-x: hidden;
   overflow-y: visible;
+  margin-bottom: 3rem;
 }
 
 .forum-frame .postform {
@@ -89,6 +90,9 @@ select:focus {
   display: flex;
   /* align-items: center; */
 }
+.descrip {
+  font-size: 1.5rem;
+}
 .openBtn {
   font-size: 1.8rem;
   transition: 0.7s;
@@ -140,6 +144,8 @@ select:focus {
   width: 80%;
 }
 
+
+
 @media (max-width: 1200px) {
   .forum-frame .title .addBtn {
     display: block;
@@ -155,5 +161,14 @@ select:focus {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+  }
+}
+
+@media (max-width: 1100px) {
+  .postform .radio-frame {
+    flex-direction: column;
+  }
+  .postform .radio-frame .radio-flex {
+    margin: 0.5rem 0;
   }
 }

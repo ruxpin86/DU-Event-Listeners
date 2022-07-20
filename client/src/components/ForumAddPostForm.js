@@ -4,8 +4,9 @@ import Auth from "../utils/auth";
 import { QUERY_ME } from "../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
 import { ADD_EVENT, ADD_TO_FORUM } from "../utils/mutations";
+import { MdClose } from "react-icons/md";
 
-export default function ForumAddPostForm({ updateData }) {
+export default function ForumAddPostForm({ updateData, closeFunc }) {
   const { loading, data, error: userError } = useQuery(QUERY_ME);
 
   const userData = data?.getMe || {};
@@ -42,7 +43,11 @@ export default function ForumAddPostForm({ updateData }) {
   return (
     <>
       <form className="postform" onSubmit={handleSubmit(onSubmit)}>
-        <label>Description</label>
+        <div className="title">
+          <label>Description</label>
+          <MdClose className="closeBtn" onClick={closeFunc} />
+        </div>
+
         <input
           className="descripInput"
           {...register("description", { required: true })}

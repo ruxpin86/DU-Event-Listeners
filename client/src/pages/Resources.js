@@ -1,42 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import "../style/resources.css";
-import { MdClose } from "react-icons/md";
+import { MdClose, MdControlPoint } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import ResourceCard from "../components/ResourceCard";
-
 import { useQuery } from "@apollo/client";
-import { useMutation } from "@apollo/client";
-import { QUERY_ALL_RESOURCES, QUERY_ME } from "../utils/queries";
-import { ADD_RESOURCE } from "../utils/mutations";
+import { QUERY_ALL_RESOURCES } from "../utils/queries";
+import AddResourceForm from "../components/AddResourceForm";
+import useBreakpoint from "../components/tool/useBreakpoint";
 //need Auth so i can check if user is logged in
 import Auth from "../utils/auth";
-const Resources = () => {
+import PacmanLoader from "react-spinners/PacmanLoader";
+
+const Resources = (props) => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const point = useBreakpoint();
+  const [openAddFormPhon, setOpenFormPhon] = useState(false);
 
-  // const { loading, data, error: userError } = useQuery(QUERY_ME);
-  const { loading, data, error: userError } = useQuery(QUERY_ALL_RESOURCES);
-  //this is how we unpack QUERY_ME
-  // const userData = data?.getMe || {};
+  const [selectValue, setSelect] = useState("all");
+  const [allData, setAllData] = useState([]);
+  const [newData, setNewdata] = useState([]);
 
   //empty array in allResources now
+  const { loading, data, error: userError } = useQuery(QUERY_ALL_RESOURCES);
   const allResources = data?.getAllResources || [];
-  console.log(data);
+  console.log(allResources);
+  useEffect(() => {
+    // if (allResources.length > 0) {
+    setNewdata(props.allResources);
+    // }
+  }, [props]);
 
-  //think this is how i want to useState?
-  const [resourceData, setUserResource] = useState([]);
   //if this is working get data compliled into addResource and boom
-  const [addResource, { error }] = useMutation(ADD_RESOURCE);
-  if (error || userError) {
-    console.log(JSON.stringify(error || userError));
+  if (userError) {
+    console.log(JSON.stringify(userError));
   }
-  if (loading) {
-    return <h2>Loading...</h2>;
-  }
+  // if (loading) {
+  //   return <PacmanLoader />;
+  // }
 
   // get token
   const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -45,7 +50,6 @@ const Resources = () => {
     return false;
   }
 
-  //changed data to match backend resourceSeeds key values
   const fakeData = [
     {
       user: "krisd",
@@ -58,7 +62,7 @@ const Resources = () => {
     {
       user: "ted",
       link: "https://dev.to/underscorecode/css-selectors-the-full-reference-guide-3cbf",
-      category: "Frontend",
+      category: "frontend",
       title: "CSS Selectors",
       description:
         "This resource highlights some important details on CSS Selectors",
@@ -66,7 +70,7 @@ const Resources = () => {
     {
       user: "olly",
       link: "https://flexbox.malven.co/",
-      category: "Frontend",
+      category: "frontend",
       title: "Flexbox Cheat-Sheet",
       description:
         "This resource is quick guide for all the essential knowledge on flexbox",
@@ -74,113 +78,125 @@ const Resources = () => {
     {
       user: "andyp",
       link: "https://reactrouter.com/docs/en/v6/getting-started/overview",
-      category: "Frontend",
+      category: "frontend",
       title: "Guide to React Router",
       description: "React router information!",
     },
     {
       user: "pete",
       link: "https://www.apollographql.com/docs/apollo-server/integrations/middleware/#apollo-server-express",
-      category: "Backend",
+      category: "backend",
       title: "Apollo Server Guide",
       description:
         "This resource highlights how get an Apollo Server up and running on your server side applications.",
     },
   ];
-  const onSubmit = async (submitResult) => {
-    console.log(submitResult);
-    //trying to map through to show all resources to user
-    try {
-      const userResource = await addResource({
-        // variables: {
-        //   userId: userData._id,
-        //   input: { resources: newSubmitResult },
-        // },
-        // variables: { userId: userData._id, input: { ...newSubmitResult } },
-        variables: { input: { ...submitResult } },
-      });
-      // console.log(userResource);
-      // newSubmitResult.map((data) => ({
-      //   user: data.userData.user,
-      //   link: data.userData.link,
-      //   category: data.userData.category,
-      //   title: data.userData.title,
-      //   description: data.userData.description,
-      // }));
 
-      //this console log is coming up as an empty array
-      // setUserResource(userResource);
-      console.log(userResource);
-    } catch (error) {
-      console.error(error);
+  const closeFunc = () => {
+    setOpenFormPhon(false);
+  };
+
+  const updateData = () => {
+    console.log("refresh");
+    window.location.reload();
+  };
+
+  const changeSelect = (event) => {
+    setSelect(event.target.value);
+    if (allResources.length > 0) {
+      switch (event.target.value) {
+        case "all":
+          setNewdata(allResources);
+          break;
+        case "frontend":
+          const frontendArr = allResources.filter(
+            (item) => item.category === "frontend"
+          );
+          setNewdata(frontendArr);
+          break;
+        case "backend":
+          const backendArr = allResources.filter(
+            (item) => item.category === "backend"
+          );
+          setNewdata(backendArr);
+          break;
+        case "other":
+          const otherArr = allResources.filter(
+            (item) => item.category === "other"
+          );
+          setNewdata(otherArr);
+          break;
+        default:
+          break;
+      }
     }
   };
+  console.log(newData);
   return (
     <div className="resources-frame">
       <div className="title">
         <h1>Resources</h1>
-        <Link to="/main">
-          <MdClose />
-        </Link>
+        <div className="icon-frame">
+          <MdControlPoint
+            className="addBtn"
+            onClick={() => setOpenFormPhon(!openAddFormPhon)}
+          />
+          <Link to="/main">
+            <MdClose />
+          </Link>
+        </div>
       </div>
       <div className="blog-block">
         <div className="left">
           <div className="filter">
-            <select defaultValue={"DEFAULT"}>
-              <option value="DEFAULT" disabled>
+            <select onChange={changeSelect} defaultValue="all">
+              {/* <option value="all" disabled>
                 Select Resources Type
-              </option>
-              <option value="1">Front end</option>
-              <option value="2">Back end</option>
-              <option value="3">Other</option>
+              </option> */}
+              <option value="all">All Resources</option>
+              <option value="frontend">Front end</option>
+              <option value="backend">Back end</option>
+              <option value="other">Other</option>
             </select>
           </div>
-          {allResources.map((data, i) => (
-            <ResourceCard data={data} i={i} key={i} />
-          ))}
+          {loading ? (
+            <PacmanLoader />
+          ) : newData ? (
+            newData.map((data, i) => <ResourceCard data={data} i={i} key={i} />)
+          ) : (
+            allResources.map((data, i) => (
+              <ResourceCard data={data} i={i} key={i} />
+            ))
+          )}
+
+          {/* {newData
+            ? newData.map((data, i) => (
+                <ResourceCard data={data} i={i} key={i} />
+              ))
+            : allResources.map((data, i) => (
+                <ResourceCard data={data} i={i} key={i} />
+              ))} */}
         </div>
-        <div className="right">
+        {/* <div className="right">
           <h2>Add Resources</h2>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <label>Title</label>
-            <input {...register("title", { required: true })} />
-            {errors.title && <p>Title is required</p>}
-            <label>Link</label>
-            <input {...register("link", { required: true })} />
-            {errors.link && <p>Link is required</p>}
-            <label>Description</label>
-            <input {...register("description", { required: true })} />
-            {errors.description && <p>Description is required</p>}
-            <div className="radio-frame">
-              <div className="radio-flex">
-                <input
-                  {...register("category", { required: true })}
-                  type="radio"
-                  value="frontend"
-                />
-                <label>Frontend</label>
+          <AddResourceForm updateData={updateData} />
+        </div> */}
+        {point === "lg" ? (
+          <div className="right">
+            <h2>Add Resources</h2>
+            <AddResourceForm updateData={updateData} />
+          </div>
+        ) : (
+          openAddFormPhon && (
+            <div className={[openAddFormPhon ? "" : "hide", "right"].join(" ")}>
+              <div className="title">
+                <h2>Add Resources</h2>
+                <MdClose className="closeBtn" onClick={closeFunc} />
               </div>
-              <div className="radio-flex">
-                <input
-                  {...register("category", { required: true })}
-                  type="radio"
-                  value="backend"
-                />
-                <label>Backend</label>
-              </div>
-              <div className="radio-flex">
-                <input
-                  {...register("category", { required: true })}
-                  type="radio"
-                  value="other"
-                />
-                <label>Other</label>
-              </div>
+              <AddResourceForm updateData={updateData} />
             </div>
-            {errors.category && <p>Type is required</p>}
-            <input className="submit-btn" type="submit" />
-          </form>
-        </div>
+          )
+        )}
       </div>
     </div>
   );

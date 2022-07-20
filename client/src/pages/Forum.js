@@ -14,10 +14,10 @@ export default function Forum() {
   const [openAddFormPhon, setOpenFormPhon] = useState(false);
   const [selectValue, setSelect] = useState("all");
   const [allForumData, setAllData] = useState([]);
-  const [newData, setNewdata] = useState([]);
+  const [newData, setNewdata] = useState(null);
   const point = useBreakpoint();
   const { loading, data, error: forumError } = useQuery(QUERY_FORUM);
-  const forumData = data?.getForum || {};
+  const forumData = data?.getForum || [];
   console.log("forumData", forumData);
   if (data) {
     console.log(data);
@@ -59,9 +59,9 @@ export default function Forum() {
   //     create_date: "2022/07/07",
   //   },
   // ];
-  useEffect(() => {
-    setNewdata(forumData);
-  }, []);
+  // useEffect(() => {
+  //   setNewdata(forumData);
+  // }, []);
   const closeFunc = () => {
     setOpenFormPhon(false);
   };
@@ -106,7 +106,7 @@ export default function Forum() {
     console.log("refresh");
     window.location.reload();
   };
-
+  console.log(newData);
   return (
     <div className="forum-frame">
       <div className="hide">Add Post</div>
@@ -122,10 +122,10 @@ export default function Forum() {
         </Link>
       </div>
       <div className="filter">
-        <select onChange={changeSelect}>
-          <option defaultValue="default" disabled>
+        <select onChange={changeSelect} defaultValue="all">
+          {/* <option defaultValue="default" disabled>
             Select Forum Topic
-          </option>
+          </option> */}
           <option value="all">All Topics</option>
           <option value="classActivities">Class Activities</option>
           <option value="projectHelp">Project Help</option>
@@ -134,12 +134,17 @@ export default function Forum() {
         </select>
       </div>
       <div className="cardFrame">
-        {newData.length > 0 ? (
+        {/* {newData.length > 0 ? (
           newData.map((data, i) => <ForumCard data={data} i={i} key={i} />)
         ) : (
           <h1>Forum data is empty!!!</h1>
+        )} */}
+        {newData
+          ? newData.map((data, i) => <ForumCard data={data} i={i} key={i} />)
+          : forumData.map((data, i) => <ForumCard data={data} i={i} key={i} />)}
+        {openAddFormPhon && (
+          <ForumAddPostForm updateData={updateData} closeFunc={closeFunc} />
         )}
-        {openAddFormPhon && <ForumAddPostForm updateData={updateData} />}
       </div>
     </div>
   );

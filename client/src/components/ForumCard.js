@@ -7,7 +7,7 @@ export default function ForumCard({ data, i }) {
   return (
     <div className={[open ? "open" : "", "forum-card"].join(" ")} key={i}>
       <div className="title">
-        <p>{data.description}</p>
+        <p className="descrip">"{data.description}"</p>
         <button
           className={[open ? "open" : "", "openBtn"].join(" ")}
           onClick={() => setOpen(!open)}

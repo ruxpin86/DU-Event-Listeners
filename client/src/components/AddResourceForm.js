@@ -1,13 +1,31 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { ADD_RESOURCE } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
 
-export default function AddResourceForm() {
+export default function AddResourceForm({ updateData }) {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const [addResource, { error }] = useMutation(ADD_RESOURCE);
+  if (error) {
+    console.log(JSON.stringify(error));
+  }
+  const onSubmit = async (submitResult) => {
+    console.log(submitResult);
+    //trying to map through to show all resources to user
+    try {
+      const userResource = await addResource({
+        variables: { input: { ...submitResult } },
+      });
+      console.log(userResource);
+      updateData();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
