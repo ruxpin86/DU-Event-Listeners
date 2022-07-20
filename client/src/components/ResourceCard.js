@@ -24,9 +24,7 @@ export default function ResourceCard({ data, i }) {
           {data.title}
         </a>
       </h2> */}
-      <span>
-        {data.create_date} by {data.create}
-      </span>
+      <span>by {data.user}</span>
       {/* <div className="hide-box">{open && <p>{data.description}</p>}</div> */}
       <Collapse isOpened={open}>
         <p>{data.description}</p>

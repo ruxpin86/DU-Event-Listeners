@@ -25,27 +25,27 @@ export const LOGIN_USER = gql`
     }
   }
 `;
-// mutation addResource($input: ResourceInput) {
-//   addResource(input: $input) {
-//     resource {
-//       _id
+export const ADD_RESOURCE = gql`
+  mutation addResource($input: ResourceInput) {
+    addResource(input: $input) {
+      link
+      title
+      description
+      category
+    }
+  }
+`;
+// export const ADD_RESOURCE = gql`;
+//   mutation addResource($input: ResourceInput, $userId: ID) {
+//     addResource(input: $input, userId: $userId) {
+//       user
 //       link
+//       category
 //       title
 //       description
 //     }
 //   }
-// }
-export const ADD_RESOURCE = gql`
-  mutation addResource($input: ResourceInput, $userId: ID) {
-    addResource(input: $input, userId: $userId) {
-      user
-      link
-      category
-      title
-      description
-    }
-  }
-`;
+// `;
 
 export const ADD_MESSAGE = gql`
   mutation addMessage($input: MessageInput, $userId: ID) {

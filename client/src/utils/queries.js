@@ -54,6 +54,7 @@ export const QUERY_ME = gql`
       }
       resources {
         _id
+        user
         link
         category
         title
@@ -77,8 +78,9 @@ export const QUERY_ME = gql`
 
 export const QUERY_ALL_RESOURCES = gql`
   query getAllResources {
-    resource {
+    getAllResources {
       _id
+      user
       link
       category
       title
