@@ -69,7 +69,7 @@ export default function Forum() {
   const updateData = () => {
     console.log("refresh");
     // navigate(0);
-    navigate("/main");
+    // navigate("/main");
     navigate("/forum");
   };
   console.log(newData);
