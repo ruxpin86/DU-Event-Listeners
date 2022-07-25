@@ -35,7 +35,7 @@ export default function Login(props) {
   const onSubmit = (event) => {
     event.preventDefault();
     handleSubmit(async (submitData) => {
-      console.log(submitData);
+      // console.log(submitData);
       try {
         const { data } = await login({
           variables: { ...submitData },
@@ -71,7 +71,7 @@ export default function Login(props) {
   //   });
   // };
 
-  console.log(loginFormData);
+  // console.log(loginFormData);
   return (
     <>
       <h2 className="main-page-form" onClick={() => setOpen(!open)}>

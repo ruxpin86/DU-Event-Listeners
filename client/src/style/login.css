@@ -3,31 +3,35 @@
 } */
 
 .ReactCollapse--collapse {
-    transition: height 500ms;
+  transition: height 500ms;
 }
 
-.login-form{
-    display: flex;
-    flex-direction: column;
-    width: 30vw;
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
 }
 
-.loginEl{
-    display: flex;
-    flex-direction: column;
+.login-form p {
+  color: red;
 }
 
-.login-btn{
-    margin-top: 1rem;
-    padding: 3px;
-    width: fit-content;
-    border: 3px solid black;
-    transition: .3s;
+.loginEl {
+  display: flex;
+  flex-direction: column;
 }
 
-.login-btn:hover{
-    cursor:default;
-    border-radius: 2px;
-    color:rgb(164, 117, 208);
-    border: 5px solid rgb(164, 117, 208);
+.login-btn {
+  margin-top: 1rem;
+  padding: 3px;
+  width: fit-content;
+  border: 3px solid black;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  cursor: default;
+  border-radius: 2px;
+  color: rgb(164, 117, 208);
+  border: 5px solid rgb(164, 117, 208);
 }

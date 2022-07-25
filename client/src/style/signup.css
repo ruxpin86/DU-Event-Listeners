@@ -1,44 +1,48 @@
 .ReactCollapse--collapse {
-    transition: height 500ms;
+  transition: height 500ms;
 }
 
-.main-page-form:hover{
-    cursor: s-resize;
-    color:cadetblue;
+.main-page-form:hover {
+  cursor: s-resize;
+  color: cadetblue;
 }
 
-.signup-form{
-    display: flex;
-    flex-direction: column;
-    width: 30vw;
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
 }
 
-.signupEl{
-    display: flex;
-    flex-direction: column;
+.signup-form p {
+  color: red;
 }
 
-.signup-btn{
-    margin-top: 1rem;
-    padding: 3px;
-    width: fit-content;
-    border: 3px solid black;
-    transition: .3s;
+.signupEl {
+  display: flex;
+  flex-direction: column;
 }
 
-.signup-btn:hover{
-    cursor: default;
-    border-radius: 2px;
-    color:rgb(164, 117, 208);
-    border: 5px solid rgb(164, 117, 208);
+.signup-btn {
+  margin-top: 1rem;
+  padding: 3px;
+  width: fit-content;
+  border: 3px solid black;
+  transition: 0.3s;
 }
 
-input{
-    border: none;
-    border-bottom: 1px solid black;
-    background-color: transparent;
+.signup-btn:hover {
+  cursor: default;
+  border-radius: 2px;
+  color: rgb(164, 117, 208);
+  border: 5px solid rgb(164, 117, 208);
 }
 
-input:focus{
-    outline: none;
+input {
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: transparent;
+}
+
+input:focus {
+  outline: none;
 }
