@@ -16,7 +16,6 @@
 - [Usage](#usage)
 - [Contributors](#contributors)
 - [License](#license)
-- [Additional Questions](#additional-questions)
 
 ### Installation
 
