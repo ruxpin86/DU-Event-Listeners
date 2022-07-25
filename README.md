@@ -1,5 +1,7 @@
 # DU-Event-Listeners
 
+[Deployed Application](https://du-event-listeners.herokuapp.com/)
+
 Description: As our coding bootcamp comes to a close, we wanted to create a way for all us students to keep in touch and continue to collaborate and share ideas in an easy, organized, and effecient way. Whether thats resources, like helpful links, events, like a coding meetup, forum posts for general comments or shoutouts, or even live chat with fellow classmates. This will help all of us continue to develop as professional coders, pursue employement oppurtunities, and further our knowledge
 
 Installation: to use visit the heroku link listed at the bottom or run NPM i in your terminal and then NPM Run Develop to kick off the application locally.
@@ -8,12 +10,12 @@ Usage: First, log in or create a user. This will create a user account and allow
 
 Technology: This application is built fully in React as a single page application utilizing express.js. Backend is built completely with Graphql, mongoose, and appollo server. A number of styling and animation React dependencies were used, such as React-Spinners, React-Icons, React-Hook-Forms to name a few. Another key technology used was Socket.io for the live chat.
 
+Deployed Application:
+![alt text](./Assets/Event-Listeners.gif)
+
+[Video of functionality](https://drive.google.com/file/d/1aM03f2XXqSeHzVfESaw7nIeB9Jc0qvVP/view)
+
 Contributions: Kris / Andy - on the backend Pete/ Olly - on the frontend Ted - Repo Master / Socket Master / Floating Resource
-
-**\*** get the gif in Assets
-Video of functionality: https://drive.google.com/file/d/1MIvDEXDfeUzH5Ki2hXGGpNSvqxC57Ov1/view
-
-Links:
 
 Github Repo - https://github.com/ruxpin86/DU-Event-Listeners
 Heroku - https://du-event-listeners.herokuapp.com/
