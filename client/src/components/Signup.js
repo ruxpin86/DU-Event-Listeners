@@ -35,28 +35,30 @@ export default function Signup(props) {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    // console.log("submitdata", submitData);
-    // setUserFormData({
-    //   username: submitData.username,
-    //   email: submitData.email,
-    //   password: submitData.password,
-    // });
-    try {
-      const { data } = await addUser({
-        variables: { ...userFormData },
-      });
-      console.log(data);
-      Auth.login(data.addUser.token);
-      navigate("/main");
-    } catch (err) {
-      console.error(err);
-    }
+    handleSubmit(async (submitData) => {
+      // console.log("submitdata", submitData);
+      // setUserFormData({
+      //   username: submitData.username,
+      //   email: submitData.email,
+      //   password: submitData.password,
+      // });
+      try {
+        const { data } = await addUser({
+          variables: { ...userFormData },
+        });
+        console.log(data);
+        Auth.login(data.addUser.token);
+        navigate("/main");
+      } catch (err) {
+        console.error(err);
+      }
 
-    setUserFormData({
-      username: "",
-      email: "",
-      password: "",
-    });
+      setUserFormData({
+        username: "",
+        email: "",
+        password: "",
+      });
+    })(event);
   };
 
   // console.log("userFormData", userFormData);
@@ -83,13 +85,32 @@ export default function Signup(props) {
           <label>Password</label>
           <input
             type="password"
-            {...register("password", { required: true })}
+            {...register("password", {
+              required: true,
+              minLength: 8,
+              pattern: {
+                value:
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+              },
+            })}
             onChange={handleInputChange}
           />
           {errors.password && <p>Password is required</p>}
+          {errors.password && errors.password.type === "minLength" && (
+            <p>
+              Minimum 8 characters, at least 1 letter, 1 number and 1 special
+              character(%!#)
+            </p>
+          )}
+          {errors.password && errors.password.type === "pattern" && (
+            <p>
+              Minimum 8 characters, at least 1 letter, 1 number and 1 special
+              character(%!#)
+            </p>
+          )}
           <Link to="/main">
-            <button className="signup-btn" type="button" onClick={onSubmit}>
-              Login
+            <button className="signup-btn" type="submit" onClick={onSubmit}>
+              Signup
             </button>
           </Link>
         </form>
