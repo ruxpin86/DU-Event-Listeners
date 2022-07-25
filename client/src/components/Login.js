@@ -7,7 +7,7 @@ import { LOGIN_USER } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import { Collapse } from "react-collapse";
 
-export default function Login() {
+export default function Login(props) {
   const [loginFormData, setloginFormData] = useState({
     email: "",
     password: "",
@@ -30,6 +30,8 @@ export default function Login() {
     handleSubmit,
   } = useForm();
 
+  const navigate = useNavigate();
+
   const onSubmit = (event) => {
     event.preventDefault();
     handleSubmit(async (submitData) => {
@@ -40,6 +42,7 @@ export default function Login() {
         });
         // console.log(data);
         Auth.login(data.login.token);
+        navigate("/main");
       } catch (err) {
         console.error(err);
       }
@@ -96,7 +99,6 @@ export default function Login() {
               Login
             </button>
           </Link>
-
         </form>
       </Collapse>
     </>

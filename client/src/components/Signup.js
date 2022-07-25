@@ -3,12 +3,11 @@ import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
-import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import "../style/signup.css";
 import Auth from "../utils/auth";
 import { Collapse } from "react-collapse";
 
-export default function Signup() {
+export default function Signup(props) {
   const [userFormData, setUserFormData] = useState({
     username: "",
     email: "",
@@ -32,28 +31,32 @@ export default function Signup() {
     handleSubmit,
   } = useForm();
 
-  const onSubmit = async (submitData) => {
+  const navigate = useNavigate();
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
     // console.log("submitdata", submitData);
     // setUserFormData({
-    //   username: data.username,
-    //   email: data.email,
-    //   password: data.password,
+    //   username: submitData.username,
+    //   email: submitData.email,
+    //   password: submitData.password,
     // });
     try {
       const { data } = await addUser({
-        variables: { ...submitData },
+        variables: { ...userFormData },
       });
       console.log(data);
       Auth.login(data.addUser.token);
+      navigate("/main");
     } catch (err) {
       console.error(err);
     }
 
-    // setUserFormData({
-    //   username: "",
-    //   email: "",
-    //   password: "",
-    // });
+    setUserFormData({
+      username: "",
+      email: "",
+      password: "",
+    });
   };
 
   // console.log("userFormData", userFormData);
@@ -64,21 +67,28 @@ export default function Signup() {
       </h2>
       <Collapse isOpened={open}>
         <br></br>
-        <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="signup-form">
           <label>Email</label>
-          <input {...register("email", { required: true })} />
+          <input
+            {...register("email", { required: true })}
+            onChange={handleInputChange}
+          />
           {errors.email && <p>Email is required</p>}
           <label>Username</label>
-          <input {...register("username", { required: true })} />
+          <input
+            {...register("username", { required: true })}
+            onChange={handleInputChange}
+          />
           {errors.username && <p>Username is required</p>}
           <label>Password</label>
           <input
             type="password"
             {...register("password", { required: true })}
+            onChange={handleInputChange}
           />
           {errors.password && <p>Password is required</p>}
           <Link to="/main">
-            <button className="signup-btn" type="submit">
+            <button className="signup-btn" type="button" onClick={onSubmit}>
               Login
             </button>
           </Link>

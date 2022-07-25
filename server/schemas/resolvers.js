@@ -83,7 +83,7 @@ const resolvers = {
           const updateUserByEvents = await User.findByIdAndUpdate(
             { _id: context.user._id },
             //maybe change to events: event
-            { $addToSet: { events: event._id } },
+            { $push: { events: event } },
             {
               new: true,
               runValidators: true,

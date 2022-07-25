@@ -31,7 +31,7 @@ class AuthService {
     localStorage.setItem("id_token", idToken);
 
     //CHECK IF THIS NEEDS TO JUST BE "/"
-    window.location.assign("/main");
+    // window.location.assign("/");
   }
 
   logout() {
