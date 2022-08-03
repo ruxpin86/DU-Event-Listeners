@@ -12,14 +12,20 @@
 
 ## Table of Contents
 
+- [Technology-Used](#technology-used)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributors](#contributors)
 - [License](#license)
 
+
+### Technology-Used
+
+Tech Used: React, Bootstrap, Socket.io, React-hooks, Bcrypt, Apollo Server, Express, GraphQL, Mongoose, MongoDB, JavaScript
+
 ### Installation
 
-On localhost: $ npm i && npm run develop to kick off app.
+On run on localhost: $ npm i && npm run develop 
 
 ### Usage
 
